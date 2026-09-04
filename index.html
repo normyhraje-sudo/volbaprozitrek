@@ -31,6 +31,8 @@
             --bg: #f5f8fc;
             --white: #ffffff;
             --shadow: 0 4px 20px rgba(0,0,0,0.05);
+            --radius-lg: 24px;
+            --radius-sm: 16px;
         }
 
         * {
@@ -59,15 +61,19 @@
             padding: 0 1.5rem;
         }
 
+        /* ===== NAVBAR ===== */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: var(--white);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
-            border-bottom: 1px solid var(--border);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border-bottom: 1px solid rgba(208, 220, 232, 0.4);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+            transition: background 0.2s;
         }
 
         .navbar .container {
@@ -109,24 +115,73 @@
             color: var(--accent);
         }
 
+        /* ===== HORIZONTÁLNÍ MENU PRO PC (JAKO NA OBRÁZKU) ===== */
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 999px;
+            transition: 0.25s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2.5px;
+            background: var(--accent);
+            border-radius: 99px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 60%;
+        }
+
+        .nav-links a:hover {
+            color: var(--dark);
+            background: transparent;
+        }
+
+        /* ===== MOBILNÍ PRVKY – SKRYTÉ NA PC ===== */
         .burger {
             display: none;
             flex-direction: column;
             gap: 5px;
-            background: none;
+            background: rgba(235, 223, 16, 0.12);
             border: none;
             cursor: pointer;
-            padding: 6px;
-            z-index: 1001;
+            padding: 10px 12px;
+            border-radius: 99px;
+            transition: 0.25s;
+            backdrop-filter: blur(4px);
+        }
+
+        .burger:hover {
+            background: rgba(235, 223, 16, 0.22);
+            transform: scale(1.02);
         }
 
         .burger span {
             display: block;
-            width: 26px;
-            height: 3px;
+            width: 24px;
+            height: 2.5px;
             background: var(--dark);
             border-radius: 99px;
-            transition: 0.3s;
+            transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .burger.active span:nth-child(1) {
@@ -134,73 +189,189 @@
         }
         .burger.active span:nth-child(2) {
             opacity: 0;
+            transform: scaleX(0);
         }
         .burger.active span:nth-child(3) {
             transform: rotate(-45deg) translate(5px, -5px);
         }
 
-        .nav-links {
-            display: flex;
-            gap: 0.25rem;
-            list-style: none;
+        .menu-header,
+        .close-menu,
+        .menu-title,
+        .nav-overlay {
+            display: none;
         }
 
-        .nav-links a {
-            color: var(--muted);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            padding: 0.5rem 1rem;
-            border-radius: 999px;
-            transition: 0.2s;
-        }
-
-        .nav-links a:hover {
-            background: var(--bg);
-            color: var(--dark);
-        }
-
-        /* ===== MOBILE MENU ===== */
+        /* ===== MOBILNÍ MENU – VYSKOČÍ JAKO KARTA ===== */
         @media (max-width: 768px) {
             .burger {
                 display: flex;
             }
 
             .nav-links {
-                display: none;
-                position: absolute;
-                top: 64px;
-                left: 0;
-                right: 0;
-                background: var(--white);
-                flex-direction: column;
-                border-bottom: 1px solid var(--border);
-                box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-                padding: 0.5rem 0;
-                width: 100%;
+                display: flex;
+                position: fixed;
+                top: 12px;
+                left: 12px;
+                right: 12px;
+                width: auto;
                 height: auto;
+                max-height: 80vh;
+                background: rgba(255, 255, 255, 0.96);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+                padding: 1.8rem 1.5rem 2rem;
+                gap: 0.25rem;
+                border-radius: var(--radius-lg);
+                box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.5);
+                z-index: 1001;
+                border: 1px solid rgba(235, 223, 16, 0.25);
+                transform: translateY(-20px) scale(0.96);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease;
+                overflow-y: auto;
             }
 
             .nav-links.open {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .nav-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.25);
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
+                z-index: 1000;
+                opacity: 0;
+                transition: opacity 0.35s ease;
+            }
+
+            .nav-overlay.active {
+                display: block;
+                opacity: 1;
+            }
+
+            .menu-header {
                 display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 1.2rem;
+                padding-bottom: 0.8rem;
+                border-bottom: 2px solid rgba(235, 223, 16, 0.25);
+            }
+
+            .menu-title {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-weight: 800;
+                font-size: 1rem;
+                color: var(--dark);
+                letter-spacing: -0.3px;
+            }
+
+            .menu-title .emoji {
+                font-size: 1.3rem;
+            }
+
+            .close-menu {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                background: rgba(235, 223, 16, 0.15);
+                border: none;
+                border-radius: 99px;
+                color: var(--dark);
+                font-size: 1.4rem;
+                cursor: pointer;
+                transition: 0.25s;
+                flex-shrink: 0;
+            }
+
+            .close-menu:hover,
+            .close-menu:active {
+                background: var(--accent);
+                transform: rotate(90deg) scale(1.05);
+                color: var(--dark);
             }
 
             .nav-links a {
-                padding: 0.9rem 1.5rem;
-                border-radius: 0;
-                border-bottom: 1px solid var(--border);
-                justify-content: center;
-                color: var(--text);
+                color: var(--dark);
+                text-decoration: none;
+                font-weight: 700;
+                font-size: 1.1rem;
+                padding: 0.8rem 1.2rem;
+                border-radius: var(--radius-sm);
+                transition: 0.2s;
+                text-align: left;
+                display: flex;
+                align-items: center;
+                gap: 0.7rem;
+                border: 1px solid transparent;
+                background: transparent;
+            }
+
+            .nav-links a i {
+                color: var(--accent);
+                font-size: 1.1rem;
+                width: 1.4rem;
+                text-align: center;
+                opacity: 0.7;
+                transition: 0.2s;
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+
+            .nav-links a:hover,
+            .nav-links a:active {
+                background: var(--accent-soft);
+                border-color: var(--accent);
+                transform: translateX(4px);
+            }
+
+            .nav-links a:hover i {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                padding: 1.5rem 1.2rem 1.8rem;
+                border-radius: 20px;
+                top: 10px;
+                left: 10px;
+                right: 10px;
+            }
+
+            .nav-links a {
                 font-size: 1rem;
+                padding: 0.7rem 1rem;
             }
 
-            .nav-links a:hover {
-                background: var(--bg);
-                padding-left: 1.5rem;
+            .close-menu {
+                width: 36px;
+                height: 36px;
+                font-size: 1.2rem;
             }
 
-            .nav-links a:last-child {
-                border-bottom: none;
+            .menu-title {
+                font-size: 0.9rem;
             }
         }
 
@@ -709,7 +880,6 @@
             border-radius: 999px;
         }
 
-        /* ===== PRIORITY CARDS ===== */
         .priorities {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -779,7 +949,6 @@
             align-self: flex-start;
         }
 
-        /* ===== MOBILNÍ SCROLL ===== */
         .priorities-scroll {
             display: none;
             gap: 1rem;
@@ -823,24 +992,43 @@
             width: 100%;
             aspect-ratio: 16 / 9;
             background: var(--bg);
-            border: 2px dashed var(--border);
+            border: 1px solid var(--border);
             border-radius: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 0.5rem;
-            color: var(--muted);
-            font-size: 1.1rem;
-            transition: 0.3s;
-            min-height: 200px;
             overflow: hidden;
+            position: relative;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+            min-height: 200px;
+        }
+
+        .team-photo-section .photo-placeholder::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(0,0,0,0.02) 0%,
+                rgba(0,0,0,0) 55%,
+                rgba(0,0,0,0.12) 100%
+            );
+            pointer-events: none;
         }
 
         .team-photo-section .photo-placeholder img {
             width: 100%;
             height: 100%;
+            display: block;
             object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        .team-photo-section .photo-placeholder:hover img {
+            transform: scale(1.015);
+        }
+
+        .team-photo-section .photo-placeholder i {
+            font-size: 3rem;
+            color: var(--accent);
         }
 
         .team-photo-section .photo-placeholder:hover {
@@ -1115,7 +1303,6 @@
 
             .team-photo-section .photo-placeholder {
                 min-height: 150px;
-                font-size: 0.9rem;
                 border-radius: 1rem;
             }
 
@@ -1155,7 +1342,6 @@
                 padding: 0.6rem 1.6rem;
             }
 
-            /* ===== "ČISTÁ, ZELENÁ A BEZPEČNÁ OBCE" - POSOUVACÍ NA MOBILU ===== */
             .priorities {
                 display: none;
             }
@@ -1336,12 +1522,22 @@
             <span></span>
         </button>
         <ul class="nav-links" id="navLinks">
+            <!-- NA PC SKRYTÉ, NA MOBILU VIDĚT -->
+            <div class="menu-header">
+                <div class="menu-title">
+                    <span class="emoji">🧭</span> Menu
+                </div>
+                <button class="close-menu" id="closeMenu" aria-label="Zavřít menu">
+                    <i class="fas fa-xmark"></i>
+                </button>
+            </div>
             <li><a href="#home">Domů</a></li>
             <li><a href="#vysledky">Co jsme dokázali</a></li>
             <li><a href="#program">Náš program</a></li>
             <li><a href="#proc">Proč pokračovat</a></li>
             <li><a href="#tym">Náš tým</a></li>
         </ul>
+        <div class="nav-overlay" id="navOverlay"></div>
     </div>
 </nav>
 
@@ -1542,7 +1738,6 @@
         <div style="margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid var(--border);">
             <h3 class="section-title center" style="font-size: 1.8rem;">Čistá, zelená a bezpečná obec</h3>
 
-            <!-- desktop verze - 3 sloupce -->
             <div class="priorities">
                 <div class="priority-card">
                     <span class="icon">♻️</span>
@@ -1576,7 +1771,6 @@
                 </div>
             </div>
 
-            <!-- mobilní verze - posouvací -->
             <div class="priorities-scroll">
                 <div class="priority-card">
                     <span class="icon">♻️</span>
@@ -1661,11 +1855,11 @@
 <section id="tym" style="background: #fafbfc;">
     <div class="container">
         <h2 class="section-title center">Lidé, kteří to tu znají</h2>
-        <p class="section-subtitle center">Nejsme žádní cizí lidé. Jsme vaši sousedé, známé tváře z ulice, hospody i fotbalového hřiště. Pojďte si s námi promluvit.</p>
+        <p class="section-subtitle center">Jsme tým, ne soubor jednotlivců.</p>
 
         <div class="team-photo-section">
             <div class="photo-placeholder">
-                <img src="foto.png" alt="Společná fotka týmu Volba pro zítřek" />
+                <img src="foto.png" alt="Společná fotka týmu Volba pro zítřek">
             </div>
         </div>
 
@@ -1831,9 +2025,11 @@
 <!-- FOOTER -->
 <footer>
     <div class="container">
+        <!--
         <a href="#" class="footer-btn">
             <i class="fas fa-gamepad"></i> Zahrajte si s námi hry <i class="fas fa-arrow-right"></i>
         </a>
+        --> 
         <p><strong>Volba pro zítřek</strong> – společně tvoříme budoucnost Čisté</p>
         <p>Komunální volby 9.–10. října 2026</p>
         <p>© 2026</p>
@@ -1843,19 +2039,29 @@
 <script>
     const burger = document.getElementById('burger');
     const navLinks = document.getElementById('navLinks');
+    const closeMenu = document.getElementById('closeMenu');
+    const navOverlay = document.getElementById('navOverlay');
 
-    burger.addEventListener('click', () => {
-        burger.classList.toggle('active');
-        navLinks.classList.toggle('open');
-        document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
-    });
+    function openMenu() {
+        burger.classList.add('active');
+        navLinks.classList.add('open');
+        navOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenuFn() {
+        burger.classList.remove('active');
+        navLinks.classList.remove('open');
+        navOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    burger.addEventListener('click', openMenu);
+    closeMenu.addEventListener('click', closeMenuFn);
+    navOverlay.addEventListener('click', closeMenuFn);
 
     document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            burger.classList.remove('active');
-            navLinks.classList.remove('open');
-            document.body.style.overflow = '';
-        });
+        link.addEventListener('click', closeMenuFn);
     });
 
     document.getElementById('logoLink').addEventListener('click', (e) => {
@@ -1882,5 +2088,6 @@
     window.addEventListener('scroll', updateTimeline, { passive: true });
     updateTimeline();
 </script>
+
 </body>
 </html>
