@@ -112,8 +112,12 @@
             transform: scale(1.05);
         }
 
-        .logo span {
+        .logo .logo-text {
             color: var(--accent);
+        }
+
+        .logo .logo-text-highlight {
+            color: var(--secondary);
         }
 
         .nav-links {
@@ -2055,7 +2059,7 @@
     <div class="container">
         <a href="#" class="logo" id="logoLink">
             <span class="logo-icon">📋</span>
-            Volba pro <span>zítřek</span>
+            <span class="logo-text">Volba pro </span><span class="logo-text-highlight">zítřek</span>
         </a>
         <button class="burger" id="burger" aria-label="Menu">
             <span></span>
@@ -2484,7 +2488,7 @@
 
         <div class="team-photo-section">
             <div class="photo-placeholder">
-                <img src="foto1.png" alt="Společná fotka týmu Volba pro zítřek">
+                <img src="foto1.jpg" alt="Společná fotka týmu Volba pro zítřek">
             </div>
         </div>
 
