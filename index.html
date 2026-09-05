@@ -9,7 +9,7 @@
     <meta property="og:description" content="Máme za sebou kus práce. S vámi chceme pokračovat." />
     <meta property="og:type" content="website" />
 
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f172a'/%3E%3Cpath d='M50 20 L70 45 L60 45 L70 65 L30 65 L40 45 L30 45 Z' fill='%23F5C518'/%3E%3C/svg%3E" type="image/svg+xml" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232A4A7A'/%3E%3Cpath d='M50 20 L70 45 L60 45 L70 65 L30 65 L40 45 L30 45 Z' fill='%23FFFFFF'/%3E%3C/svg%3E" type="image/svg+xml" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,16 +18,17 @@
 
     <style>
         :root {
-            --accent: #F5C518;
-            --accent-hover: #d9ad10;
-            --accent-soft: #fef7e0;
-            --accent-light: #fcf3c0;
-            --accent-glow: rgba(245, 197, 24, 0.35);
-            --secondary: #4FC3F7;
+            --accent: #2A4A7A;
+            --accent-hover: #1f3a60;
+            --accent-soft: #eaf0f8;
+            --accent-light: #d4e0f0;
+            --accent-glow: rgba(42, 74, 122, 0.25);
+            --secondary: #4A9EFF;
+            --secondary-soft: #e3f0ff;
             --dark: #1a1a2e;
-            --text: #2d2d3f;
-            --muted: #5a5a6e;
-            --border: #e8ecf0;
+            --text: #1a2a3a;
+            --muted: #4a5a6e;
+            --border: #dce0e8;
             --bg: #ffffff;
             --white: #ffffff;
             --shadow: 0 4px 20px rgba(0,0,0,0.06);
@@ -72,7 +73,7 @@
             -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
             border-bottom: 3px solid var(--accent);
-            box-shadow: 0 2px 12px rgba(245, 197, 24, 0.2);
+            box-shadow: 0 2px 12px var(--accent-glow);
             transition: background 0.2s;
         }
 
@@ -86,7 +87,7 @@
         .logo {
             font-size: 1.25rem;
             font-weight: 900;
-            color: var(--dark);
+            color: var(--accent);
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -102,7 +103,7 @@
             align-items: center;
             justify-content: center;
             font-weight: 900;
-            color: var(--dark);
+            color: var(--white);
             font-size: 1.1rem;
             transition: transform 0.2s;
         }
@@ -151,7 +152,7 @@
         }
 
         .nav-links a:hover {
-            color: var(--dark);
+            color: var(--accent);
             background: transparent;
         }
 
@@ -172,11 +173,15 @@
             transform: scale(1.02);
         }
 
+        .burger:hover span {
+            background: var(--white);
+        }
+
         .burger span {
             display: block;
             width: 24px;
             height: 2.5px;
-            background: var(--dark);
+            background: var(--accent);
             border-radius: 99px;
             transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -273,7 +278,7 @@
                 gap: 0.5rem;
                 font-weight: 800;
                 font-size: 1rem;
-                color: var(--dark);
+                color: var(--accent);
                 letter-spacing: -0.3px;
             }
 
@@ -290,7 +295,7 @@
                 background: var(--accent-soft);
                 border: 2px solid var(--accent);
                 border-radius: 99px;
-                color: var(--dark);
+                color: var(--accent);
                 font-size: 1.4rem;
                 cursor: pointer;
                 transition: 0.25s;
@@ -301,11 +306,11 @@
             .close-menu:active {
                 background: var(--accent);
                 transform: rotate(90deg) scale(1.05);
-                color: var(--dark);
+                color: var(--white);
             }
 
             .nav-links a {
-                color: var(--dark);
+                color: var(--accent);
                 text-decoration: none;
                 font-weight: 700;
                 font-size: 1.1rem;
@@ -382,7 +387,7 @@
         .hero .badge {
             display: inline-block;
             background: var(--accent);
-            color: var(--dark);
+            color: var(--white);
             font-weight: 800;
             font-size: 0.85rem;
             padding: 0.4rem 1.4rem;
@@ -398,14 +403,13 @@
             font-weight: 900;
             line-height: 1.15;
             letter-spacing: -0.03em;
-            color: var(--dark);
+            color: var(--accent);
             margin-bottom: 0.5rem;
         }
 
         .hero h1 .highlight {
-            color: var(--accent);
+            color: var(--secondary);
             position: relative;
-            text-shadow: 0 2px 12px var(--accent-glow);
         }
 
         .hero .subheadline {
@@ -490,7 +494,7 @@
             align-items: center;
             gap: 0.6rem;
             background: var(--accent);
-            color: var(--dark);
+            color: var(--white);
             font-weight: 800;
             font-size: 1rem;
             padding: 0.75rem 2.2rem;
@@ -505,6 +509,7 @@
         .btn:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 8px 30px var(--accent-glow);
+            background: var(--accent-hover);
         }
 
         .btn:active {
@@ -513,7 +518,7 @@
 
         .btn-outline {
             background: transparent;
-            color: var(--dark);
+            color: var(--accent);
             border: 2px solid var(--accent);
             box-shadow: none;
         }
@@ -522,6 +527,7 @@
             background: var(--accent-soft);
             border-color: var(--accent);
             box-shadow: 0 4px 16px var(--accent-glow);
+            color: var(--accent);
         }
 
         section {
@@ -532,8 +538,8 @@
 
         .section-tag {
             display: inline-block;
-            background: var(--accent-soft);
-            color: var(--accent);
+            background: var(--secondary-soft);
+            color: var(--secondary);
             font-weight: 800;
             font-size: 0.8rem;
             padding: 0.3rem 1.2rem;
@@ -541,13 +547,13 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 0.6rem;
-            border: 1px solid var(--accent);
+            border: 1px solid var(--secondary);
         }
 
         .section-title {
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 900;
-            color: var(--dark);
+            color: var(--accent);
             margin-bottom: 0.6rem;
             letter-spacing: -0.02em;
         }
@@ -659,7 +665,7 @@
         .tl-step.active .tl-dot {
             border-color: var(--accent);
             background: var(--accent);
-            color: var(--dark);
+            color: var(--white);
             transform: scale(1.1);
             box-shadow: 0 0 0 8px var(--accent-glow);
         }
@@ -694,7 +700,7 @@
 
         .detail-list li::before {
             content: "✓";
-            color: var(--accent);
+            color: var(--secondary);
             font-weight: 900;
             font-size: 0.9rem;
             flex-shrink: 0;
@@ -730,7 +736,7 @@
             display: inline-block;
             font-size: 1.1rem;
             font-weight: 800;
-            color: var(--accent);
+            color: var(--secondary);
             background: transparent;
             padding: 0;
             margin-bottom: 0.15rem;
@@ -739,14 +745,14 @@
         }
 
         .tl-step.active .year-tag {
-            color: var(--accent);
+            color: var(--secondary);
             background: transparent;
         }
 
         .label {
             font-size: 1.2rem;
             font-weight: 800;
-            color: var(--dark);
+            color: var(--accent);
             display: block;
             line-height: 1.3;
         }
@@ -768,16 +774,17 @@
         .badge-list span {
             font-size: 0.7rem;
             font-weight: 700;
-            background: var(--accent-soft);
+            background: var(--secondary-soft);
             padding: 0.15rem 0.8rem;
             border-radius: 999px;
-            color: var(--dark);
-            border: 1px solid var(--accent);
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
         }
 
         .tl-step.active .badge-list span {
             background: var(--white);
-            border-color: var(--accent);
+            border-color: var(--secondary);
+            color: var(--secondary);
         }
 
         .tl-right .year-tag,
@@ -802,7 +809,7 @@
             justify-content: flex-end;
         }
 
-        /* ===== RESPONSIVE – MOBIL (ROK PRVNÍ U OBOU KROKŮ) ===== */
+        /* ===== RESPONSIVE – MOBIL ===== */
         @media (max-width: 768px) {
             .program-timeline::before {
                 left: 20px;
@@ -826,7 +833,6 @@
                 position: relative;
             }
 
-            /* OBA KROKY: rok nahoře, odrážky dole */
             .tl-step .tl-left {
                 text-align: left !important;
                 padding-right: 0 !important;
@@ -845,7 +851,6 @@
                 order: 2 !important;
             }
 
-            /* Rok, název a popis vlevo */
             .tl-left .year-tag,
             .tl-left .label,
             .tl-left .desc {
@@ -856,7 +861,6 @@
                 justify-content: flex-start !important;
             }
 
-            /* Odrážky vlevo */
             .tl-left .detail-list {
                 text-align: left !important;
             }
@@ -871,7 +875,6 @@
                 margin-right: 0.3rem !important;
             }
 
-            /* Pravý sloupec (odrážky) – vždy vlevo */
             .tl-right .detail-list {
                 text-align: left !important;
             }
@@ -885,7 +888,6 @@
                 margin-right: 0.3rem !important;
             }
 
-            /* Dot / číslo uprostřed */
             .tl-dot {
                 width: 40px;
                 height: 40px;
@@ -1016,7 +1018,7 @@
         .timeline-item.active .dot {
             background: var(--accent);
             box-shadow: 0 0 0 2px var(--accent);
-            color: var(--dark);
+            color: var(--white);
             transform: scale(1.15);
         }
 
@@ -1039,17 +1041,17 @@
             font-size: 0.8rem;
             font-weight: 700;
             color: var(--muted);
-            background: var(--accent-soft);
+            background: var(--secondary-soft);
             padding: 0.2rem 0.9rem;
             border-radius: 999px;
             margin-bottom: 0.4rem;
-            border: 1px solid var(--accent);
+            border: 1px solid var(--secondary);
         }
 
         .timeline-item.active .year {
-            color: var(--dark);
-            background: var(--accent-soft);
-            border-color: var(--accent);
+            color: var(--secondary);
+            background: var(--secondary-soft);
+            border-color: var(--secondary);
         }
 
         .timeline-item .icon {
@@ -1061,7 +1063,7 @@
         .timeline-item h3 {
             font-size: 1.25rem;
             font-weight: 800;
-            color: var(--dark);
+            color: var(--accent);
             margin-bottom: 0.3rem;
         }
 
@@ -1083,11 +1085,11 @@
             font-size: 1.6rem;
             font-weight: 800;
             margin-bottom: 0.4rem;
-            color: var(--dark);
+            color: var(--accent);
         }
 
         .sliby h3 i {
-            color: var(--accent);
+            color: var(--secondary);
         }
 
         .sliby .sub {
@@ -1111,7 +1113,7 @@
             text-align: center;
             padding: 0.9rem 1.2rem;
             background: var(--accent);
-            color: var(--dark);
+            color: var(--white);
             border-bottom: 2px solid var(--accent);
         }
 
@@ -1145,7 +1147,7 @@
             display: block;
             font-weight: 700;
             font-size: 0.85rem;
-            color: var(--accent);
+            color: var(--secondary);
             margin-top: 0.1rem;
         }
 
@@ -1170,7 +1172,7 @@
         }
 
         .status-hotovo { background: #d4edda; color: #155724; border: 1px solid #b8daff; }
-        .status-probiha { background: #fef7e0; color: #8a7f0a; border: 1px solid var(--accent); }
+        .status-probiha { background: var(--secondary-soft); color: var(--secondary); border: 1px solid var(--secondary); }
         .status-pripraveno { background: #dbeafe; color: #1d4ed8; border: 1px solid #b8daff; }
 
         .why-grid {
@@ -1209,7 +1211,7 @@
 
         .why-card .icon {
             font-size: 2rem;
-            color: var(--accent);
+            color: var(--secondary);
             margin-bottom: 0.6rem;
             display: block;
         }
@@ -1231,11 +1233,11 @@
             font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
-            background: var(--accent-soft);
-            color: var(--dark);
+            background: var(--secondary-soft);
+            color: var(--secondary);
             padding: 0.2rem 0.9rem;
             border-radius: 999px;
-            border: 1px solid var(--accent);
+            border: 1px solid var(--secondary);
         }
 
         .proc-kandidujeme {
@@ -1296,6 +1298,7 @@
             font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 0.6rem;
+            color: var(--accent);
         }
 
         .priority-card ul {
@@ -1316,7 +1319,7 @@
             content: "•";
             position: absolute;
             left: 0;
-            color: var(--accent);
+            color: var(--secondary);
             font-weight: 700;
         }
 
@@ -1324,12 +1327,12 @@
             font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
-            background: var(--accent-soft);
-            color: var(--dark);
+            background: var(--secondary-soft);
+            color: var(--secondary);
             padding: 0.2rem 0.8rem;
             border-radius: 999px;
             align-self: flex-start;
-            border: 1px solid var(--accent);
+            border: 1px solid var(--secondary);
         }
 
         .priorities-scroll {
@@ -1431,14 +1434,14 @@
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: var(--accent-soft);
-            border: 2px solid var(--accent);
+            background: var(--secondary-soft);
+            border: 2px solid var(--secondary);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
             font-weight: 800;
-            color: var(--dark);
+            color: var(--secondary);
         }
 
         .candidate-info {
@@ -1453,23 +1456,24 @@
         .candidate-info .role-tag {
             font-size: 0.8rem;
             font-weight: 700;
-            background: var(--accent-soft);
-            color: var(--dark);
+            background: var(--secondary-soft);
+            color: var(--secondary);
             padding: 0.15rem 0.8rem;
             border-radius: 999px;
             display: inline-block;
-            border: 1px solid var(--accent);
+            border: 1px solid var(--secondary);
         }
 
         .candidate-info h3 {
             font-size: 1.4rem;
             font-weight: 800;
             margin: 0.1rem 0 0.05rem;
+            color: var(--accent);
         }
 
         .candidate-info .position {
             font-weight: 600;
-            color: var(--accent);
+            color: var(--secondary);
             margin-bottom: 0.3rem;
             font-size: 0.95rem;
         }
@@ -1497,9 +1501,10 @@
             border-radius: 999px;
             font-weight: 500;
             border: 1px solid var(--border);
+            color: var(--muted);
         }
 
-        /* ===== ACCORDION (ROZKLIKÁVACÍ MENU) ===== */
+        /* ===== ACCORDION ===== */
         .accordion {
             max-width: 900px;
             margin: 0 auto;
@@ -1530,7 +1535,7 @@
         }
 
         .accordion-header:hover {
-            background: var(--accent-soft);
+            background: var(--secondary-soft);
         }
 
         .accordion-header .icon-left {
@@ -1545,14 +1550,14 @@
         .accordion-header .title-group h4 {
             font-size: 1.1rem;
             font-weight: 700;
-            color: var(--dark);
+            color: var(--accent);
             margin: 0;
             line-height: 1.3;
         }
 
         .accordion-header .accordion-toggle {
             font-size: 1.2rem;
-            color: var(--accent);
+            color: var(--secondary);
             transition: transform 0.3s ease;
             flex-shrink: 0;
             width: 30px;
@@ -1590,7 +1595,7 @@
 
         .accordion-body ul li::before {
             content: "•";
-            color: var(--accent);
+            color: var(--secondary);
             font-weight: 700;
             font-size: 1.2rem;
         }
@@ -1600,10 +1605,9 @@
             background: var(--accent);
             text-align: center;
             padding: 3.5rem 1.5rem;
-            color: var(--dark);
+            color: var(--white);
             font-size: 0.95rem;
             border-top: 4px solid var(--accent-hover);
-            box-shadow: 0 -4px 20px var(--accent-glow);
         }
 
         footer p {
@@ -1612,12 +1616,13 @@
 
         footer p strong {
             font-weight: 900;
+            color: var(--white);
         }
 
         footer .footer-divider {
             width: 60px;
             height: 3px;
-            background: var(--dark);
+            background: var(--white);
             margin: 1rem auto;
             border-radius: 99px;
             opacity: 0.3;
@@ -1627,7 +1632,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.6rem;
-            background: var(--dark);
+            background: var(--white);
             color: var(--accent);
             font-weight: 800;
             font-size: 1rem;
@@ -1642,8 +1647,40 @@
         .footer-btn:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-            background: var(--dark);
+            background: var(--white);
             color: var(--accent);
+        }
+
+        /* ===== TÝMOVÝ SLOGAN – SVĚTLE MODRÝ S TMVĚ MODRÝM PODTRŽENÍM ===== */
+        .team-slogan {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--secondary);
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+            margin: 0 auto 1.5rem;
+            padding: 0.5rem 0;
+            max-width: 800px;
+        }
+
+        .team-slogan .slogan-text {
+            display: inline-block;
+            border-bottom: 4px solid var(--accent);
+            padding-bottom: 0.15rem;
+        }
+
+        @media (max-width: 768px) {
+            .team-slogan {
+                font-size: 1.4rem;
+                padding: 0.3rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .team-slogan {
+                font-size: 1.1rem;
+            }
         }
 
         /* ===== RESPONSIVE ===== */
@@ -1853,19 +1890,16 @@
                 padding: 2.5rem 1.5rem;
             }
 
-            /* ===== NA MOBILU SCHOVAT PŮVODNÍ KARTY ===== */
             .school-grid-desktop {
                 display: none !important;
             }
 
-            /* Accordion viditelný na mobilu */
             .accordion {
                 display: block !important;
             }
         }
 
         @media (min-width: 769px) {
-            /* Accordion schovaný na desktopu */
             .accordion {
                 display: none !important;
             }
@@ -2084,7 +2118,7 @@
 
         <p class="hero-text">
             Stabilizovali jsme skalní svah, vybudovali nový chodník s osvětlením a dokončujeme kanalizaci.
-            <strong style="color: var(--dark);">Čistá se mění k lepšímu.</strong>
+            <strong style="color: var(--accent);">Čistá se mění k lepšímu.</strong>
             Pojďte s námi dotáhnout další projekty, které dávají smysl.
         </p>
 
@@ -2131,7 +2165,7 @@
                     <span class="year">🔧 Dokončení 09/2026</span>
                     <span class="icon">🚧</span>
                     <h3>Splašková kanalizace – hlavní projekt</h3>
-                    <p>Stavba zahájena 10/2024, k 25. 9. 2026 bude dokončena a předána. Rozpočet: 166,20 mil. Kč, vysoutěženo za 188,58 mil. Kč (včetně dodatků).</p>
+                    <p>Stavba zahájena v 10/2024, k 25. 9. 2026 bude dílo dokončeno a předáno. Následně bude požádáno o kolaudační rozhodnutí na tuto stavbu. Rozpočet: 166,20 mil. Kč, vysoutěženo za 188,58 mil. Kč.</p>
                 </div>
             </div>
             <div class="timeline-item">
@@ -2184,7 +2218,7 @@
                     </div>
                     <div class="status-wrap">
                         <span class="status status-probiha">🟡 Probíhá</span>
-                        <span class="price-detail">Konečná cena bude známa při předání</span>
+                        <span class="price-detail">Vysoutěženo bez dodatků</span>
                     </div>
                 </div>
             </div>
@@ -2267,11 +2301,11 @@
         <div style="margin-top: 3rem; padding-top: 2.5rem; border-top: 3px solid var(--accent);">
             <h3 class="section-title center" style="font-size: 1.8rem;">Škola, rodiny a aktivní život</h3>
 
-            <!-- DESKTOP verze – 2 sloupce -->
+            <!-- DESKTOP verze -->
             <div class="school-grid-desktop" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 900px; margin: 0 auto;">
                 <div style="background: var(--white); border-radius: 1.5rem; padding: 1.8rem; border: 2px solid var(--border);">
                     <span style="font-size: 2rem;">📚</span>
-                    <h4 style="font-weight: 700; margin: 0.5rem 0;">Moderní vzdělávání</h4>
+                    <h4 style="font-weight: 700; margin: 0.5rem 0; color: var(--accent);">Moderní vzdělávání</h4>
                     <ul style="list-style: none; font-size: 0.95rem; color: var(--muted);">
                         <li style="padding: 0.2rem 0;">• Aktivizační metody výuky</li>
                         <li style="padding: 0.2rem 0;">• Projektová a badatelská výuka</li>
@@ -2280,7 +2314,7 @@
                 </div>
                 <div style="background: var(--white); border-radius: 1.5rem; padding: 1.8rem; border: 2px solid var(--border);">
                     <span style="font-size: 2rem;">🏃</span>
-                    <h4 style="font-weight: 700; margin: 0.5rem 0;">Sport a volný čas</h4>
+                    <h4 style="font-weight: 700; margin: 0.5rem 0; color: var(--accent);">Sport a volný čas</h4>
                     <ul style="list-style: none; font-size: 0.95rem; color: var(--muted);">
                         <li style="padding: 0.2rem 0;">• Pumptrack pro děti a mládež</li>
                         <li style="padding: 0.2rem 0;">• Senior park – setkávání a pohyb</li>
@@ -2289,7 +2323,7 @@
                 </div>
             </div>
 
-            <!-- MOBIL verze – rozklikávací accordion -->
+            <!-- MOBIL verze – accordion -->
             <div class="accordion">
                 <div class="accordion-item open">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
@@ -2404,9 +2438,9 @@
 <section id="proc">
     <div class="container">
         <div class="proc-kandidujeme">
-            <h2 class="section-title center"><i class="fas fa-heart" style="color: var(--accent);"></i> Proč kandidujeme</h2>
+            <h2 class="section-title center"><i class="fas fa-heart" style="color: var(--secondary);"></i> Proč kandidujeme</h2>
             <p><strong>Čistá je náš domov.</strong> Chceme, aby se tu dobře žilo všem.</p>
-            <p>Neslibujeme nemožné. <strong style="color: var(--accent);">Chceme pokračovat v projektech, které dávají smysl.</strong></p>
+            <p>Neslibujeme nemožné. <strong style="color: var(--secondary);">Chceme pokračovat v projektech, které dávají smysl.</strong></p>
             <div class="divider"></div>
             <p style="font-weight: 600; color: var(--dark);">Společně tvoříme budoucnost. A ta začíná tady, v Čisté.</p>
         </div>
@@ -2448,7 +2482,11 @@
 <section id="tym">
     <div class="container">
         <h2 class="section-title center">Lidé, kteří to tu znají</h2>
-        <p class="section-subtitle center">Jsme tým, ne soubor jednotlivců.</p>
+
+        <!-- ===== TÝMOVÝ SLOGAN – SVĚTLE MODRÝ S TMVĚ MODRÝM PODTRŽENÍM ===== -->
+        <div class="team-slogan">
+            <span class="slogan-text">Jsme tým, ne soubor jednotlivců</span>
+        </div>
 
         <div class="team-photo-section">
             <div class="photo-placeholder">
@@ -2742,18 +2780,15 @@
         const item = header.parentElement;
         const isOpen = item.classList.contains('open');
 
-        // Zavřít všechny
         document.querySelectorAll('.accordion-item').forEach(el => {
             el.classList.remove('open');
         });
 
-        // Otevřít kliknutý pokud nebyl otevřený
         if (!isOpen) {
             item.classList.add('open');
         }
     }
 
-    // Na mobilech otevřít první položku jako výchozí
     if (window.innerWidth <= 768) {
         const firstItem = document.querySelector('.accordion-item');
         if (firstItem) {
