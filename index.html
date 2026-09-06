@@ -3252,7 +3252,6 @@
         document.body.style.overflow = '';
     }
 
-    // Klikání na fotky s třídou .clickable-image
     document.querySelectorAll('.clickable-image').forEach(element => {
         element.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -3263,20 +3262,17 @@
         });
     });
 
-    // Zavření přes křížek
     lightboxClose.addEventListener('click', function(e) {
         e.stopPropagation();
         closeLightbox();
     });
 
-    // Zavření kliknutím na pozadí
     lightbox.addEventListener('click', function(e) {
         if (e.target === this) {
             closeLightbox();
         }
     });
 
-    // Zavření klávesou ESC
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && lightbox.style.display === 'flex') {
             closeLightbox();
