@@ -1,4 +1,4 @@
-&nbsp;<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="cs">
 <head>
     <meta charset="UTF-8" />
@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <style>
+        /* ----- ZÁKLADNÍ PROMĚNNÉ ----- */
         :root {
             --accent: #2A4A7A;
             --accent-hover: #1f3a60;
@@ -38,6 +39,8 @@
             --card-2: #4A9EFF;
             --card-3: #2A4A7A;
             --card-4: #4A9EFF;
+            /* NOVÉ: barva pro hero */
+            --hero-bg: #eef4fa;
         }
 
         * {
@@ -66,7 +69,7 @@
             padding: 0 1.5rem;
         }
 
-        /* ===== NAVBAR ===== */
+        /* ----- NAVBAR ----- */
         .navbar {
             position: fixed;
             top: 0;
@@ -413,9 +416,9 @@
             }
         }
 
-        /* ===== HERO ===== */
+        /* ----- HERO – JEMNĚ MODRÁ ----- */
         .hero {
-            background: var(--white);
+            background: var(--hero-bg);
             text-align: center;
             padding: 5rem 0 4rem;
             border-bottom: 3px solid var(--accent);
@@ -457,7 +460,6 @@
             margin: 0 auto 1.5rem;
         }
 
-        /* ===== FLEX ROW – FOTKA + BUBLINKY ===== */
         .hero-row {
             display: flex;
             gap: 2.5rem;
@@ -479,7 +481,6 @@
             justify-content: center;
         }
 
-        /* ===== FOTKA ===== */
         .hero-photo {
             width: 100%;
             height: 100%;
@@ -503,7 +504,6 @@
             transform: scale(1.02);
         }
 
-        /* ===== STATISTIKY – 4 POLOŽKY ===== */
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -558,7 +558,6 @@
             text-align: center;
         }
 
-        /* ===== SPODNÍ TEXT A TLAČÍTKA ===== */
         .hero-bottom {
             max-width: 900px;
             margin: 0 auto;
@@ -618,7 +617,7 @@
             color: var(--accent);
         }
 
-        /* ===== RESPONSIVE – MOBIL ===== */
+        /* ----- RESPONSIVE HERO ----- */
         @media (max-width: 992px) {
             .hero-row {
                 flex-direction: column;
@@ -791,7 +790,7 @@
             }
         }
 
-        /* ===== SECTION ===== */
+        /* ----- ZBYTEK STRÁNKY (beze změny) ----- */
         section {
             padding: 4.5rem 0;
             border-bottom: 1px solid var(--border);
@@ -834,7 +833,6 @@
             margin-right: auto;
         }
 
-        /* ===== ČASOVÁ OSA ===== */
         .program-timeline {
             max-width: 960px;
             margin: 0 auto;
@@ -1071,7 +1069,6 @@
             justify-content: flex-end;
         }
 
-        /* ===== RESPONSIVE – MOBIL ===== */
         @media (max-width: 768px) {
             .program-timeline::before {
                 left: 20px;
@@ -1229,7 +1226,6 @@
             }
         }
 
-        /* ===== TIMELINE ===== */
         .timeline {
             position: relative;
             max-width: 720px;
@@ -1334,7 +1330,6 @@
             font-size: 0.95rem;
         }
 
-        /* ===== SLIBY ===== */
         .sliby {
             max-width: 900px;
             margin: 3.5rem auto 0;
@@ -1437,7 +1432,6 @@
         .status-probiha { background: var(--secondary-soft); color: var(--secondary); border: 1px solid var(--secondary); }
         .status-pripraveno { background: #dbeafe; color: #1d4ed8; border: 1px solid #b8daff; }
 
-        /* ===== PROČ KANDIDUJEME – BAREVNÉ BUBLINKY ===== */
         .why-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -1503,7 +1497,6 @@
             border: 1px solid var(--secondary);
         }
 
-        /* Barevné varianty pro karty – na desktopu 01+03 stejné, 02+04 stejné */
         .why-card:nth-child(1) {
             border-color: var(--card-1);
             background: #f0f4fa;
@@ -1556,7 +1549,6 @@
             border-color: var(--card-4);
         }
 
-        /* ===== RESPONSIVE – MOBIL: 02 a 04 jiné barvy ===== */
         @media (max-width: 768px) {
             .why-grid {
                 grid-template-columns: 1fr;
@@ -1640,7 +1632,6 @@
             color: var(--dark);
         }
 
-        /* ===== ZVÝRAZNĚNÝ BOX POD BUBLINAMI ===== */
         .highlight-box {
             max-width: 900px;
             margin: 1.8rem auto 0;
@@ -1712,7 +1703,6 @@
             }
         }
 
-        /* ===== PRIORITY ===== */
         .priorities {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1818,7 +1808,6 @@
             min-height: 200px;
         }
 
-        /* ===== FOTKA TÝMU ===== */
         .team-photo-section {
             max-width: 960px;
             margin: 0 auto 3rem;
@@ -1853,7 +1842,6 @@
             border-color: var(--accent);
         }
 
-        /* ===== CANDIDATES ===== */
         .candidates {
             display: flex;
             flex-direction: column;
@@ -1954,7 +1942,6 @@
             color: var(--muted);
         }
 
-        /* ===== ACCORDION ===== */
         .accordion {
             max-width: 900px;
             margin: 0 auto;
@@ -2050,7 +2037,6 @@
             font-size: 1.2rem;
         }
 
-        /* ===== FOOTER ===== */
         footer {
             background: var(--accent);
             text-align: center;
@@ -2101,7 +2087,6 @@
             color: var(--accent);
         }
 
-        /* ===== TÝMOVÝ SLOGAN ===== */
         .team-slogan {
             text-align: center;
             font-size: 1.8rem;
@@ -2132,7 +2117,6 @@
             }
         }
 
-        /* ===== LIGHTBOX ===== */
         #lightbox {
             display: none;
             position: fixed;
@@ -2187,7 +2171,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 992px) {
             .candidate {
                 padding: 1.5rem;
@@ -2446,7 +2429,6 @@
             }
         }
 
-        /* ===== TŘÍDA PRO KLIKATELNÉ FOTKY ===== */
         .clickable-image {
             cursor: pointer;
         }
@@ -2493,16 +2475,12 @@
 <header class="hero" id="home">
     <div class="container">
 
-        <!-- BADGE -->
         <span class="badge"><i class="fas fa-check-circle"></i> 4 roky práce pro Čistou</span>
 
-        <!-- HLAVNÍ NADPIS -->
         <h1>Máme za sebou kus práce.<br><span class="highlight">S vámi chceme pokračovat.</span></h1>
         <p class="subheadline">Čistá u Mladé Boleslavi – náš domov.</p>
 
-        <!-- ===== FOTKA VLEVO + 4 BUBLINKY V PRAVO ===== -->
         <div class="hero-row">
-            <!-- Levý sloupec – FOTKA -->
             <div class="col-photo">
                 <div class="hero-photo clickable-image">
                     <img 
@@ -2513,7 +2491,6 @@
                 </div>
             </div>
 
-            <!-- Pravý sloupec – 4 BUBLINKY -->
             <div class="col-stats">
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -2544,7 +2521,6 @@
             </div>
         </div>
 
-        <!-- ===== TEXT A TLAČÍTKA POD SLOUPCI ===== -->
         <div class="hero-bottom">
             <p class="hero-text">
                 Stabilizovali jsme skalní svah, vybudovali nový chodník s osvětlením a <strong style="color: var(--accent);">dokončujeme splaškovou kanalizaci.</strong>
@@ -2654,7 +2630,7 @@
     </div>
 </section>
 
-<!-- PROGRAM S ČASOVOU OSOU -->
+<!-- PROGRAM -->
 <section id="program">
     <div class="container">
         <span class="section-tag">Plán na další 4 roky</span>
@@ -2664,7 +2640,6 @@
         <div class="program-timeline" id="programTimeline">
             <div class="line-fill" id="lineFill"></div>
 
-            <!-- Krok 1 -->
             <div class="tl-step active" data-step="0">
                 <div class="tl-left">
                     <span class="year-tag">2026–2028</span>
@@ -2693,7 +2668,6 @@
                 </div>
             </div>
 
-            <!-- Krok 2 -->
             <div class="tl-step" data-step="1">
                 <div class="tl-left">
                     <span class="year-tag">2028–2030</span>
@@ -2724,11 +2698,9 @@
             </div>
         </div>
 
-        <!-- Škola, rodiny a aktivní život -->
         <div style="margin-top: 3rem; padding-top: 2.5rem; border-top: 3px solid var(--accent);">
             <h3 class="section-title center" style="font-size: 1.8rem;">Škola, rodiny a aktivní život</h3>
 
-            <!-- DESKTOP verze -->
             <div class="school-grid-desktop" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 900px; margin: 0 auto;">
                 <div style="background: var(--white); border-radius: 1.5rem; padding: 1.8rem; border: 2px solid var(--border);">
                     <span style="font-size: 2rem;">📚</span>
@@ -2750,7 +2722,6 @@
                 </div>
             </div>
 
-            <!-- MOBIL verze – accordion -->
             <div class="accordion">
                 <div class="accordion-item open">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
@@ -2788,7 +2759,6 @@
             </div>
         </div>
 
-        <!-- Čistá, zelená a bezpečná obec -->
         <div style="margin-top: 3rem; padding-top: 2.5rem; border-top: 3px solid var(--accent);">
             <h3 class="section-title center" style="font-size: 1.8rem;">Čistá, zelená a bezpečná obec</h3>
 
@@ -2861,7 +2831,7 @@
     </div>
 </section>
 
-<!-- PROČ POKRAČOVAT -->
+<!-- PROČ -->
 <section id="proc">
     <div class="container">
         <div class="proc-kandidujeme">
@@ -2903,7 +2873,6 @@
             </div>
         </div>
 
-        <!-- ===== ZVÝRAZNĚNÝ BOX ===== -->
         <div class="highlight-box">
             <p>
                 <i class="fas fa-handshake"></i>
@@ -2919,7 +2888,6 @@
     <div class="container">
         <h2 class="section-title center">Lidé, kteří to tu znají</h2>
 
-        <!-- ===== TÝMOVÝ SLOGAN ===== -->
         <div class="team-slogan">
             <span class="slogan-text">Jsme tým, ne soubor jednotlivců</span>
         </div>
@@ -3102,7 +3070,7 @@
     </div>
 </footer>
 
-<!-- ===== LIGHTBOX ===== -->
+<!-- LIGHTBOX -->
 <div id="lightbox">
     <button id="lightboxClose" aria-label="Zavřít">✕</button>
     <img id="lightboxImage" src="" alt="Zvětšený obrázek">
@@ -3142,7 +3110,7 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // ===== TIMELINE PRO VÝSLEDKY =====
+    // ===== TIMELINE =====
     const items = document.querySelectorAll('.timeline-item');
 
     function updateTimeline() {
@@ -3162,7 +3130,7 @@
     window.addEventListener('scroll', updateTimeline, { passive: true });
     updateTimeline();
 
-    // ===== ČASOVÁ OSA PROGRAMU =====
+    // ===== PROGRAM TIMELINE =====
     const tlSteps = document.querySelectorAll('.tl-step');
     const lineFill = document.getElementById('lineFill');
 
