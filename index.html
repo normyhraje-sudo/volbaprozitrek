@@ -9,7 +9,7 @@
     <meta property="og:description" content="Máme za sebou kus práce. S vámi chceme pokračovat." />
     <meta property="og:type" content="website" />
 
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232A4A7A'/%3E%3Cpath d='M50 20 L70 45 L60 45 L70 65 L30 65 L40 45 L30 45 Z' fill='%23FFFFFF'/%3E%3C/svg%3E" type="image/svg+xml" />
+    <link rel="icon" href="logoa.png" type="image/png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,6 +34,10 @@
             --shadow: 0 4px 20px rgba(0,0,0,0.06);
             --radius-lg: 24px;
             --radius-sm: 16px;
+            --card-1: #2A4A7A;
+            --card-2: #4A9EFF;
+            --card-3: #2A4A7A;
+            --card-4: #4A9EFF;
         }
 
         * {
@@ -97,15 +101,19 @@
         .logo-icon {
             width: 38px;
             height: 38px;
-            background: var(--accent);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 900;
-            color: var(--white);
-            font-size: 1.1rem;
-            transition: transform 0.2s;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .logo:hover .logo-icon {
@@ -114,10 +122,19 @@
 
         .logo .logo-text {
             color: var(--accent);
+            white-space: nowrap;
         }
 
         .logo .logo-text-highlight {
             color: var(--secondary);
+            white-space: nowrap;
+        }
+
+        .logo .logo-text-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            white-space: nowrap;
         }
 
         .nav-links {
@@ -286,8 +303,19 @@
                 letter-spacing: -0.3px;
             }
 
-            .menu-title .emoji {
-                font-size: 1.3rem;
+            .menu-title .menu-logo {
+                width: 32px;
+                height: 32px;
+                border-radius: 8px;
+                overflow: hidden;
+                flex-shrink: 0;
+            }
+
+            .menu-title .menu-logo img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
             }
 
             .close-menu {
@@ -378,6 +406,11 @@
             .menu-title {
                 font-size: 0.9rem;
             }
+
+            .menu-title .menu-logo {
+                width: 28px;
+                height: 28px;
+            }
         }
 
         /* ===== HERO ===== */
@@ -424,12 +457,57 @@
             margin: 0 auto 1.5rem;
         }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            max-width: 900px;
+        /* ===== FLEX ROW – FOTKA + BUBLINKY ===== */
+        .hero-row {
+            display: flex;
+            gap: 2.5rem;
+            align-items: stretch;
+            max-width: 1100px;
             margin: 0 auto 2rem;
+        }
+
+        .hero-row .col-photo {
+            flex: 1 1 48%;
+            min-width: 0;
+        }
+
+        .hero-row .col-stats {
+            flex: 1 1 48%;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* ===== FOTKA ===== */
+        .hero-photo {
+            width: 100%;
+            height: 100%;
+            min-height: 340px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            background: var(--white);
+            cursor: pointer;
+        }
+
+        .hero-photo img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .hero-photo:hover img {
+            transform: scale(1.02);
+        }
+
+        /* ===== STATISTIKY – 4 POLOŽKY ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
         }
 
         .stat-card {
@@ -443,7 +521,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 150px;
+            text-align: center;
+            min-height: 140px;
         }
 
         .stat-card:hover {
@@ -459,7 +538,7 @@
         }
 
         .stat-card .number {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 900;
             color: var(--accent);
             display: block;
@@ -468,22 +547,27 @@
 
         .stat-card .label {
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: block;
             color: var(--dark);
         }
 
         .stat-card .desc {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--muted);
             text-align: center;
         }
 
+        /* ===== SPODNÍ TEXT A TLAČÍTKA ===== */
+        .hero-bottom {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
         .hero-text {
-            max-width: 680px;
-            margin: 0 auto 2rem;
             color: var(--muted);
             font-size: 1.05rem;
+            margin-bottom: 1.5rem;
         }
 
         .btn-group {
@@ -534,6 +618,180 @@
             color: var(--accent);
         }
 
+        /* ===== RESPONSIVE – MOBIL ===== */
+        @media (max-width: 992px) {
+            .hero-row {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .hero-row .col-photo {
+                flex: 1 1 auto;
+            }
+
+            .hero-row .col-stats {
+                flex: 1 1 auto;
+            }
+
+            .hero-photo {
+                min-height: 200px;
+                max-height: 340px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.6rem;
+            }
+
+            .stat-card {
+                min-height: 110px;
+                padding: 0.8rem 0.4rem;
+                border-radius: 1rem;
+            }
+
+            .stat-card .emoji {
+                font-size: 1.6rem;
+            }
+
+            .stat-card .number {
+                font-size: 1.1rem;
+            }
+
+            .stat-card .label {
+                font-size: 0.8rem;
+            }
+
+            .stat-card .desc {
+                font-size: 0.6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 64px;
+                font-size: 16px;
+            }
+
+            .navbar .container {
+                height: 64px;
+            }
+
+            .hero {
+                padding: 3rem 0 2.5rem;
+            }
+
+            .hero .subheadline {
+                font-size: 1.1rem;
+            }
+
+            .hero-photo {
+                min-height: 160px;
+                max-height: 260px;
+                border-radius: 16px;
+            }
+
+            .stats-grid {
+                gap: 0.5rem;
+            }
+
+            .stat-card {
+                min-height: 100px;
+                padding: 0.6rem 0.3rem;
+                border-radius: 0.8rem;
+            }
+
+            .stat-card .emoji {
+                font-size: 1.4rem;
+            }
+
+            .stat-card .number {
+                font-size: 1rem;
+            }
+
+            .stat-card .label {
+                font-size: 0.7rem;
+            }
+
+            .stat-card .desc {
+                font-size: 0.55rem;
+            }
+
+            .hero-text {
+                font-size: 0.95rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 0.6rem 1.6rem;
+            }
+
+            .btn-group {
+                gap: 0.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 2rem 0 2rem;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero .badge {
+                font-size: 0.7rem;
+                padding: 0.3rem 1rem;
+            }
+
+            .hero-photo {
+                min-height: 140px;
+                max-height: 200px;
+                border-radius: 12px;
+            }
+
+            .stats-grid {
+                gap: 0.4rem;
+            }
+
+            .stat-card {
+                min-height: 85px;
+                padding: 0.5rem 0.2rem;
+                border-radius: 0.6rem;
+            }
+
+            .stat-card .emoji {
+                font-size: 1.2rem;
+            }
+
+            .stat-card .number {
+                font-size: 0.85rem;
+            }
+
+            .stat-card .label {
+                font-size: 0.65rem;
+            }
+
+            .stat-card .desc {
+                font-size: 0.5rem;
+            }
+
+            .hero-text {
+                font-size: 0.85rem;
+                margin-bottom: 1rem;
+            }
+
+            .btn {
+                font-size: 0.8rem;
+                padding: 0.5rem 1.2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* ===== SECTION ===== */
         section {
             padding: 4.5rem 0;
             border-bottom: 1px solid var(--border);
@@ -1179,6 +1437,7 @@
         .status-probiha { background: var(--secondary-soft); color: var(--secondary); border: 1px solid var(--secondary); }
         .status-pripraveno { background: #dbeafe; color: #1d4ed8; border: 1px solid #b8daff; }
 
+        /* ===== PROČ KANDIDUJEME – BAREVNÉ BUBLINKY ===== */
         .why-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -1244,6 +1503,119 @@
             border: 1px solid var(--secondary);
         }
 
+        /* Barevné varianty pro karty – na desktopu 01+03 stejné, 02+04 stejné */
+        .why-card:nth-child(1) {
+            border-color: var(--card-1);
+            background: #f0f4fa;
+        }
+        .why-card:nth-child(1) .icon {
+            color: var(--card-1);
+        }
+        .why-card:nth-child(1) .tag {
+            background: var(--card-1);
+            color: white;
+            border-color: var(--card-1);
+        }
+
+        .why-card:nth-child(2) {
+            border-color: var(--card-2);
+            background: #e8f2ff;
+        }
+        .why-card:nth-child(2) .icon {
+            color: var(--card-2);
+        }
+        .why-card:nth-child(2) .tag {
+            background: var(--card-2);
+            color: white;
+            border-color: var(--card-2);
+        }
+
+        .why-card:nth-child(3) {
+            border-color: var(--card-3);
+            background: #f0f4fa;
+        }
+        .why-card:nth-child(3) .icon {
+            color: var(--card-3);
+        }
+        .why-card:nth-child(3) .tag {
+            background: var(--card-3);
+            color: white;
+            border-color: var(--card-3);
+        }
+
+        .why-card:nth-child(4) {
+            border-color: var(--card-4);
+            background: #e8f2ff;
+        }
+        .why-card:nth-child(4) .icon {
+            color: var(--card-4);
+        }
+        .why-card:nth-child(4) .tag {
+            background: var(--card-4);
+            color: white;
+            border-color: var(--card-4);
+        }
+
+        /* ===== RESPONSIVE – MOBIL: 02 a 04 jiné barvy ===== */
+        @media (max-width: 768px) {
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .why-card:nth-child(1) {
+                border-color: var(--card-1);
+                background: #f0f4fa;
+            }
+            .why-card:nth-child(1) .icon {
+                color: var(--card-1);
+            }
+            .why-card:nth-child(1) .tag {
+                background: var(--card-1);
+                color: white;
+                border-color: var(--card-1);
+            }
+
+            .why-card:nth-child(3) {
+                border-color: var(--card-3);
+                background: #f0f4fa;
+            }
+            .why-card:nth-child(3) .icon {
+                color: var(--card-3);
+            }
+            .why-card:nth-child(3) .tag {
+                background: var(--card-3);
+                color: white;
+                border-color: var(--card-3);
+            }
+
+            .why-card:nth-child(2) {
+                border-color: var(--card-2);
+                background: #e8f2ff;
+            }
+            .why-card:nth-child(2) .icon {
+                color: var(--card-2);
+            }
+            .why-card:nth-child(2) .tag {
+                background: var(--card-2);
+                color: white;
+                border-color: var(--card-2);
+            }
+
+            .why-card:nth-child(4) {
+                border-color: var(--card-4);
+                background: #e8f2ff;
+            }
+            .why-card:nth-child(4) .icon {
+                color: var(--card-4);
+            }
+            .why-card:nth-child(4) .tag {
+                background: var(--card-4);
+                color: white;
+                border-color: var(--card-4);
+            }
+        }
+
         .proc-kandidujeme {
             max-width: 750px;
             margin: 0 auto 3rem;
@@ -1268,6 +1640,79 @@
             color: var(--dark);
         }
 
+        /* ===== ZVÝRAZNĚNÝ BOX POD BUBLINAMI ===== */
+        .highlight-box {
+            max-width: 900px;
+            margin: 1.8rem auto 0;
+            padding: 1.6rem 2rem;
+            background: var(--accent);
+            border-radius: 1.5rem;
+            text-align: center;
+            color: white;
+            box-shadow: 0 8px 30px var(--accent-glow);
+            border: 2px solid var(--secondary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .highlight-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px var(--accent-glow);
+        }
+
+        .highlight-box p {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .highlight-box i {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .highlight-box {
+                padding: 1.2rem 1.2rem;
+                margin: 1.2rem auto 0;
+                border-radius: 1.2rem;
+            }
+
+            .highlight-box p {
+                font-size: 0.95rem;
+                gap: 0.6rem;
+            }
+
+            .highlight-box i {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .highlight-box {
+                padding: 1rem 0.8rem;
+                margin: 1rem auto 0;
+                border-radius: 1rem;
+                border-width: 1.5px;
+            }
+
+            .highlight-box p {
+                font-size: 0.85rem;
+                gap: 0.4rem;
+                flex-direction: column;
+            }
+
+            .highlight-box i {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* ===== PRIORITY ===== */
         .priorities {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1388,6 +1833,7 @@
             overflow: hidden;
             position: relative;
             box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+            cursor: pointer;
         }
 
         .team-photo-section .photo-placeholder img {
@@ -1686,28 +2132,63 @@
             }
         }
 
+        /* ===== LIGHTBOX ===== */
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.88);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            cursor: pointer;
+        }
+
+        #lightboxClose {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.4);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 1.6rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            z-index: 10000;
+            font-family: Arial, sans-serif;
+        }
+
+        #lightboxClose:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+
+        #lightboxImage {
+            max-width: 90vw;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            cursor: default;
+            transition: transform 0.3s ease;
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 992px) {
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.8rem;
-            }
-            .stat-card {
-                min-height: 130px;
-                padding: 1rem 0.6rem;
-            }
-            .stat-card .number {
-                font-size: 1.2rem;
-            }
-            .stat-card .label {
-                font-size: 0.85rem;
-            }
-            .stat-card .desc {
-                font-size: 0.7rem;
-            }
-            .why-grid {
-                grid-template-columns: 1fr;
-            }
             .candidate {
                 padding: 1.5rem;
                 gap: 1.5rem;
@@ -1715,77 +2196,6 @@
         }
 
         @media (max-width: 768px) {
-            body {
-                padding-top: 64px;
-                font-size: 16px;
-            }
-
-            .navbar .container {
-                height: 64px;
-            }
-
-            .hero {
-                padding: 3rem 0 2.5rem;
-            }
-
-            .hero .subheadline {
-                font-size: 1.1rem;
-            }
-
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.6rem;
-            }
-
-            .stat-card {
-                min-height: 120px;
-                padding: 0.8rem 0.5rem;
-                border-radius: 1rem;
-            }
-
-            .stat-card .emoji {
-                font-size: 1.6rem;
-            }
-
-            .stat-card .number {
-                font-size: 1.1rem;
-            }
-
-            .stat-card .label {
-                font-size: 0.8rem;
-            }
-
-            .stat-card .desc {
-                font-size: 0.65rem;
-            }
-
-            .candidate {
-                flex-direction: column;
-                text-align: left;
-                padding: 1.2rem;
-                gap: 0.8rem;
-                align-items: stretch;
-                border-radius: 1rem;
-            }
-
-            .candidate-number {
-                width: 36px;
-                height: 36px;
-                font-size: 0.9rem;
-            }
-
-            .candidate-info h3 {
-                font-size: 1.2rem;
-            }
-
-            .candidate-info .bio {
-                font-size: 0.9rem;
-            }
-
-            .tags {
-                justify-content: flex-start;
-            }
-
             .sliby-header {
                 display: none;
             }
@@ -1827,15 +2237,6 @@
             .team-photo-section .photo-placeholder img {
                 object-fit: contain;
                 background: var(--gray-light);
-            }
-
-            .btn {
-                font-size: 0.9rem;
-                padding: 0.6rem 1.6rem;
-            }
-
-            .btn-group {
-                gap: 0.6rem;
             }
 
             .footer-btn {
@@ -1900,6 +2301,23 @@
             .accordion {
                 display: block !important;
             }
+
+            #lightbox {
+                padding: 1rem;
+            }
+
+            #lightboxClose {
+                top: 1rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1.3rem;
+            }
+
+            #lightboxImage {
+                max-width: 95vw;
+                max-height: 85vh;
+            }
         }
 
         @media (min-width: 769px) {
@@ -1913,33 +2331,6 @@
         }
 
         @media (max-width: 480px) {
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.4rem;
-            }
-
-            .stat-card {
-                min-height: 100px;
-                padding: 0.6rem 0.4rem;
-                border-radius: 0.8rem;
-            }
-
-            .stat-card .emoji {
-                font-size: 1.3rem;
-            }
-
-            .stat-card .number {
-                font-size: 1rem;
-            }
-
-            .stat-card .label {
-                font-size: 0.7rem;
-            }
-
-            .stat-card .desc {
-                font-size: 0.6rem;
-            }
-
             .priorities-scroll .priority-card {
                 flex: 0 0 220px;
                 min-height: 170px;
@@ -1982,15 +2373,6 @@
                 padding: 0.1rem 0.6rem;
             }
 
-            .hero h1 {
-                font-size: 1.6rem;
-            }
-
-            .hero .badge {
-                font-size: 0.7rem;
-                padding: 0.3rem 1rem;
-            }
-
             .section-title {
                 font-size: 1.3rem;
             }
@@ -2001,11 +2383,6 @@
 
             .container {
                 padding: 0 1rem;
-            }
-
-            .btn {
-                font-size: 0.8rem;
-                padding: 0.5rem 1.2rem;
             }
 
             .footer-btn {
@@ -2049,6 +2426,29 @@
             .accordion-body ul li {
                 font-size: 0.85rem;
             }
+
+            #lightbox {
+                padding: 0.5rem;
+            }
+
+            #lightboxClose {
+                top: 0.8rem;
+                right: 0.8rem;
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
+            }
+
+            #lightboxImage {
+                max-width: 98vw;
+                max-height: 80vh;
+                border-radius: 8px;
+            }
+        }
+
+        /* ===== TŘÍDA PRO KLIKATELNÉ FOTKY ===== */
+        .clickable-image {
+            cursor: pointer;
         }
     </style>
 </head>
@@ -2058,8 +2458,11 @@
 <nav class="navbar">
     <div class="container">
         <a href="#" class="logo" id="logoLink">
-            <span class="logo-icon">📋</span>
-            <span class="logo-text">Volba pro </span><span class="logo-text-highlight">zítřek</span>
+            <span class="logo-icon"><img src="logoa.png" alt="Logo Volba pro zítřek"></span>
+            <span class="logo-text-wrapper">
+                <span class="logo-text">Volba pro</span>
+                <span class="logo-text-highlight">zítřek</span>
+            </span>
         </a>
         <button class="burger" id="burger" aria-label="Menu">
             <span></span>
@@ -2069,7 +2472,8 @@
         <ul class="nav-links" id="navLinks">
             <div class="menu-header">
                 <div class="menu-title">
-                    <span class="emoji">🧭</span> Menu
+                    <span class="menu-logo"><img src="logoa.png" alt="Logo"></span>
+                    Menu
                 </div>
                 <button class="close-menu" id="closeMenu" aria-label="Zavřít menu">
                     <i class="fas fa-xmark"></i>
@@ -2085,53 +2489,78 @@
     </div>
 </nav>
 
-<!-- HERO -->
+<!-- ===== HERO ===== -->
 <header class="hero" id="home">
     <div class="container">
+
+        <!-- BADGE -->
         <span class="badge"><i class="fas fa-check-circle"></i> 4 roky práce pro Čistou</span>
+
+        <!-- HLAVNÍ NADPIS -->
         <h1>Máme za sebou kus práce.<br><span class="highlight">S vámi chceme pokračovat.</span></h1>
         <p class="subheadline">Čistá u Mladé Boleslavi – náš domov.</p>
 
-        <div class="stats">
-            <div class="stat-card">
-                <span class="emoji">🚧</span>
-                <span class="number">dokončujeme</span>
-                <span class="label">splaškovou kanalizaci</span>
-                <span class="desc">za 188,58 mil. Kč s dotacemi</span>
+        <!-- ===== FOTKA VLEVO + 4 BUBLINKY V PRAVO ===== -->
+        <div class="hero-row">
+            <!-- Levý sloupec – FOTKA -->
+            <div class="col-photo">
+                <div class="hero-photo clickable-image">
+                    <img 
+                        src="vesnice.jpg" 
+                        alt="Čistá u Mladé Boleslavi – pohled na obec" 
+                        loading="lazy"
+                    >
+                </div>
             </div>
-            <div class="stat-card">
-                <span class="emoji">🚶</span>
-                <span class="number">nový</span>
-                <span class="label">chodník + osvětlení</span>
-                <span class="desc">3. etapa za 10,68 mil. Kč</span>
-            </div>
-            <div class="stat-card">
-                <span class="emoji">🏫</span>
-                <span class="number">podpoříme</span>
-                <span class="label">moderní školu</span>
-                <span class="desc">aktivizační metody a individuální přístup</span>
-            </div>
-            <div class="stat-card">
-                <span class="emoji">🌿</span>
-                <span class="number">obnovíme</span>
-                <span class="label">zeleň a veřejný prostor</span>
-                <span class="desc">revitalizace návsi a výsadba stromů</span>
+
+            <!-- Pravý sloupec – 4 BUBLINKY -->
+            <div class="col-stats">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="emoji">🚧</span>
+                        <span class="number">dokončujeme</span>
+                        <span class="label">splaškovou kanalizaci</span>
+                        <span class="desc">za 188,58 mil. Kč s dotacemi</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="emoji">🚶</span>
+                        <span class="number">nový</span>
+                        <span class="label">chodník + osvětlení</span>
+                        <span class="desc">3. etapa za 10,68 mil. Kč</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="emoji">🏫</span>
+                        <span class="number">podpoříme</span>
+                        <span class="label">moderní školu</span>
+                        <span class="desc">aktivizační metody a individuální přístup</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="emoji">🌿</span>
+                        <span class="number">obnovíme</span>
+                        <span class="label">zeleň a veřejný prostor</span>
+                        <span class="desc">revitalizace návsi a výsadba stromů</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <p class="hero-text">
-            Stabilizovali jsme skalní svah, vybudovali nový chodník s osvětlením a <strong style="color: var(--accent);">dokončujeme splaškovou kanalizaci.</strong>
-            Čistá se mění k lepšímu. Pojďte s námi dotáhnout další projekty, které dávají smysl.
-        </p>
+        <!-- ===== TEXT A TLAČÍTKA POD SLOUPCI ===== -->
+        <div class="hero-bottom">
+            <p class="hero-text">
+                Stabilizovali jsme skalní svah, vybudovali nový chodník s osvětlením a <strong style="color: var(--accent);">dokončujeme splaškovou kanalizaci.</strong>
+                Čistá se mění k lepšímu. Pojďte s námi dotáhnout další projekty, které dávají smysl.
+            </p>
 
-        <div class="btn-group">
-            <a href="#vysledky" class="btn">
-                Co jsme dokázali <i class="fas fa-arrow-right"></i>
-            </a>
-            <a href="#tym" class="btn btn-outline">
-                <i class="fas fa-users"></i> Kandidáti
-            </a>
+            <div class="btn-group">
+                <a href="#vysledky" class="btn">
+                    Co jsme dokázali <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#tym" class="btn btn-outline">
+                    <i class="fas fa-users"></i> Kandidáti
+                </a>
+            </div>
         </div>
+
     </div>
 </header>
 
@@ -2140,7 +2569,7 @@
     <div class="container">
         <span class="section-tag">Co se v Čisté povedlo</span>
         <h2 class="section-title">Čistá se mění k lepšímu</h2>
-        <p class="section-subtitle">Za poslední 4 roky jsme připravili a realizovali spoustu dobrých věcí. A to je teprve začátek. Pojďte se podívat, co už funguje a kam se posouváme dál.</p>
+        <p class="section-subtitle">Za poslední 4 roky jsme připravili a realizovali spoustu dobrých věcí. To je teprve začátek. Pojďte se podívat, co už funguje a kam se posouváme dál.</p>
 
         <div class="timeline" id="timeline">
             <div class="timeline-item active">
@@ -2187,8 +2616,8 @@
 
             <div class="sliby-table">
                 <div class="sliby-header">
-                    <div>PROJEKT</div>
-                    <div>STAV</div>
+                    <div>Projekt</div>
+                    <div>Stav</div>
                 </div>
                 <div class="sliby-row">
                     <div class="text">
@@ -2440,7 +2869,7 @@
             <p><strong>Čistá je náš domov.</strong> Chceme, aby se tu dobře žilo všem.</p>
             <p>Neslibujeme nemožné. <strong style="color: var(--secondary);">Chceme pokračovat v projektech, které dávají smysl.</strong></p>
             <div class="divider"></div>
-            <p style="font-weight: 600; color: var(--dark);">Společně tvoříme budoucnost. A ta začíná tady, v Čisté.</p>
+            <p style="font-weight: 600; color: var(--dark);">Společně tvoříme budoucnost. Ta začíná tady, v Čisté.</p>
         </div>
 
         <div class="why-grid">
@@ -2448,7 +2877,7 @@
                 <span class="num">01</span>
                 <span class="icon"><i class="fas fa-check-double"></i></span>
                 <h3>Dotahujeme věci do konce</h3>
-                <p>Neslibujeme, co nezvládneme. Nové chodníky a parkovací stání, kanalizace – to jsou projekty, které jsme dotáhli od prvního návrhu až do zdárného konce. A to je náš styl.</p>
+                <p>Neslibujeme, co nezvládneme. Nové chodníky a parkovací stání, kanalizace – to jsou projekty, které jsme dotáhli od prvního návrhu až do zdárného konce. To je náš styl.</p>
                 <span class="tag">Spolehlivost</span>
             </div>
             <div class="why-card">
@@ -2473,6 +2902,15 @@
                 <span class="tag">Moderní přístup</span>
             </div>
         </div>
+
+        <!-- ===== ZVÝRAZNĚNÝ BOX ===== -->
+        <div class="highlight-box">
+            <p>
+                <i class="fas fa-handshake"></i>
+                <span>Umíme jednat s developery a získat ze spolupráce významné plnění pro obec.</span>
+            </p>
+        </div>
+
     </div>
 </section>
 
@@ -2487,7 +2925,7 @@
         </div>
 
         <div class="team-photo-section">
-            <div class="photo-placeholder">
+            <div class="photo-placeholder clickable-image">
                 <img src="ffoo.jpg" alt="Společná fotka týmu Volba pro zítřek">
             </div>
         </div>
@@ -2664,8 +3102,14 @@
     </div>
 </footer>
 
+<!-- ===== LIGHTBOX ===== -->
+<div id="lightbox">
+    <button id="lightboxClose" aria-label="Zavřít">✕</button>
+    <img id="lightboxImage" src="" alt="Zvětšený obrázek">
+</div>
+
 <script>
-    // Burger menu
+    // ===== BURGER MENU =====
     const burger = document.getElementById('burger');
     const navLinks = document.getElementById('navLinks');
     const closeMenu = document.getElementById('closeMenu');
@@ -2698,7 +3142,7 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Timeline pro výsledky
+    // ===== TIMELINE PRO VÝSLEDKY =====
     const items = document.querySelectorAll('.timeline-item');
 
     function updateTimeline() {
@@ -2738,7 +3182,6 @@
         });
     });
 
-    // Automatická aktivace podle scrollu
     const programSection = document.getElementById('program');
 
     function updateProgramOnScroll() {
@@ -2768,8 +3211,6 @@
     }
 
     window.addEventListener('scroll', updateProgramOnScroll, { passive: true });
-
-    // Inicializace
     updateProgramStep(0);
     setTimeout(updateProgramOnScroll, 100);
 
@@ -2793,6 +3234,54 @@
             firstItem.classList.add('open');
         }
     }
+
+    // ===== LIGHTBOX =====
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    function openLightbox(src, alt) {
+        lightboxImage.src = src;
+        lightboxImage.alt = alt || 'Zvětšený obrázek';
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    // Klikání na fotky s třídou .clickable-image
+    document.querySelectorAll('.clickable-image').forEach(element => {
+        element.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const img = this.querySelector('img') || this;
+            if (img.tagName === 'IMG') {
+                openLightbox(img.src, img.alt);
+            }
+        });
+    });
+
+    // Zavření přes křížek
+    lightboxClose.addEventListener('click', function(e) {
+        e.stopPropagation();
+        closeLightbox();
+    });
+
+    // Zavření kliknutím na pozadí
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeLightbox();
+        }
+    });
+
+    // Zavření klávesou ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+            closeLightbox();
+        }
+    });
 </script>
 
 </body>
