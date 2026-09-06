@@ -1432,6 +1432,7 @@
         .status-probiha { background: var(--secondary-soft); color: var(--secondary); border: 1px solid var(--secondary); }
         .status-pripraveno { background: #dbeafe; color: #1d4ed8; border: 1px solid #b8daff; }
 
+        /* WHY GRID */
         .why-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -1441,223 +1442,206 @@
         }
 
         .why-card {
+            border-radius: 1.5rem;
+            padding: 2rem 1.8rem;
+            position: relative;
+            transition: 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .why-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+
+        .why-card .num {
+            position: absolute;
+            top: 1rem;
+            right: 1.4rem;
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .why-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .why-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .why-card p {
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .why-card .tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.2rem 0.9rem;
+            border-radius: 999px;
+        }
+
+        /* PC: 01 a 04 bílé, 02 a 03 modré */
+        .why-card:nth-child(1) {
             background: var(--white);
             border: 2px solid var(--border);
-            border-radius: 1.5rem;
-            padding: 2rem 1.8rem;
-            position: relative;
-            transition: 0.3s;
-            box-shadow: var(--shadow);
         }
-
-        .why-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-            border-color: var(--accent);
-        }
-
-        .why-card .num {
-            position: absolute;
-            top: 1rem;
-            right: 1.4rem;
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: #e8ecf0;
-            line-height: 1;
-        }
-
-        .why-card .icon {
-            font-size: 2rem;
-            color: var(--secondary);
-            margin-bottom: 0.6rem;
-            display: block;
-        }
-
-        .why-card h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .why-card p {
-            color: var(--muted);
-            font-size: 0.95rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .why-card .tag {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            background: var(--secondary-soft);
-            color: var(--secondary);
-            padding: 0.2rem 0.9rem;
-            border-radius: 999px;
-            border: 1px solid var(--secondary);
-        }
-
-        .why-card {
-            background: var(--white);
-            border: 3px solid var(--border);
-            border-radius: 1.5rem;
-            padding: 2rem 1.8rem;
-            position: relative;
-            transition: 0.3s;
-            box-shadow: var(--shadow);
-        }
-
-        .why-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-        }
-
-        .why-card .num {
-            position: absolute;
-            top: 1rem;
-            right: 1.4rem;
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: #e8ecf0;
-            line-height: 1;
-        }
-
-        .why-card .icon {
-            font-size: 2rem;
-            color: var(--secondary);
-            margin-bottom: 0.6rem;
-            display: block;
-        }
-
-        .why-card h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .why-card p {
-            color: var(--muted);
-            font-size: 0.95rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .why-card .tag {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            background: var(--secondary-soft);
-            color: var(--secondary);
-            padding: 0.2rem 0.9rem;
-            border-radius: 999px;
-            border: 1px solid var(--secondary);
-        }
-
-         /* --- DESKTOP: 01 a 04 stejné (modrá), 02 a 03 stejné (světle modrá) --- */
-        .why-card:nth-child(1) {
-            border-color: var(--card-1);      /* modrá #2A4A7A */
-            background: #f0f4fa;
-        }
-        .why-card:nth-child(1) .icon {
-            color: var(--card-1);
-        }
+        .why-card:nth-child(1) .icon { color: var(--secondary); }
+        .why-card:nth-child(1) h3 { color: var(--accent); }
+        .why-card:nth-child(1) p { color: var(--muted); }
+        .why-card:nth-child(1) .num { color: #e8ecf0; }
         .why-card:nth-child(1) .tag {
-            background: var(--card-1);
-            color: white;
-            border-color: var(--card-1);
+            background: var(--secondary-soft);
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
         }
+        .why-card:nth-child(1):hover { border-color: var(--accent); }
 
         .why-card:nth-child(2) {
-            border-color: var(--card-2);      /* světle modrá #4A9EFF */
-            background: #e8f2ff;
+            background: var(--accent);
+            border: 2px solid var(--accent);
+            color: var(--white);
         }
-        .why-card:nth-child(2) .icon {
-            color: var(--card-2);
-        }
+        .why-card:nth-child(2) .icon { color: #7ab8ff; }
+        .why-card:nth-child(2) h3 { color: var(--white); }
+        .why-card:nth-child(2) p { color: rgba(255, 255, 255, 0.85); }
+        .why-card:nth-child(2) p strong { color: var(--white); }
+        .why-card:nth-child(2) .num { color: rgba(255, 255, 255, 0.15); }
         .why-card:nth-child(2) .tag {
-            background: var(--card-2);
-            color: white;
-            border-color: var(--card-2);
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .why-card:nth-child(2):hover {
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+            box-shadow: 0 12px 35px var(--accent-glow);
         }
 
         .why-card:nth-child(3) {
-            border-color: var(--card-3);      /* světle modrá #4A9EFF */
-            background: #e8f2ff;
+            background: var(--accent);
+            border: 2px solid var(--accent);
+            color: var(--white);
         }
-        .why-card:nth-child(3) .icon {
-            color: var(--card-3);
-        }
+        .why-card:nth-child(3) .icon { color: #7ab8ff; }
+        .why-card:nth-child(3) h3 { color: var(--white); }
+        .why-card:nth-child(3) p { color: rgba(255, 255, 255, 0.85); }
+        .why-card:nth-child(3) p strong { color: var(--white); }
+        .why-card:nth-child(3) .num { color: rgba(255, 255, 255, 0.15); }
         .why-card:nth-child(3) .tag {
-            background: var(--card-3);
-            color: white;
-            border-color: var(--card-3);
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .why-card:nth-child(3):hover {
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+            box-shadow: 0 12px 35px var(--accent-glow);
         }
 
         .why-card:nth-child(4) {
-            border-color: var(--card-4);      /* modrá #2A4A7A */
-            background: #f0f4fa;
+            background: var(--white);
+            border: 2px solid var(--border);
         }
-        .why-card:nth-child(4) .icon {
-            color: var(--card-4);
-        }
+        .why-card:nth-child(4) .icon { color: var(--secondary); }
+        .why-card:nth-child(4) h3 { color: var(--accent); }
+        .why-card:nth-child(4) p { color: var(--muted); }
+        .why-card:nth-child(4) .num { color: #e8ecf0; }
         .why-card:nth-child(4) .tag {
-            background: var(--card-4);
-            color: white;
-            border-color: var(--card-4);
+            background: var(--secondary-soft);
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
         }
+        .why-card:nth-child(4):hover { border-color: var(--accent); }
 
+        /* Mobil: 01 a 03 bílé, 02 a 04 modré */
         @media (max-width: 768px) {
-            /* --- MOBILE: 01 a 03 stejné (modrá), 02 a 04 stejné (světle modrá) --- */
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
             .why-card:nth-child(1) {
-                border-color: var(--card-1);      /* modrá #2A4A7A */
-                background: #f0f4fa;
+                background: var(--white);
+                border: 2px solid var(--border);
             }
-            .why-card:nth-child(1) .icon {
-                color: var(--card-1);
-            }
+            .why-card:nth-child(1) .icon { color: var(--secondary); }
+            .why-card:nth-child(1) h3 { color: var(--accent); }
+            .why-card:nth-child(1) p { color: var(--muted); }
+            .why-card:nth-child(1) .num { color: #e8ecf0; }
             .why-card:nth-child(1) .tag {
-                background: var(--card-1);
-                color: white;
-                border-color: var(--card-1);
+                background: var(--secondary-soft);
+                color: var(--secondary);
+                border: 1px solid var(--secondary);
             }
+            .why-card:nth-child(1):hover { border-color: var(--accent); }
 
             .why-card:nth-child(2) {
-                border-color: var(--card-2);      /* světle modrá #4A9EFF */
-                background: #e8f2ff;
+                background: var(--accent);
+                border: 2px solid var(--accent);
+                color: var(--white);
             }
-            .why-card:nth-child(2) .icon {
-                color: var(--card-2);
-            }
+            .why-card:nth-child(2) .icon { color: #7ab8ff; }
+            .why-card:nth-child(2) h3 { color: var(--white); }
+            .why-card:nth-child(2) p { color: rgba(255, 255, 255, 0.85); }
+            .why-card:nth-child(2) p strong { color: var(--white); }
+            .why-card:nth-child(2) .num { color: rgba(255, 255, 255, 0.15); }
             .why-card:nth-child(2) .tag {
-                background: var(--card-2);
-                color: white;
-                border-color: var(--card-2);
+                background: rgba(255, 255, 255, 0.15);
+                color: var(--white);
+                border: 1px solid rgba(255, 255, 255, 0.4);
+            }
+            .why-card:nth-child(2):hover {
+                background: var(--accent-hover);
+                border-color: var(--accent-hover);
+                box-shadow: 0 12px 35px var(--accent-glow);
             }
 
             .why-card:nth-child(3) {
-                border-color: var(--card-3);      /* modrá #2A4A7A */
-                background: #f0f4fa;
+                background: var(--white);
+                border: 2px solid var(--border);
             }
-            .why-card:nth-child(3) .icon {
-                color: var(--card-3);
-            }
+            .why-card:nth-child(3) .icon { color: var(--secondary); }
+            .why-card:nth-child(3) h3 { color: var(--accent); }
+            .why-card:nth-child(3) p { color: var(--muted); }
+            .why-card:nth-child(3) p strong { color: var(--dark); }
+            .why-card:nth-child(3) .num { color: #e8ecf0; }
             .why-card:nth-child(3) .tag {
-                background: var(--card-3);
-                color: white;
-                border-color: var(--card-3);
+                background: var(--secondary-soft);
+                color: var(--secondary);
+                border: 1px solid var(--secondary);
+            }
+            .why-card:nth-child(3):hover {
+                border-color: var(--accent);
             }
 
             .why-card:nth-child(4) {
-                border-color: var(--card-4);      /* světle modrá #4A9EFF */
-                background: #e8f2ff;
+                background: var(--accent);
+                border: 2px solid var(--accent);
+                color: var(--white);
             }
-            .why-card:nth-child(4) .icon {
-                color: var(--card-4);
-            }
+            .why-card:nth-child(4) .icon { color: #7ab8ff; }
+            .why-card:nth-child(4) h3 { color: var(--white); }
+            .why-card:nth-child(4) p { color: rgba(255, 255, 255, 0.85); }
+            .why-card:nth-child(4) p strong { color: var(--white); }
+            .why-card:nth-child(4) .num { color: rgba(255, 255, 255, 0.15); }
             .why-card:nth-child(4) .tag {
-                background: var(--card-4);
-                color: white;
-                border-color: var(--card-4);
+                background: rgba(255, 255, 255, 0.15);
+                color: var(--white);
+                border: 1px solid rgba(255, 255, 255, 0.4);
+            }
+            .why-card:nth-child(4):hover {
+                background: var(--accent-hover);
+                border-color: var(--accent-hover);
+                box-shadow: 0 12px 35px var(--accent-glow);
             }
         }
         
