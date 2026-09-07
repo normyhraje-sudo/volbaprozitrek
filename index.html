@@ -2770,14 +2770,14 @@
 </section>
 
 <!-- ===== BANNER: PROGRAM ===== -->
-<div class="banner-section" id="program">
+<div class="banner-section" id="program-banner">
     <div class="container">
         <h2><i class="fas fa-clipboard-list"></i> Program</h2>
     </div>
 </div>
 
 <!-- PROGRAM -->
-<section>
+<section id="program">
     <div class="container">
         <h2 class="section-title">Náš program pro Čistou 2026–2030</h2>
         <p class="section-subtitle">Reálný plán, který stojí na zkušenosti a odpovědnosti. Nejdříve dokončíme projekt splaškové kanalizace a poté stabilizujeme finance, abychom mohli investovat dál.</p>
@@ -2977,14 +2977,14 @@
 </section>
 
 <!-- ===== BANNER: PROČ KANDIDUJEME ===== -->
-<div class="banner-section" id="proc">
+<div class="banner-section" id="proc-banner">
     <div class="container">
         <h2><i class="fas fa-heart"></i> Proč kandidujeme</h2>
     </div>
 </div>
 
 <!-- PROČ -->
-<section>
+<section id="proc">
     <div class="container">
         <div class="proc-kandidujeme">
             <p><strong>Čistá je náš domov.</strong> Chceme, aby se tu dobře žilo všem.</p>
@@ -3035,14 +3035,14 @@
 </section>
 
 <!-- ===== BANNER: KANDIDÁTI ===== -->
-<div class="banner-section" id="tym">
+<div class="banner-section" id="tym-banner">
     <div class="container">
         <h2><i class="fas fa-users"></i> Kandidáti</h2>
     </div>
 </div>
 
 <!-- TÝM -->
-<section>
+<section id="tym">
     <div class="container">
         <h2 class="section-title center">Lidé, kteří to tu znají</h2>
 
@@ -3272,24 +3272,49 @@
     const navItems = document.querySelectorAll('.nav-links a[data-section]');
     const sections = {};
 
+    // Sbíráme všechny elementy s ID, které odpovídají data-section v menu
     navItems.forEach(link => {
         const sectionId = link.getAttribute('data-section');
-        const section = document.getElementById(sectionId);
-        if (section) {
-            sections[sectionId] = section;
+        // Hledáme element s ID = sectionId (nejdříve section, pak banner)
+        let element = document.getElementById(sectionId);
+        if (!element) {
+            // Zkusíme najít banner s ID = sectionId + "-banner"
+            element = document.getElementById(sectionId + '-banner');
+        }
+        if (element) {
+            sections[sectionId] = element;
         }
     });
 
     function updateActiveNav() {
-        const scrollPos = window.scrollY + 120;
-        let activeSection = 'home';
+        const scrollPos = window.scrollY + 150;
+        let activeSection = null;
 
-        for (const [id, section] of Object.entries(sections)) {
-            const top = section.offsetTop;
-            const height = section.offsetHeight;
+        // Najdeme sekci/banner, kde se nacházíme
+        for (const [id, element] of Object.entries(sections)) {
+            const top = element.offsetTop;
+            const height = element.offsetHeight;
             if (scrollPos >= top && scrollPos < top + height) {
                 activeSection = id;
                 break;
+            }
+        }
+
+        // Když jsme pod poslední sekcí, aktivujeme poslední
+        if (!activeSection) {
+            let lastId = null;
+            let lastBottom = 0;
+            for (const [id, element] of Object.entries(sections)) {
+                const bottom = element.offsetTop + element.offsetHeight;
+                if (bottom > lastBottom) {
+                    lastBottom = bottom;
+                    lastId = id;
+                }
+            }
+            if (lastId && scrollPos >= lastBottom) {
+                activeSection = lastId;
+            } else {
+                activeSection = 'home';
             }
         }
 
@@ -3300,7 +3325,7 @@
     }
 
     window.addEventListener('scroll', updateActiveNav);
-    updateActiveNav();
+    setTimeout(updateActiveNav, 50);
 
     // ===== TIMELINE =====
     const items = document.querySelectorAll('.timeline-item');
