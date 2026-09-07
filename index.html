@@ -39,8 +39,8 @@
             --card-2: #4A9EFF;
             --card-3: #2A4A7A;
             --card-4: #4A9EFF;
-            /* NOVÉ: barva pro hero */
             --hero-bg: #eef4fa;
+            --muted-dark: #2d3a4a;
         }
 
         * {
@@ -180,6 +180,13 @@
             background: transparent;
         }
 
+        .nav-links a.active::after {
+            width: 60%;
+        }
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
         .burger {
             display: none;
             flex-direction: column;
@@ -265,6 +272,17 @@
                 transform: translateY(0) scale(1);
                 opacity: 1;
                 pointer-events: auto;
+            }
+
+            .nav-links a::after {
+                display: none !important;
+            }
+            .nav-links a.active::after {
+                display: none !important;
+            }
+            .nav-links a.active {
+                background: var(--accent-soft);
+                border-color: var(--accent);
             }
 
             .nav-overlay {
@@ -369,18 +387,16 @@
                 transition: 0.2s;
             }
 
-            .nav-links a::after {
-                display: none;
-            }
-
             .nav-links a:hover,
-            .nav-links a:active {
+            .nav-links a:active,
+            .nav-links a.active {
                 background: var(--accent-soft);
                 border-color: var(--accent);
                 transform: translateX(4px);
             }
 
-            .nav-links a:hover i {
+            .nav-links a:hover i,
+            .nav-links a.active i {
                 opacity: 1;
                 transform: scale(1.1);
             }
@@ -416,7 +432,7 @@
             }
         }
 
-        /* ----- HERO – JEMNĚ MODRÁ ----- */
+        /* ----- HERO ----- */
         .hero {
             background: var(--hero-bg);
             text-align: center;
@@ -443,13 +459,20 @@
             font-weight: 900;
             line-height: 1.15;
             letter-spacing: -0.03em;
-            color: var(--accent);
             margin-bottom: 0.5rem;
         }
 
-        .hero h1 .highlight {
-            color: var(--secondary);
-            position: relative;
+        .hero h1 .line1 {
+            color: var(--accent);
+            display: block;
+        }
+
+        .hero h1 .line2 {
+            background: linear-gradient(to right, #3A7AD4, #4A9EFF, #6AB0FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
         }
 
         .hero .subheadline {
@@ -564,7 +587,7 @@
         }
 
         .hero-text {
-            color: var(--muted);
+            color: #2d3a4a;
             font-size: 1.05rem;
             margin-bottom: 1.5rem;
         }
@@ -790,7 +813,50 @@
             }
         }
 
-        /* ----- ZBYTEK STRÁNKY (beze změny) ----- */
+        /* ----- BANNERY ----- */
+        .banner-section {
+            background: var(--accent);
+            padding: 4rem 0;
+            text-align: center;
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        .banner-section h2 {
+            color: var(--white);
+            font-size: clamp(2.5rem, 6vw, 4.2rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin: 0;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.15);
+        }
+
+        .banner-section h2 i {
+            color: var(--secondary);
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .banner-section {
+                padding: 2.5rem 0;
+            }
+
+            .banner-section h2 {
+                font-size: clamp(1.8rem, 5vw, 2.8rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .banner-section {
+                padding: 2rem 0;
+            }
+
+            .banner-section h2 {
+                font-size: clamp(1.5rem, 4vw, 2rem);
+            }
+        }
+
+        /* ----- ZBYTEK STRÁNKY ----- */
         section {
             padding: 4.5rem 0;
             border-bottom: 1px solid var(--border);
@@ -1432,7 +1498,6 @@
         .status-probiha { background: var(--secondary-soft); color: var(--secondary); border: 1px solid var(--secondary); }
         .status-pripraveno { background: #dbeafe; color: #1d4ed8; border: 1px solid #b8daff; }
 
-        /* WHY GRID */
         .why-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -1451,7 +1516,7 @@
 
         .why-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
         }
 
         .why-card .num {
@@ -1487,97 +1552,132 @@
             text-transform: uppercase;
             padding: 0.2rem 0.9rem;
             border-radius: 999px;
+            border: 1px solid;
         }
 
-        /* PC: 01 a 04 bílé, 02 a 03 modré */
+        /* ----- PC: 01 a 04 modré, 02 a 03 bílé ----- */
         .why-card:nth-child(1) {
-            background: var(--white);
-            border: 2px solid var(--border);
-        }
-        .why-card:nth-child(1) .icon { color: var(--secondary); }
-        .why-card:nth-child(1) h3 { color: var(--accent); }
-        .why-card:nth-child(1) p { color: var(--muted); }
-        .why-card:nth-child(1) .num { color: #e8ecf0; }
-        .why-card:nth-child(1) .tag {
-            background: var(--secondary-soft);
-            color: var(--secondary);
-            border: 1px solid var(--secondary);
-        }
-        .why-card:nth-child(1):hover { border-color: var(--accent); }
-
-        .why-card:nth-child(2) {
             background: var(--accent);
             border: 2px solid var(--accent);
             color: var(--white);
         }
-        .why-card:nth-child(2) .icon { color: #7ab8ff; }
-        .why-card:nth-child(2) h3 { color: var(--white); }
-        .why-card:nth-child(2) p { color: rgba(255, 255, 255, 0.85); }
-        .why-card:nth-child(2) p strong { color: var(--white); }
-        .why-card:nth-child(2) .num { color: rgba(255, 255, 255, 0.15); }
-        .why-card:nth-child(2) .tag {
-            background: rgba(255, 255, 255, 0.15);
-            color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+        .why-card:nth-child(1) .num {
+            color: rgba(255,255,255,0.15);
         }
-        .why-card:nth-child(2):hover {
+        .why-card:nth-child(1) .icon {
+            color: #7ab8ff;
+        }
+        .why-card:nth-child(1) h3 {
+            color: var(--white);
+        }
+        .why-card:nth-child(1) p {
+            color: rgba(255,255,255,0.85);
+        }
+        .why-card:nth-child(1) .tag {
+            background: rgba(255,255,255,0.15);
+            color: var(--white);
+            border-color: rgba(255,255,255,0.4);
+        }
+        .why-card:nth-child(1):hover {
             background: var(--accent-hover);
             border-color: var(--accent-hover);
-            box-shadow: 0 12px 35px var(--accent-glow);
+        }
+
+        .why-card:nth-child(2) {
+            background: var(--white);
+            border: 2px solid var(--border);
+            color: var(--dark);
+        }
+        .why-card:nth-child(2) .num {
+            color: #e8ecf0;
+        }
+        .why-card:nth-child(2) .icon {
+            color: var(--secondary);
+        }
+        .why-card:nth-child(2) h3 {
+            color: var(--accent);
+        }
+        .why-card:nth-child(2) p {
+            color: var(--muted);
+        }
+        .why-card:nth-child(2) .tag {
+            background: var(--secondary-soft);
+            color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        .why-card:nth-child(2):hover {
+            border-color: var(--accent);
         }
 
         .why-card:nth-child(3) {
+            background: var(--white);
+            border: 2px solid var(--border);
+            color: var(--dark);
+        }
+        .why-card:nth-child(3) .num {
+            color: #e8ecf0;
+        }
+        .why-card:nth-child(3) .icon {
+            color: var(--secondary);
+        }
+        .why-card:nth-child(3) h3 {
+            color: var(--accent);
+        }
+        .why-card:nth-child(3) p {
+            color: var(--muted);
+        }
+        .why-card:nth-child(3) .tag {
+            background: var(--secondary-soft);
+            color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        .why-card:nth-child(3):hover {
+            border-color: var(--accent);
+        }
+
+        .why-card:nth-child(4) {
             background: var(--accent);
             border: 2px solid var(--accent);
             color: var(--white);
         }
-        .why-card:nth-child(3) .icon { color: #7ab8ff; }
-        .why-card:nth-child(3) h3 { color: var(--white); }
-        .why-card:nth-child(3) p { color: rgba(255, 255, 255, 0.85); }
-        .why-card:nth-child(3) p strong { color: var(--white); }
-        .why-card:nth-child(3) .num { color: rgba(255, 255, 255, 0.15); }
-        .why-card:nth-child(3) .tag {
-            background: rgba(255, 255, 255, 0.15);
-            color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+        .why-card:nth-child(4) .num {
+            color: rgba(255,255,255,0.15);
         }
-        .why-card:nth-child(3):hover {
+        .why-card:nth-child(4) .icon {
+            color: #7ab8ff;
+        }
+        .why-card:nth-child(4) h3 {
+            color: var(--white);
+        }
+        .why-card:nth-child(4) p {
+            color: rgba(255,255,255,0.85);
+        }
+        .why-card:nth-child(4) .tag {
+            background: rgba(255,255,255,0.15);
+            color: var(--white);
+            border-color: rgba(255,255,255,0.4);
+        }
+        .why-card:nth-child(4):hover {
             background: var(--accent-hover);
             border-color: var(--accent-hover);
-            box-shadow: 0 12px 35px var(--accent-glow);
         }
 
-        .why-card:nth-child(4) {
-            background: var(--white);
-            border: 2px solid var(--border);
-        }
-        .why-card:nth-child(4) .icon { color: var(--secondary); }
-        .why-card:nth-child(4) h3 { color: var(--accent); }
-        .why-card:nth-child(4) p { color: var(--muted); }
-        .why-card:nth-child(4) .num { color: #e8ecf0; }
-        .why-card:nth-child(4) .tag {
-            background: var(--secondary-soft);
-            color: var(--secondary);
-            border: 1px solid var(--secondary);
-        }
-        .why-card:nth-child(4):hover { border-color: var(--accent); }
-
-        /* Mobil: 01 a 03 bílé, 02 a 04 modré */
+        /* ----- MOBIL: 01 a 03 bílé, 02 a 04 modré ----- */
         @media (max-width: 768px) {
             .why-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
 
-            /* KARTA 01 - BÍLÁ */
             .why-card:first-child {
                 background: var(--white) !important;
                 border: 2px solid var(--border) !important;
+                color: var(--dark) !important;
             }
+            .why-card:first-child .num { color: #e8ecf0 !important; }
             .why-card:first-child .icon { color: var(--secondary) !important; }
             .why-card:first-child h3 { color: var(--accent) !important; }
             .why-card:first-child p { color: var(--muted) !important; }
-            .why-card:first-child .num { color: #e8ecf0 !important; }
             .why-card:first-child .tag {
                 background: var(--secondary-soft) !important;
                 color: var(--secondary) !important;
@@ -1585,16 +1685,16 @@
             }
             .why-card:first-child:hover { border-color: var(--accent) !important; }
 
-            /* KARTA 02 - MODRÁ */
             .why-card:nth-child(2) {
                 background: var(--accent) !important;
                 border: 2px solid var(--accent) !important;
+                color: var(--white) !important;
             }
+            .why-card:nth-child(2) .num { color: rgba(255,255,255,0.15) !important; }
             .why-card:nth-child(2) .icon { color: #7ab8ff !important; }
             .why-card:nth-child(2) h3 { color: var(--white) !important; }
             .why-card:nth-child(2) p { color: rgba(255, 255, 255, 0.85) !important; }
             .why-card:nth-child(2) p strong { color: var(--white) !important; }
-            .why-card:nth-child(2) .num { color: rgba(255, 255, 255, 0.15) !important; }
             .why-card:nth-child(2) .tag {
                 background: rgba(255, 255, 255, 0.15) !important;
                 color: var(--white) !important;
@@ -1605,16 +1705,16 @@
                 border-color: var(--accent-hover) !important;
             }
 
-            /* KARTA 03 - BÍLÁ */
             .why-card:nth-child(3) {
                 background: var(--white) !important;
                 border: 2px solid var(--border) !important;
+                color: var(--dark) !important;
             }
+            .why-card:nth-child(3) .num { color: #e8ecf0 !important; }
             .why-card:nth-child(3) .icon { color: var(--secondary) !important; }
             .why-card:nth-child(3) h3 { color: var(--accent) !important; }
             .why-card:nth-child(3) p { color: var(--muted) !important; }
             .why-card:nth-child(3) p strong { color: var(--dark) !important; }
-            .why-card:nth-child(3) .num { color: #e8ecf0 !important; }
             .why-card:nth-child(3) .tag {
                 background: var(--secondary-soft) !important;
                 color: var(--secondary) !important;
@@ -1622,16 +1722,16 @@
             }
             .why-card:nth-child(3):hover { border-color: var(--accent) !important; }
 
-            /* KARTA 04 - MODRÁ */
             .why-card:nth-child(4) {
                 background: var(--accent) !important;
                 border: 2px solid var(--accent) !important;
+                color: var(--white) !important;
             }
+            .why-card:nth-child(4) .num { color: rgba(255,255,255,0.15) !important; }
             .why-card:nth-child(4) .icon { color: #7ab8ff !important; }
             .why-card:nth-child(4) h3 { color: var(--white) !important; }
             .why-card:nth-child(4) p { color: rgba(255, 255, 255, 0.85) !important; }
             .why-card:nth-child(4) p strong { color: var(--white) !important; }
-            .why-card:nth-child(4) .num { color: rgba(255, 255, 255, 0.15) !important; }
             .why-card:nth-child(4) .tag {
                 background: rgba(255, 255, 255, 0.15) !important;
                 color: var(--white) !important;
@@ -1642,7 +1742,6 @@
                 border-color: var(--accent-hover) !important;
             }
         }
-        
 
         .proc-kandidujeme {
             max-width: 750px;
@@ -1675,17 +1774,16 @@
             background: var(--accent);
             border-radius: 1.5rem;
             text-align: center;
-            color: white;
-            box-shadow: 0 8px 30px var(--accent-glow);
-            border: 2px solid var(--secondary);
+            border: 3px solid var(--accent);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
+        
         .highlight-box:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 40px var(--accent-glow);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
         }
-
+        
         .highlight-box p {
             font-size: 1.15rem;
             font-weight: 600;
@@ -1695,11 +1793,12 @@
             justify-content: center;
             gap: 0.8rem;
             flex-wrap: wrap;
+            color: var(--white);
         }
-
+        
         .highlight-box i {
             font-size: 1.8rem;
-            color: var(--secondary);
+            color: var(--white);
             flex-shrink: 0;
         }
 
@@ -1879,23 +1978,23 @@
         }
 
         .candidates {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            max-width: 920px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
         .candidate {
             display: flex;
-            gap: 2rem;
+            flex-direction: column;
             background: var(--white);
             border: 2px solid var(--border);
             border-radius: 1.5rem;
-            padding: 2rem;
-            align-items: flex-start;
+            padding: 1.8rem 1.5rem;
             transition: 0.3s;
             box-shadow: var(--shadow);
+            height: 100%;
         }
 
         .candidate:hover {
@@ -1905,17 +2004,18 @@
 
         .candidate-number {
             flex-shrink: 0;
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: var(--accent);
             border: 2px solid var(--accent);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 800;
             color: var(--white);
+            margin-bottom: 0.8rem;
         }
 
         .candidate-info {
@@ -1928,18 +2028,18 @@
         }
 
         .candidate-info .role-tag {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 700;
             background: var(--secondary-soft);
             color: var(--secondary);
-            padding: 0.15rem 0.8rem;
+            padding: 0.1rem 0.7rem;
             border-radius: 999px;
             display: inline-block;
             border: 1px solid var(--secondary);
         }
 
         .candidate-info h3 {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 800;
             margin: 0.1rem 0 0.05rem;
             color: var(--accent);
@@ -1949,13 +2049,14 @@
             font-weight: 600;
             color: var(--secondary);
             margin-bottom: 0.3rem;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
 
         .candidate-info .bio {
             color: var(--muted);
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             margin-bottom: 0.5rem;
+            flex: 1;
         }
 
         .candidate-info .bio strong {
@@ -1965,13 +2066,14 @@
         .tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.4rem;
+            gap: 0.3rem;
+            margin-top: 0.3rem;
         }
 
         .tags span {
             background: var(--white);
-            font-size: 0.8rem;
-            padding: 0.2rem 0.9rem;
+            font-size: 0.7rem;
+            padding: 0.1rem 0.7rem;
             border-radius: 999px;
             font-weight: 500;
             border: 1px solid var(--border);
@@ -2140,19 +2242,7 @@
             padding-bottom: 0.15rem;
         }
 
-        @media (max-width: 768px) {
-            .team-slogan {
-                font-size: 1.4rem;
-                padding: 0.3rem 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .team-slogan {
-                font-size: 1.1rem;
-            }
-        }
-
+        /* ----- LIGHTBOX ----- */
         #lightbox {
             display: none;
             position: fixed;
@@ -2208,13 +2298,18 @@
         }
 
         @media (max-width: 992px) {
-            .candidate {
-                padding: 1.5rem;
-                gap: 1.5rem;
+            .candidates {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
             }
         }
 
         @media (max-width: 768px) {
+            .team-slogan {
+                font-size: 1.4rem;
+                padding: 0.3rem 0;
+            }
+
             .sliby-header {
                 display: none;
             }
@@ -2338,62 +2433,9 @@
                 max-height: 85vh;
             }
 
-            /* --- MOBILE: 01 a 03 stejné (modrá), 02 a 04 stejné (světle modrá) --- */
-            .why-grid {
+            .candidates {
                 grid-template-columns: 1fr;
                 gap: 1rem;
-            }
-
-            .why-card:nth-child(1) {
-                border-color: var(--card-1);
-                background: #f0f4fa;
-            }
-            .why-card:nth-child(1) .icon {
-                color: var(--card-1);
-            }
-            .why-card:nth-child(1) .tag {
-                background: var(--card-1);
-                color: white;
-                border-color: var(--card-1);
-            }
-
-            .why-card:nth-child(2) {
-                border-color: var(--card-2);
-                background: #e8f2ff;
-            }
-            .why-card:nth-child(2) .icon {
-                color: var(--card-2);
-            }
-            .why-card:nth-child(2) .tag {
-                background: var(--card-2);
-                color: white;
-                border-color: var(--card-2);
-            }
-
-            .why-card:nth-child(3) {
-                border-color: var(--card-3);
-                background: #f0f4fa;
-            }
-            .why-card:nth-child(3) .icon {
-                color: var(--card-3);
-            }
-            .why-card:nth-child(3) .tag {
-                background: var(--card-3);
-                color: white;
-                border-color: var(--card-3);
-            }
-
-            .why-card:nth-child(4) {
-                border-color: var(--card-4);
-                background: #e8f2ff;
-            }
-            .why-card:nth-child(4) .icon {
-                color: var(--card-4);
-            }
-            .why-card:nth-child(4) .tag {
-                background: var(--card-4);
-                color: white;
-                border-color: var(--card-4);
             }
         }
 
@@ -2527,8 +2569,6 @@
             cursor: pointer;
         }
     </style>
-
-    
 </head>
 <body>
 
@@ -2557,11 +2597,11 @@
                     <i class="fas fa-xmark"></i>
                 </button>
             </div>
-            <li><a href="#home">Domů</a></li>
-            <li><a href="#vysledky">Co jsme dokázali</a></li>
-            <li><a href="#program">Náš program</a></li>
-            <li><a href="#proc">Proč pokračovat</a></li>
-            <li><a href="#tym">Náš tým</a></li>
+            <li><a href="#home" data-section="home">Domů</a></li>
+            <li><a href="#vysledky" data-section="vysledky">Co jsme dokázali</a></li>
+            <li><a href="#program" data-section="program">Náš program</a></li>
+            <li><a href="#proc" data-section="proc">Proč pokračovat</a></li>
+            <li><a href="#tym" data-section="tym">Náš tým</a></li>
         </ul>
         <div class="nav-overlay" id="navOverlay"></div>
     </div>
@@ -2573,7 +2613,10 @@
 
         <span class="badge"><i class="fas fa-check-circle"></i> 4 roky práce pro Čistou</span>
 
-        <h1>Máme za sebou kus práce.<br><span class="highlight">S vámi chceme pokračovat.</span></h1>
+        <h1>
+            <span class="line1">Máme za sebou kus práce.</span>
+            <span class="line2">S vámi chceme pokračovat.</span>
+        </h1>
         <p class="subheadline">Čistá u Mladé Boleslavi – náš domov.</p>
 
         <div class="hero-row">
@@ -2726,10 +2769,16 @@
     </div>
 </section>
 
-<!-- PROGRAM -->
-<section id="program">
+<!-- ===== BANNER: PROGRAM ===== -->
+<div class="banner-section" id="program">
     <div class="container">
-        <span class="section-tag">Plán na další 4 roky</span>
+        <h2><i class="fas fa-clipboard-list"></i> Program</h2>
+    </div>
+</div>
+
+<!-- PROGRAM -->
+<section>
+    <div class="container">
         <h2 class="section-title">Náš program pro Čistou 2026–2030</h2>
         <p class="section-subtitle">Reálný plán, který stojí na zkušenosti a odpovědnosti. Nejdříve dokončíme projekt splaškové kanalizace a poté stabilizujeme finance, abychom mohli investovat dál.</p>
 
@@ -2927,11 +2976,17 @@
     </div>
 </section>
 
+<!-- ===== BANNER: PROČ KANDIDUJEME ===== -->
+<div class="banner-section" id="proc">
+    <div class="container">
+        <h2><i class="fas fa-heart"></i> Proč kandidujeme</h2>
+    </div>
+</div>
+
 <!-- PROČ -->
-<section id="proc">
+<section>
     <div class="container">
         <div class="proc-kandidujeme">
-            <h2 class="section-title center"><i class="fas fa-heart" style="color: var(--secondary);"></i> Proč kandidujeme</h2>
             <p><strong>Čistá je náš domov.</strong> Chceme, aby se tu dobře žilo všem.</p>
             <p>Neslibujeme nemožné. <strong style="color: var(--secondary);">Chceme pokračovat v&nbsp;projektech, které&nbsp;dávají smysl.</strong></p>
             <div class="divider"></div>
@@ -2968,7 +3023,7 @@
                 <span class="tag">Moderní přístup</span>
             </div>
         </div>
-
+        
         <div class="highlight-box">
             <p>
                 <i class="fas fa-handshake"></i>
@@ -2979,8 +3034,15 @@
     </div>
 </section>
 
+<!-- ===== BANNER: KANDIDÁTI ===== -->
+<div class="banner-section" id="tym">
+    <div class="container">
+        <h2><i class="fas fa-users"></i> Kandidáti</h2>
+    </div>
+</div>
+
 <!-- TÝM -->
-<section id="tym">
+<section>
     <div class="container">
         <h2 class="section-title center">Lidé, kteří to tu znají</h2>
 
@@ -3169,7 +3231,7 @@
 <!-- LIGHTBOX -->
 <div id="lightbox">
     <button id="lightboxClose" aria-label="Zavřít">✕</button>
-    <img id="lightboxImage" src="" alt="Zvětšený obrázek">
+    <img id="lightboxImage" src="" alt="">
 </div>
 
 <script>
@@ -3205,6 +3267,40 @@
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+    // ===== AKTIVNÍ POLOŽKA MENU =====
+    const navItems = document.querySelectorAll('.nav-links a[data-section]');
+    const sections = {};
+
+    navItems.forEach(link => {
+        const sectionId = link.getAttribute('data-section');
+        const section = document.getElementById(sectionId);
+        if (section) {
+            sections[sectionId] = section;
+        }
+    });
+
+    function updateActiveNav() {
+        const scrollPos = window.scrollY + 120;
+        let activeSection = 'home';
+
+        for (const [id, section] of Object.entries(sections)) {
+            const top = section.offsetTop;
+            const height = section.offsetHeight;
+            if (scrollPos >= top && scrollPos < top + height) {
+                activeSection = id;
+                break;
+            }
+        }
+
+        navItems.forEach(link => {
+            const sectionId = link.getAttribute('data-section');
+            link.classList.toggle('active', sectionId === activeSection);
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav();
 
     // ===== TIMELINE =====
     const items = document.querySelectorAll('.timeline-item');
@@ -3246,7 +3342,7 @@
         });
     });
 
-    const programSection = document.getElementById('program');
+    const programSection = document.querySelector('#programTimeline');
 
     function updateProgramOnScroll() {
         const center = window.scrollY + window.innerHeight / 2;
@@ -3304,9 +3400,9 @@
     const lightboxImage = document.getElementById('lightboxImage');
     const lightboxClose = document.getElementById('lightboxClose');
 
-    function openLightbox(src, alt) {
+    function openLightbox(src) {
         lightboxImage.src = src;
-        lightboxImage.alt = alt || 'Zvětšený obrázek';
+        lightboxImage.alt = '';
         lightbox.style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
@@ -3319,22 +3415,22 @@
     document.querySelectorAll('.clickable-image').forEach(element => {
         element.addEventListener('click', function(e) {
             e.stopPropagation();
-            const img = this.querySelector('img') || this;
-            if (img.tagName === 'IMG') {
-                openLightbox(img.src, img.alt);
+            const img = this.querySelector('img');
+            if (img) {
+                openLightbox(img.src);
             }
         });
-    });
-
-    lightboxClose.addEventListener('click', function(e) {
-        e.stopPropagation();
-        closeLightbox();
     });
 
     lightbox.addEventListener('click', function(e) {
         if (e.target === this) {
             closeLightbox();
         }
+    });
+
+    lightboxClose.addEventListener('click', function(e) {
+        e.stopPropagation();
+        closeLightbox();
     });
 
     document.addEventListener('keydown', function(e) {
