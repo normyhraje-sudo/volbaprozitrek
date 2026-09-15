@@ -687,112 +687,495 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 .section-subtitle strong { color: var(--green); }
 .section-title.center, .section-subtitle.center { text-align: center; margin-left: auto; margin-right: auto; }
 
-/* ===== TIMELINE ===== */
-.timeline { position: relative; max-width: 720px; margin: 0 auto; padding-left: 32px; }
-.timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 3px; background: var(--border); border-radius: 99px; }
-.timeline-item { position: relative; margin-bottom: 24px; padding-left: 24px; }
-.timeline-item:last-child { margin-bottom: 0; }
-.timeline-item .dot {
-    position: absolute;
-    left: -22px;
-    top: 6px;
-    width: 28px;
-    height: 28px;
-    background: var(--border);
-    border-radius: 50%;
-    border: 3px solid var(--white);
-    box-shadow: 0 0 0 2px var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 800;
-    color: var(--text-muted);
-    transition: var(--transition);
-}
-.timeline-item.active .dot { background: var(--primary); box-shadow: 0 0 0 2px var(--primary); color: var(--white); transform: scale(1.15); }
-.timeline-item .content { background: var(--white); border: 2px solid var(--border); border-radius: var(--radius); padding: 20px 24px; transition: var(--transition); box-shadow: var(--shadow); }
-.timeline-item.active .content { border-color: var(--primary); box-shadow: var(--shadow-hover); }
-.timeline-item .year {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 2px 14px;
-    border-radius: 50px;
-    border: 1px solid;
-    margin-bottom: 6px;
-}
-/* Barevné varianty roku */
-.timeline-item .year.hotovo {
-    color: #155724;
-    background: #d4edda;
-    border-color: #28a745;
-}
-.timeline-item .year.probiha {
-    color: #0c5460;
-    background: #d1ecf1;
-    border-color: #17a2b8;
-}
-.timeline-item .year.chystame {
-    color: #856404;
-    background: #fff3cd;
-    border-color: #ffc107;
-}
-
-.timeline-item .icon { font-size: 28px; display: block; margin-bottom: 4px; }
-.timeline-item h3 { font-size: 18px; font-weight: 800; color: var(--primary); }
-.timeline-item .desc { color: var(--text-muted); font-size: 15px; margin-top: 4px; }
-
-/* ===== CENA - ZÁKLADNÍ NASTAVENÍ ===== */
-.timeline-item .price {
-    font-weight: 700;
-    margin-top: 4px;
-    color: var(--green); /* výchozí zelená pro ostatní */
-}
-
-/* ===== CENA U PROBÍHAJÍCÍHO PROJEKTU - MODRÁ ===== */
-.timeline-item .content:has(.status-probiha) .price {
-    color: #0c5460 !important;
-}
-
-/* ===== CENA U HOTOVÉHO PROJEKTU - ZELENÁ ===== */
-.timeline-item .content:has(.status-hotovo) .price {
-    color: var(--green);
-}
-
-/* ===== CENA U CHYSTANÉHO PROJEKTU - ŽLUTÁ ===== */
-.timeline-item .content:has(.status-chystame) .price {
-    color: #856404;
-}
-
-/* ===== STATUS BADGE ===== */
-.status-badge {
-    display: inline-block;
-    padding: 4px 18px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 13px;
-    margin-top: 8px;
-}
-.status-badge i { margin-right: 6px; }
-
-/* Hotovo - zelená */
+/* =============================================================== */
+/* ===== STATUS BADGES – GLOBÁLNÍ (fungují na všech zařízeních) ===== */
+/* =============================================================== */
 .status-hotovo {
     background: #d4edda;
     color: #155724;
     border: 1px solid #28a745;
 }
-
-/* Probíhá - modrá */
 .status-probiha {
+    background: #d1ecf1;
+    color: #0c5460;
     border: 1px solid #17a2b8;
 }
-
-/* Chystáme - žlutá */
 .status-chystame {
     background: #fff3cd;
     color: #856404;
     border: 1px solid #ffc107;
+}
+
+/* Barvy pro "year" badge – také globálně */
+.timeline-item .content .year.hotovo {
+    color: #155724;
+    background: #d4edda;
+    border-color: #28a745;
+}
+.timeline-item .content .year.hotovo i { color: #28a745; }
+
+.timeline-item .content .year.probiha {
+    color: #0c5460;
+    background: #d1ecf1;
+    border-color: #17a2b8;
+}
+.timeline-item .content .year.probiha i { color: #17a2b8; }
+
+.timeline-item .content .year.chystame {
+    color: #856404;
+    background: #fff3cd;
+    border-color: #ffc107;
+}
+.timeline-item .content .year.chystame i { color: #ffc107; }
+
+/* =============================================================== */
+/* ===== TIMELINE – CYK-CAK NA PC S OBRÁZKY ===== */
+/* =============================================================== */
+
+/* ===== PC – OBRÁZKY VEDLE BUBLINEK ===== */
+@media (min-width: 769px) {
+    .timeline {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px 0;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 10px;
+        bottom: 10px;
+        width: 3px;
+        background: linear-gradient(to bottom, var(--border) 0%, var(--primary) 50%, var(--border) 100%);
+        border-radius: 99px;
+        transform: translateX(-50%);
+        z-index: 0;
+        opacity: 0.5;
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 120px;
+        padding: 0;
+        display: flex;
+        align-items: stretch;
+        z-index: 1;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    /* ===== LEVÁ STRANA ===== */
+    .timeline-item.left {
+        flex-direction: row;
+        padding-right: calc(50% + 40px);
+        text-align: right;
+    }
+
+    .timeline-item.left .timeline-image {
+        position: absolute;
+        left: calc(50% + 52px);
+        top: 0;
+        bottom: 0;
+        width: 520px;
+        border-radius: 5%;
+        overflow: hidden;
+        border: 3px solid var(--border);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        background: var(--white);
+        transition: var(--transition);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .timeline-item.left .timeline-image:hover {
+        transform: scale(1.04);
+        border-color: var(--primary);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+
+    .timeline-item.left .timeline-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .timeline-item.left .timeline-image-text {
+        position: absolute;
+        left: calc(50% + 52px);
+        top: 0;
+        bottom: 0;
+        width: 520px;
+        z-index: 3;
+        text-align: center;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .timeline-item.left .timeline-image-text .program-label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        font-size: 28px;
+        font-weight: 900;
+        color: var(--white);
+        background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+        padding: 16px 20px;
+        border-radius: 5%;
+        border: 3px solid var(--secondary-light);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        transition: var(--transition);
+        text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        gap: 4px;
+    }
+
+    .timeline-item.left .timeline-image-text .program-label:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 32px rgba(26,58,107,0.3);
+        border-color: var(--white);
+    }
+
+    .timeline-item.left .timeline-image-text .program-label small {
+        display: block;
+        font-size: 18px;
+        font-weight: 600;
+        color: rgba(255,255,255,0.85);
+        letter-spacing: 0;
+        margin-top: 4px;
+        background: rgba(255,255,255,0.1);
+        padding: 4px 16px;
+        border-radius: 50px;
+    }
+
+    /* ===== PRAVÁ STRANA ===== */
+    .timeline-item.right {
+        flex-direction: row-reverse;
+        padding-left: calc(50% + 40px);
+        text-align: left;
+    }
+
+    .timeline-item.right .timeline-image {
+        position: absolute;
+        right: calc(50% + 52px);
+        top: 0;
+        bottom: 0;
+        width: 520px;
+        border-radius: 5%;
+        overflow: hidden;
+        border: 3px solid var(--border);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        background: var(--white);
+        transition: var(--transition);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .timeline-item.right .timeline-image:hover {
+        transform: scale(1.04);
+        border-color: var(--primary);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+
+    .timeline-item.right .timeline-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .timeline-item.right .timeline-image-text {
+        position: absolute;
+        right: calc(50% + 52px);
+        top: 0;
+        bottom: 0;
+        width: 520px;
+        z-index: 3;
+        text-align: center;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .timeline-item.right .timeline-image-text .program-label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        font-size: 28px;
+        font-weight: 900;
+        color: var(--white);
+        background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+        padding: 16px 20px;
+        border-radius: 5%;
+        border: 3px solid var(--secondary-light);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        transition: var(--transition);
+        text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        gap: 4px;
+    }
+
+    .timeline-item.right .timeline-image-text .program-label:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 32px rgba(26,58,107,0.3);
+        border-color: var(--white);
+    }
+
+    .timeline-item.right .timeline-image-text .program-label small {
+        display: block;
+        font-size: 18px;
+        font-weight: 600;
+        color: rgba(255,255,255,0.85);
+        letter-spacing: 0;
+        margin-top: 4px;
+        background: rgba(255,255,255,0.1);
+        padding: 4px 16px;
+        border-radius: 50px;
+    }
+
+    /* ===== TEČKA ===== */
+    .timeline-item .dot {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: var(--border);
+        border: 4px solid var(--white);
+        box-shadow: 0 0 0 3px var(--border), 0 4px 20px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+        font-weight: 900;
+        color: var(--text-muted);
+        transition: var(--transition);
+        z-index: 2;
+    }
+
+    .timeline-item.active .dot {
+        background: var(--primary);
+        box-shadow: 0 0 0 3px var(--primary), 0 4px 24px rgba(26,58,107,0.3);
+        color: var(--white);
+        transform: translate(-50%, -50%) scale(1.15);
+    }
+
+    /* ===== BUBLINKY ===== */
+    .timeline-item .content {
+        background: var(--white);
+        border: 2px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 32px 36px;
+        transition: var(--transition);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        width: 100%;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .timeline-item .content:hover {
+        border-color: var(--primary);
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-2px);
+    }
+
+    .timeline-item.active .content {
+        border-color: var(--primary);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .timeline-item .content .year {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 2px 14px;
+        border-radius: 50px;
+        border: 1px solid;
+        margin-bottom: 6px;
+    }
+
+    .timeline-item .content .icon { font-size: 32px; display: block; margin-bottom: 6px; }
+    .timeline-item .content h3 { font-size: 19px; font-weight: 800; color: var(--primary); margin-bottom: 4px; line-height: 1.3; }
+    .timeline-item .content .desc { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-top: 2px; }
+
+    /* ===== CENOVKA A STATUS POD SEBOU ===== */
+    .timeline-item .content .price {
+        font-weight: 700;
+        font-size: 16px;
+        margin-top: 8px;
+        color: var(--green);
+        padding: 4px 14px;
+        background: var(--green-soft);
+        border-radius: 50px;
+        display: block;
+        border: 1px solid var(--green);
+        width: fit-content;
+    }
+
+    .timeline-item .content .status-badge {
+        display: block;
+        padding: 4px 18px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 13px;
+        margin-top: 8px;
+        width: fit-content;
+    }
+    .timeline-item .content .status-badge i { margin-right: 6px; }
+
+    /* Zarovnání vlevo/vpravo podle strany */
+    .timeline-item.left .content {
+        align-items: flex-end;
+        text-align: right;
+    }
+    .timeline-item.left .content .price,
+    .timeline-item.left .content .status-badge {
+        align-self: flex-end;
+    }
+
+    .timeline-item.right .content {
+        align-items: flex-start;
+        text-align: left;
+    }
+    .timeline-item.right .content .price,
+    .timeline-item.right .content .status-badge {
+        align-self: flex-start;
+    }
+
+    /* Čára mezi body */
+    .timeline-item::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: calc(50% + 28px);
+        width: 2px;
+        height: calc(100% + 10px);
+        background: var(--border);
+        transform: translateX(-50%);
+        z-index: 0;
+        opacity: 0.3;
+    }
+    .timeline-item:last-child::after { display: none; }
+}
+
+/* ===== MOBIL – PŮVODNÍ VZHLED (BEZ OBRÁZKŮ) ===== */
+@media (max-width: 768px) {
+    .timeline {
+        position: relative;
+        max-width: 720px;
+        margin: 0 auto;
+        padding-left: 32px;
+    }
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 10px;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--border);
+        border-radius: 99px;
+    }
+    .timeline-item {
+        position: relative;
+        margin-bottom: 24px;
+        padding-left: 24px;
+    }
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    /* Skrytí obrázků na mobilu */
+    .timeline-image,
+    .timeline-image-text {
+        display: none !important;
+    }
+
+    .timeline-item .dot {
+        position: absolute;
+        left: -22px;
+        top: 6px;
+        width: 28px;
+        height: 28px;
+        background: var(--border);
+        border-radius: 50%;
+        border: 3px solid var(--white);
+        box-shadow: 0 0 0 2px var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--text-muted);
+        transition: var(--transition);
+    }
+    .timeline-item.active .dot {
+        background: var(--primary);
+        box-shadow: 0 0 0 2px var(--primary);
+        color: var(--white);
+        transform: scale(1.15);
+    }
+    .timeline-item .content {
+        background: var(--white);
+        border: 2px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px 24px;
+        transition: var(--transition);
+        box-shadow: var(--shadow);
+    }
+    .timeline-item.active .content {
+        border-color: var(--primary);
+        box-shadow: var(--shadow-hover);
+    }
+    .timeline-item .content .year {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 2px 14px;
+        border-radius: 50px;
+        border: 1px solid;
+        margin-bottom: 6px;
+    }
+    .timeline-item .content .icon { font-size: 28px; display: block; margin-bottom: 4px; }
+    .timeline-item .content h3 { font-size: 18px; font-weight: 800; color: var(--primary); }
+    .timeline-item .content .desc { color: var(--text-muted); font-size: 15px; margin-top: 4px; }
+    .timeline-item .content .price {
+        font-weight: 700;
+        margin-top: 8px;
+        color: var(--green);
+        display: block;
+        width: fit-content;
+    }
+    .timeline-item .content .status-badge {
+        display: block;
+        padding: 4px 18px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 13px;
+        margin-top: 8px;
+        width: fit-content;
+    }
+    .timeline-item .content .status-badge i { margin-right: 6px; }
 }
 
 /* ===== SLIBY – PŮVODNÍ STYLY (ZACHOVÁNY PRO KOMPATIBILITU) ===== */
@@ -956,31 +1339,224 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 .priorities-scroll .priority-card { flex: 0 0 250px; scroll-snap-align: start; min-height: 180px; }
 @media (max-width: 768px) { .priorities { display: none; } .priorities-scroll { display: flex; } }
 
-/* ===== SCHOOL GRID ===== */
-.school-grid-desktop { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
-.school-card { background: var(--white); border-radius: var(--radius); padding: 24px; border: 2px solid var(--border); transition: var(--transition); box-shadow: var(--shadow); }
-.school-card:hover { border-color: var(--primary); box-shadow: var(--shadow-hover); }
-.school-card .icon { font-size: 32px; }
-.school-card h4 { font-weight: 700; font-size: 18px; color: var(--primary); margin: 8px 0 4px; }
-.school-card ul { list-style: none; }
-.school-card ul li { padding: 4px 0; font-size: 15px; color: var(--text-muted); }
-.school-card ul li::before { content: "•"; color: var(--green); margin-right: 6px; }
-.accordion { max-width: 900px; margin: 0 auto; }
-.accordion-item { border: 2px solid var(--border); border-radius: var(--radius); margin-bottom: 10px; overflow: hidden; transition: var(--transition); background: var(--white); }
-.accordion-item:hover { border-color: var(--primary); }
-.accordion-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; cursor: pointer; background: var(--white); transition: var(--transition); gap: 12px; }
-.accordion-header:hover { background: var(--green-soft); }
-.accordion-header .icon-left { font-size: 24px; flex-shrink: 0; }
-.accordion-header .title-group h4 { font-size: 16px; font-weight: 700; color: var(--primary); margin: 0; }
-.accordion-toggle { font-size: 16px; color: var(--green); transition: var(--transition); flex-shrink: 0; }
-.accordion-item.open .accordion-toggle { transform: rotate(180deg); }
-.accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), padding 0.3s ease; padding: 0 20px; }
-.accordion-item.open .accordion-body { max-height: 300px; padding: 0 20px 16px 20px; }
-.accordion-body ul { list-style: none; font-size: 15px; color: var(--text-muted); }
-.accordion-body ul li { padding: 4px 0; display: flex; align-items: center; gap: 6px; }
-.accordion-body ul li::before { content: "•"; color: var(--green); font-weight: 700; }
-@media (min-width: 769px) { .accordion { display: none !important; } }
-@media (max-width: 768px) { .school-grid-desktop { display: none !important; } }
+/* ===== SCHOOL GRID - 2×2 LAYOUT ===== */
+.school-grid-desktop { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px; 
+    max-width: 1200px;
+    margin: 0 auto; 
+}
+
+.school-card { 
+    background: var(--white); 
+    border-radius: var(--radius); 
+    padding: 24px; 
+    border: 2px solid var(--border); 
+    transition: var(--transition); 
+    box-shadow: var(--shadow); 
+}
+
+.school-card:hover { 
+    border-color: var(--primary); 
+    box-shadow: var(--shadow-hover); 
+}
+
+.school-card .icon { 
+    font-size: 32px; 
+}
+
+.school-card h4 { 
+    font-weight: 700; 
+    font-size: 18px; 
+    color: var(--primary); 
+    margin: 8px 0 4px; 
+}
+
+.school-card ul { 
+    list-style: none; 
+}
+
+.school-card ul li { 
+    padding: 4px 0; 
+    font-size: 15px; 
+    color: var(--text-muted); 
+}
+
+.school-card ul li::before { 
+    content: "•"; 
+    color: var(--green); 
+    margin-right: 6px; 
+}
+
+/* Škola foto bublina */
+.school-photo-wrapper {
+    margin: 0;
+}
+
+.school-photo-bubble {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 3px solid var(--border);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.school-photo-bubble:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px);
+}
+
+.school-photo-bubble img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.school-photo-bubble:hover img {
+    transform: scale(1.05);
+}
+
+.school-photo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(26, 58, 107, 0.9), transparent);
+    padding: 16px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.school-photo-text {
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Mobil - accordion */
+.accordion { 
+    max-width: 900px; 
+    margin: 0 auto; 
+}
+
+.accordion-item { 
+    border: 2px solid var(--border); 
+    border-radius: var(--radius); 
+    margin-bottom: 10px; 
+    overflow: hidden; 
+    transition: var(--transition); 
+    background: var(--white); 
+}
+
+.accordion-item:hover { 
+    border-color: var(--primary); 
+}
+
+.accordion-header { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 14px 20px; 
+    cursor: pointer; 
+    background: var(--white); 
+    transition: var(--transition); 
+    gap: 12px; 
+}
+
+.accordion-header:hover { 
+    background: var(--green-soft); 
+}
+
+.accordion-header .icon-left { 
+    font-size: 24px; 
+    flex-shrink: 0; 
+}
+
+.accordion-header .title-group h4 { 
+    font-size: 16px; 
+    font-weight: 700; 
+    color: var(--primary); 
+    margin: 0; 
+}
+
+.accordion-toggle { 
+    font-size: 16px; 
+    color: var(--green); 
+    transition: var(--transition); 
+    flex-shrink: 0; 
+}
+
+.accordion-item.open .accordion-toggle { 
+    transform: rotate(180deg); 
+}
+
+.accordion-body { 
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), padding 0.3s ease; 
+    padding: 0 20px; 
+}
+
+.accordion-item.open .accordion-body { 
+    max-height: 300px; 
+    padding: 0 20px 16px 20px; 
+}
+
+.accordion-body ul { 
+    list-style: none; 
+    font-size: 15px; 
+    color: var(--text-muted); 
+}
+
+.accordion-body ul li { 
+    padding: 4px 0; 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+}
+
+.accordion-body ul li::before { 
+    content: "•"; 
+    color: var(--green); 
+    font-weight: 700; 
+}
+
+@media (min-width: 769px) { 
+    .accordion { display: none !important; } 
+}
+
+@media (max-width: 768px) { 
+    .school-grid-desktop { display: none !important; }
+    
+    /* Mobil - fotky mezi accordion items */
+    .school-photo-wrapper {
+        margin: 0 auto 16px;
+        padding: 0 16px;
+    }
+    
+    .school-photo-bubble {
+        aspect-ratio: 16 / 10;
+        border-radius: var(--radius);
+        border: 2px solid var(--border);
+    }
+    
+    .school-photo-text {
+        font-size: 18px;
+    }
+    
+    .school-photo-overlay {
+        padding: 12px;
+    }
+}
 
 /* ===== CANDIDATES ===== */
 .team-slogan {
@@ -1099,12 +1675,12 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     margin-top: 4px;
 }
 .tags span {
-    background: var(--white);
+    background: var(--green-soft);
     font-size: 11px;
     padding: 2px 12px;
     border-radius: 50px;
-    font-weight: 500;
-    border: 1px solid var(--border);
+    font-weight: 700;
+    border: 1px solid var(--green);
     color: var(--green);
 }
 
@@ -1134,7 +1710,6 @@ footer p strong { font-weight: 900; }
 #lightboxClose:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
 #lightboxImage { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); cursor: default; }
 @media (max-width: 480px) { #lightboxClose { top: 12px; right: 12px; width: 40px; height: 40px; font-size: 18px; } #lightboxImage { max-width: 95vw; max-height: 80vh; } }
-
 
         
     </style>
@@ -1239,7 +1814,7 @@ footer p strong { font-weight: 900; }
     </div>
 </header>
 
-<!-- ===== VÝSLEDKY – SLOUČENÁ SEKCE ===== -->
+<!-- ===== VÝSLEDKY ===== -->
 <section id="vysledky">
     <div class="container">
         <span class="section-tag">🌱 Co se v Čisté povedlo</span>
@@ -1247,9 +1822,12 @@ footer p strong { font-weight: 900; }
         <p class="section-subtitle">Za poslední 4 roky jsme připravili a realizovali <strong>spoustu dobrých věcí</strong>. To&nbsp;je teprve začátek.</p>
 
         <div class="timeline" id="timeline">
-            <!-- 1. Stabilizace skalního svahu – HOTOVO (zelená) -->
-            <div class="timeline-item active">
+            <!-- BOD 1 – LEVÁ STRANA (HOTOVO) + OBRÁZEK VPRAVO -->
+            <div class="timeline-item left active">
                 <div class="dot">1</div>
+                <div class="timeline-image">
+                    <img src="svah.jpg" alt="Stabilizace skalního svahu" loading="lazy">
+                </div>
                 <div class="content">
                     <span class="year hotovo"><i class="fas fa-check-circle"></i> Dokončeno 02/2025</span>
                     <span class="icon">⛰️</span>
@@ -1260,9 +1838,12 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
 
-            <!-- 2. Chodník, opěrné zdi a osvětlení – HOTOVO (zelená) -->
-            <div class="timeline-item">
+            <!-- BOD 2 – PRAVÁ STRANA (HOTOVO) + OBRÁZEK VLEVO -->
+            <div class="timeline-item right">
                 <div class="dot">2</div>
+                <div class="timeline-image">
+                    <img src="chodnik.jpg" alt="Chodník, opěrné zdi a osvětlení" loading="lazy">
+                </div>
                 <div class="content">
                     <span class="year hotovo"><i class="fas fa-check-circle"></i> Dokončeno 02/2026</span>
                     <span class="icon">🚶</span>
@@ -1273,9 +1854,12 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
 
-            <!-- 3. Splašková kanalizace – PROBÍHÁ (modrá) -->
-            <div class="timeline-item">
+            <!-- BOD 3 – LEVÁ STRANA (PROBÍHÁ) + OBRÁZEK VPRAVO -->
+            <div class="timeline-item left">
                 <div class="dot">3</div>
+                <div class="timeline-image">
+                    <img src="kanalizace.jpg" alt="Splašková kanalizace" loading="lazy">
+                </div>
                 <div class="content">
                     <span class="year probiha"><i class="fas fa-sync-alt fa-spin"></i> Dokončení 09/2026</span>
                     <span class="icon">🚧</span>
@@ -1286,8 +1870,8 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
 
-            <!-- 4. Další projekty – CHYSTÁME (žlutá) -->
-            <div class="timeline-item">
+            <!-- BOD 4 – PRAVÁ STRANA: CHYSTÁME VLEVO, PROGRAM VPRAVO -->
+            <div class="timeline-item right">
                 <div class="dot">4</div>
                 <div class="content">
                     <span class="year chystame"><i class="fas fa-clock"></i> Chystáme</span>
@@ -1295,6 +1879,9 @@ footer p strong { font-weight: 900; }
                     <h3>Další projekty pro rozvoj obce</h3>
                     <p class="desc">Máme plány na další roky – od rozvoje kultury až po moderní služby. <strong>Chceme v tom pokračovat.</strong></p>
                     <span class="status-badge status-chystame"><i class="fas fa-clock"></i> Chystáme</span>
+                </div>
+                <div class="timeline-image-text">
+                    <span class="program-label">Program<br><small>2026–2030</small></span>
                 </div>
             </div>
         </div>
@@ -1351,18 +1938,52 @@ footer p strong { font-weight: 900; }
         </div>
         <div style="margin-top: 40px; padding-top: 32px; border-top: 3px solid var(--primary);">
             <h3 class="section-title center" style="font-size: 28px;">🌱 Škola, rodiny a aktivní život</h3>
+            
             <div class="school-grid-desktop">
+                <!-- Karta 1: Moderní vzdělávání -->
                 <div class="school-card">
                     <span class="icon">📚</span>
                     <h4>Moderní vzdělávání</h4>
-                    <ul><li>Aktivizační metody výuky</li><li>Projektová a badatelská výuka</li><li>Individuální přístup k dětem</li></ul>
+                    <ul>
+                        <li>Aktivizační metody výuky</li>
+                        <li>Projektová a badatelská výuka</li>
+                        <li>Individuální přístup k dětem</li>
+                    </ul>
                 </div>
+                
+                <!-- Karta 2: Fotka školy -->
+                <div class="school-photo-wrapper">
+                    <div class="school-photo-bubble clickable-image">
+                        <img src="skola.jpg" alt="Naše škola v Čisté" loading="lazy">
+                        <div class="school-photo-overlay">
+                            <span class="school-photo-text">📚<br>Naše<br>škola</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Karta 3: Sport a volný čas -->
                 <div class="school-card">
                     <span class="icon">🏃</span>
                     <h4>Sport a volný čas</h4>
-                    <ul><li>Pumptrack pro děti a mládež</li><li>Senior park – setkávání a pohyb</li><li>Podpora spolků a kulturních akcí</li></ul>
+                    <ul>
+                        <li>Pumptrack pro děti a mládež</li>
+                        <li>Senior park – setkávání a pohyb</li>
+                        <li>Podpora spolků a kulturních akcí</li>
+                    </ul>
+                </div>
+                
+                <!-- Karta 4: Fotka hřiště -->
+                <div class="school-photo-wrapper">
+                    <div class="school-photo-bubble clickable-image">
+                        <img src="hriste.jpg" alt="Dětské hřiště" loading="lazy">
+                        <div class="school-photo-overlay">
+                            <span class="school-photo-text">🛝<br>Dětské<br>hřiště</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+            <!-- Mobil - accordion s fotkami -->
             <div class="accordion">
                 <div class="accordion-item open">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
@@ -1370,15 +1991,48 @@ footer p strong { font-weight: 900; }
                         <div class="title-group"><h4>Moderní vzdělávání</h4></div>
                         <span class="accordion-toggle">▼</span>
                     </div>
-                    <div class="accordion-body"><ul><li>Aktivizační metody výuky</li><li>Projektová a badatelská výuka</li><li>Individuální přístup k dětem</li></ul></div>
+                    <div class="accordion-body">
+                        <ul>
+                            <li>Aktivizační metody výuky</li>
+                            <li>Projektová a badatelská výuka</li>
+                            <li>Individuální přístup k dětem</li>
+                        </ul>
+                    </div>
                 </div>
+                
+                <!-- Fotka školy na mobilu -->
+                <div class="school-photo-wrapper">
+                    <div class="school-photo-bubble clickable-image">
+                        <img src="skola.jpg" alt="Naše škola v Čisté" loading="lazy">
+                        <div class="school-photo-overlay">
+                            <span class="school-photo-text">📚<br>Naše<br>škola</span>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
                         <span class="icon-left">🏃</span>
                         <div class="title-group"><h4>Sport a volný čas</h4></div>
                         <span class="accordion-toggle">▼</span>
                     </div>
-                    <div class="accordion-body"><ul><li>Pumptrack pro děti a mládež</li><li>Senior park – setkávání a pohyb</li><li>Podpora spolků a kulturních akcí</li></ul></div>
+                    <div class="accordion-body">
+                        <ul>
+                            <li>Pumptrack pro děti a mládež</li>
+                            <li>Senior park – setkávání a pohyb</li>
+                            <li>Podpora spolků a kulturních akcí</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Fotka hřiště na mobilu -->
+                <div class="school-photo-wrapper">
+                    <div class="school-photo-bubble clickable-image">
+                        <img src="hriste.jpg" alt="Dětské hřiště" loading="lazy">
+                        <div class="school-photo-overlay">
+                            <span class="school-photo-text">🛝<br>Dětské<br>hřiště</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1892,6 +2546,7 @@ footer p strong { font-weight: 900; }
             }
         });
     });
+
 </script>
 
 </body>
