@@ -1,2553 +1,976 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Volba pro zítřek – Čistá u Mladé Boleslavi</title>
-    <meta name="description" content="Společně tvoříme budoucnost obce Čistá. 4 roky práce, stabilizovaný svah, nový rybníček a dokončená kanalizace." />
-    <link rel="icon" href="logoa.png" type="image/png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
-    <style>
-
-/* ===== ROOT ===== */
-:root {
-    --primary: #1a3a6b;
-    --primary-dark: #0f2a4a;
-    --secondary: #2a7ad8;
-    --secondary-light: #5a9ee8;
-    --green: #2e7d32;
-    --green-light: #4caf50;
-    --green-soft: #e8f5e9;
-    --bg-light: #f0f4fa;
-    --white: #ffffff;
-    --text-dark: #1a2a3a;
-    --text-muted: #5a6a7e;
-    --border: #dce4ec;
-    --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    --shadow-hover: 0 16px 48px rgba(26, 58, 107, 0.15);
-    --radius: 16px;
-    --radius-lg: 24px;
-    --transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* ===== RESET ===== */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: var(--white);
-    color: var(--text-dark);
-    line-height: 1.7;
-    padding-top: 72px;
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
-}
-.container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
-img { max-width: 100%; display: block; }
-a { text-decoration: none; color: inherit; }
-
-/* ===== BUTTONS ===== */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 32px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 15px;
-    border: none;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: 0 4px 16px rgba(26, 58, 107, 0.25);
-}
-.btn-primary {
-    background: var(--primary);
-    color: var(--white);
-}
-.btn-primary:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 32px rgba(26, 58, 107, 0.35);
-    background: var(--primary-dark);
-}
-.btn-outline {
-    background: transparent;
-    color: var(--primary);
-    border: 2px solid var(--primary);
-    box-shadow: none;
-}
-.btn-outline:hover {
-    background: rgba(26, 58, 107, 0.06);
-    border-color: var(--primary);
-    color: var(--primary);
-    transform: translateY(-3px) scale(1.02);
-}
-
-/* ===== NAVBAR ===== */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    z-index: 1000;
-    border-bottom: 3px solid var(--primary);
-    box-shadow: 0 2px 12px rgba(26, 58, 107, 0.15);
-    transition: background 0.2s;
-}
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 72px;
-}
-.logo {
-    font-size: 1.25rem;
-    font-weight: 900;
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-.logo-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-.logo-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.logo .logo-text-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    white-space: nowrap;
-}
-.logo .logo-text { color: var(--primary); }
-.logo .logo-text-highlight { color: var(--secondary); }
-.nav-links {
-    display: flex;
-    gap: 0.5rem;
-    list-style: none;
-    align-items: center;
-}
-.nav-links a {
-    color: var(--text-muted);
-    font-weight: 600;
-    font-size: 0.95rem;
-    padding: 0.5rem 1.2rem;
-    border-radius: 999px;
-    transition: 0.25s;
-    position: relative;
-}
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 3px;
-    background: var(--primary);
-    border-radius: 99px;
-    transition: width 0.3s ease;
-}
-.nav-links a:hover::after { width: 60%; }
-.nav-links a:hover {
-    color: var(--primary);
-    background: rgba(26, 58, 107, 0.08);
-    border-radius: 999px;
-}
-.nav-links a.active {
-    color: var(--primary) !important;
-    background: transparent !important;
-}
-.nav-links a.active::after { width: 60% !important; }
-.nav-links a.banner-active::after { width: 0 !important; }
-.nav-links a.banner-active {
-    background: transparent !important;
-    color: var(--text-muted) !important;
-}
-.nav-links a.banner-active:hover {
-    background: rgba(26, 58, 107, 0.08) !important;
-    color: var(--primary) !important;
-}
-
-.burger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: rgba(26, 58, 107, 0.06);
-    border: 2px solid var(--primary);
-    cursor: pointer;
-    padding: 10px 12px;
-    border-radius: 99px;
-    transition: 0.25s;
-}
-.burger:hover { background: var(--primary); transform: scale(1.02); }
-.burger:hover span { background: var(--white); }
-.burger span {
-    display: block;
-    width: 24px;
-    height: 2.5px;
-    background: var(--primary);
-    border-radius: 99px;
-    transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.burger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-.burger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.burger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-.menu-header, .close-menu, .menu-title, .nav-overlay { display: none; }
-
-/* ===== HERO – SVĚTLÉ BARVY ===== */
-.hero { text-align: left; padding: 0; border-bottom: 3px solid var(--primary); position: relative; overflow: hidden; }
-.hero-top {
-    background: linear-gradient(120deg, #e8f5e9 0%, #c8e6c9 100%);
-    padding: 60px 0 20px;
-}
-.hero-bottom-section {
-    background: linear-gradient(135deg, #dce8f5 0%, #b8d4e8 100%);
-    padding: 60px 0 40px;
-}
-.hero .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--primary);
-    color: var(--white);
-    font-weight: 700;
-    font-size: 13px;
-    padding: 6px 18px;
-    border-radius: 50px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 16px;
-    box-shadow: 0 2px 16px rgba(26, 58, 107, 0.2);
-}
-.hero h1 {
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
-    text-align: left;
-}
-.hero h1 .line1 { color: var(--primary); }
-.hero h1 .line2 {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-.hero .subheadline {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text-dark);
-    margin-bottom: 24px;
-    opacity: 0.8;
-    text-align: left;
-}
-.hero-row {
-    display: flex;
-    gap: 40px;
-    align-items: stretch;
-    max-width: 1100px;
-    margin: 0 auto 20px;
-}
-.hero-row .col-photo { flex: 1 1 48%; min-width: 0; }
-.hero-row .col-stats { flex: 1 1 48%; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
-
-.hero-photo {
-    width: 100%;
-    height: 100%;
-    min-height: 220px;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    background: var(--white);
-    cursor: pointer;
-    transition: var(--transition);
-    aspect-ratio: 21 / 9;
-}
-.hero-photo:hover { transform: scale(1.01); box-shadow: var(--shadow-hover); }
-.hero-photo img { width: 100%; height: 100%; object-fit: cover; }
-
-/* ===== STATISTIKY ===== */
-.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.stat-card {
-    background: var(--white);
-    border: 2px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 16px;
-    text-align: center;
-    transition: var(--transition);
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 130px;
-    color: var(--text-dark);
-}
-.stat-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: var(--shadow-hover); }
-.stat-card .emoji { font-size: 32px; line-height: 1.2; display: block; margin-bottom: 4px; }
-.stat-card .number { font-size: 22px; font-weight: 900; color: var(--primary); display: block; line-height: 1.2; }
-.stat-card .label { font-weight: 700; font-size: 15px; color: var(--text-dark); display: block; margin-top: 2px; }
-.stat-card .desc { font-size: 12px; color: var(--text-muted); display: block; margin-top: 4px; }
-
-.hero-bottom-text { max-width: 800px; margin: 0; text-align: left; }
-.hero-text {
-    font-size: 17px;
-    color: var(--text-dark);
-    margin-bottom: 20px;
-    line-height: 1.8;
-    text-align: left;
-}
-.hero-text strong { color: var(--primary); }
-
-.btn-group { display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap; }
-
-/* ===== INTRO BOX – BUBLINA ===== */
-.intro-box {
-    max-width: 800px;
-    margin: 0 auto 32px auto;
-    padding: 32px 36px;
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    border: 2px solid var(--border);
-    box-shadow: var(--shadow);
-    text-align: center;
-    transition: var(--transition);
-}
-.intro-box:hover {
-    border-color: var(--primary);
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-2px);
-}
-.intro-box p {
-    font-size: 18px;
-    color: var(--text-dark);
-    line-height: 1.8;
-    margin-bottom: 12px;
-}
-.intro-box p:last-child {
-    margin-bottom: 0;
-}
-.intro-box p strong {
-    color: var(--primary);
-}
-.intro-box .highlight {
-    color: var(--green);
-    font-weight: 700;
-}
-.intro-divider {
-    width: 60px;
-    height: 3px;
-    background: var(--primary);
-    margin: 16px auto;
-    border-radius: 99px;
-    opacity: 0.3;
-}
-
-/* ===== TABLET ===== */
-@media (max-width: 992px) {
-    .hero-row { flex-direction: column; gap: 24px; }
-    .hero-row .col-photo { flex: 1 1 auto; }
-    .hero-row .col-stats { flex: 1 1 auto; }
-    .hero-photo { min-height: 160px; max-height: 240px; aspect-ratio: 21 / 9; }
-    .stats-grid { gap: 8px; }
-    .stat-card { min-height: 100px; padding: 12px 8px; border-radius: 12px; }
-    .stat-card .emoji { font-size: 28px; }
-    .stat-card .number { font-size: 18px; }
-    .stat-card .label { font-size: 13px; }
-    .stat-card .desc { font-size: 11px; }
-    .hero-top { padding: 40px 0 30px; }
-    .hero-bottom-section { padding: 20px 0 30px; }
-}
-
-/* ===== MOBILE ===== */
-@media (max-width: 768px) {
-    .hero-top {
-        background: url('vesnice.jpg') no-repeat center center / cover !important;
-        padding: 40px 0 30px !important;
-        position: relative;
-        min-height: 260px;
-        display: flex;
-        align-items: center;
-        border-bottom: 3px solid var(--primary);
-    }
-    .hero-top::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.55);
-        z-index: 1;
-    }
-    .hero-top .container { position: relative; z-index: 2; width: 100%; }
-    .hero-top .badge {
-        background: rgba(26, 58, 107, 0.85) !important;
-        color: var(--white) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(4px);
-    }
-    .hero-top h1 {
-        color: #ffffff !important;
-        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
-    }
-    .hero-top h1 .line1 {
-        color: #ffffff !important;
-    }
-    .hero-top h1 .line2 {
-        background: none !important;
-        -webkit-text-fill-color: #ffffff !important;
-        color: #ffffff !important;
-    }
-    .hero-top .subheadline {
-        color: rgba(255, 255, 255, 0.85) !important;
-        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-    }
-
-    .hero-bottom-section {
-        background: linear-gradient(135deg, #dce8f5 0%, #b8d4e8 100%) !important;
-        padding: 30px 0 30px !important;
-    }
-    .hero-row .col-photo { display: none !important; }
-    .hero-row .col-stats { flex: 1 1 auto !important; width: 100% !important; }
-    .stats-grid { gap: 10px !important; }
-    .stat-card {
-        background: var(--white) !important;
-        border: 2px solid var(--border) !important;
-        border-radius: var(--radius) !important;
-        padding: 14px 10px !important;
-        min-height: 90px !important;
-        box-shadow: var(--shadow) !important;
-    }
-    .stat-card .emoji { font-size: 30px !important; margin-bottom: 2px !important; }
-    .stat-card .number { font-size: 18px !important; color: var(--primary) !important; }
-    .stat-card .label { font-size: 13px !important; font-weight: 700 !important; color: var(--text-dark) !important; }
-    .stat-card .desc { font-size: 10px !important; color: var(--text-muted) !important; }
-
-    .btn-group {
-        justify-content: center !important;
-        gap: 12px !important;
-        margin-top: 16px !important;
-        margin-bottom: 16px !important;
-        flex-wrap: wrap !important;
-    }
-    .btn {
-        font-size: 14px !important;
-        padding: 12px 24px !important;
-        border-radius: 50px !important;
-        font-weight: 700 !important;
-        box-shadow: 0 4px 16px rgba(26, 58, 107, 0.25) !important;
-        flex: 0 1 auto !important;
-        min-width: 140px !important;
-        justify-content: center !important;
-    }
-    .btn-primary {
-        background: var(--primary) !important;
-        color: var(--white) !important;
-        border: none !important;
-    }
-    .btn-outline {
-        background: transparent !important;
-        color: var(--primary) !important;
-        border: 2px solid var(--primary) !important;
-        backdrop-filter: none !important;
-    }
-
-    .hero-bottom-text {
-        max-width: 100% !important;
-        margin-top: 0 !important;
-        text-align: center !important;
-        display: flex !important;
-        flex-direction: column !important;
-    }
-    .hero-bottom-text .btn-group { order: 0 !important; }
-    .hero-bottom-text .hero-text {
-        order: 1 !important;
-        color: var(--text-dark) !important;
-        font-size: 15px !important;
-        background: transparent !important;
-        backdrop-filter: none !important;
-        padding: 0 !important;
-        border: none !important;
-        text-shadow: none !important;
-        text-align: center !important;
-    }
-    .hero-text strong { color: var(--primary) !important; }
-
-    .hero-row { flex-direction: column !important; gap: 16px !important; margin-bottom: 0 !important; display: flex !important; flex-direction: column !important; }
-    .hero-row .col-stats { order: 0 !important; }
-    .hero-bottom-section .container { padding: 0 16px !important; }
-
-    /* ===== BURGER ===== */
-    .burger { display: flex; }
-    .nav-links {
-        display: flex;
-        position: fixed;
-        top: 12px;
-        left: 12px;
-        right: 12px;
-        width: auto;
-        height: auto;
-        max-height: 80vh;
-        background: rgba(255,255,255,0.98);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: stretch;
-        padding: 1.8rem 1.5rem 2rem;
-        gap: 0.25rem;
-        border-radius: var(--radius-lg);
-        box-shadow: 0 25px 60px rgba(0,0,0,0.18);
-        z-index: 1001;
-        border: 2px solid var(--primary);
-        transform: translateY(-20px) scale(0.96);
-        opacity: 0;
-        pointer-events: none;
-        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease;
-        overflow-y: auto;
-    }
-    .nav-links.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
-    .nav-links a::after { display: none !important; }
-    .nav-links a.active::after { display: none !important; }
-    .nav-links a.active { background: rgba(26,58,107,0.08); border-color: var(--primary); }
-    .nav-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0,0,0,0.25);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        z-index: 1000;
-        opacity: 0;
-        transition: opacity 0.35s ease;
-    }
-    .nav-overlay.active { display: block; opacity: 1; }
-    .menu-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.2rem;
-        padding-bottom: 0.8rem;
-        border-bottom: 2px solid var(--primary);
-    }
-    .menu-title {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-weight: 800;
-        font-size: 1rem;
-        color: var(--primary);
-        letter-spacing: -0.3px;
-    }
-    .menu-title .menu-logo { width: 32px; height: 32px; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
-    .menu-title .menu-logo img { width: 100%; height: 100%; object-fit: cover; }
-    .close-menu {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        background: rgba(26,58,107,0.08);
-        border: 2px solid var(--primary);
-        border-radius: 99px;
-        color: var(--primary);
-        font-size: 1.4rem;
-        cursor: pointer;
-        transition: 0.25s;
-        flex-shrink: 0;
-    }
-    .close-menu:hover { background: var(--primary); transform: rotate(90deg) scale(1.05); color: var(--white); }
-    .nav-links a {
-        color: var(--primary);
-        font-weight: 700;
-        font-size: 1.1rem;
-        padding: 0.8rem 1.2rem;
-        text-align: left;
-        display: flex;
-        align-items: center;
-        gap: 0.7rem;
-        border: 1px solid transparent;
-        background: transparent;
-    }
-    .nav-links a:hover { background: rgba(26,58,107,0.08); border-color: var(--primary); transform: translateX(4px); }
-}
-
-/* ===== SMALL MOBILE ===== */
-@media (max-width: 480px) {
-    .hero-top { padding: 30px 0 20px !important; min-height: 220px; }
-    .hero-top h1 { font-size: 28px !important; }
-    .hero-top .badge { font-size: 11px; padding: 4px 14px; }
-    .hero-top .subheadline { font-size: 16px !important; }
-    .stat-card { min-height: 75px !important; padding: 10px 6px !important; border-radius: 12px !important; }
-    .stat-card .emoji { font-size: 26px !important; }
-    .stat-card .number { font-size: 16px !important; }
-    .stat-card .label { font-size: 12px !important; }
-    .stat-card .desc { font-size: 9px !important; }
-    .btn { font-size: 13px !important; padding: 10px 20px !important; min-width: 120px !important; }
-    .hero-text { font-size: 14px !important; }
-    .nav-links { padding: 1.5rem 1.2rem 1.8rem; border-radius: 20px; top: 10px; left: 10px; right: 10px; }
-    .nav-links a { font-size: 1rem; padding: 0.7rem 1rem; }
-    .close-menu { width: 36px; height: 36px; font-size: 1.2rem; }
-    .menu-title { font-size: 0.9rem; }
-    .menu-title .menu-logo { width: 28px; height: 28px; }
-}
-
-/* ===== PC – TEXT NAHOŘE, TLAČÍTKA DOLE ===== */
-@media (min-width: 769px) {
-    .hero-bottom-text {
-        display: flex !important;
-        flex-direction: column !important;
-    }
-    .hero-bottom-text .hero-text {
-        order: 0 !important;
-        margin-bottom: 16px !important;
-    }
-    .hero-bottom-text .btn-group {
-        order: 1 !important;
-        justify-content: flex-start !important;
-    }
-}
-
-/* ===== SKRYTÍ FOTKY NA PC ===== */
-@media (min-width: 769px) {
-    section[style*="padding: 40px 0; background: var(--bg-light)"] {
-        display: none !important;
-    }
-}
-
-/* ===== BANNERY ===== */
-.banner-section {
-    background: var(--primary);
-    padding: 48px 0;
-    text-align: center;
-    border-bottom: 4px solid var(--secondary);
-}
-.banner-section h2 {
-    color: var(--white);
-    font-size: clamp(32px, 5vw, 52px);
-    font-weight: 900;
-    letter-spacing: -0.02em;
-}
-.banner-section h2 i { color: var(--secondary-light); margin-right: 12px; }
-@media (max-width: 768px) { .banner-section { padding: 32px 0; } }
-@media (max-width: 480px) { .banner-section { padding: 24px 0; } }
-
-/* ===== SCROLL-MARGIN ===== */
-section { scroll-margin-top: 80px; }
-.banner-section { scroll-margin-top: 80px; }
-#home { scroll-margin-top: 0; }
-
-/* ===== SECTION COMMON ===== */
-section { padding: 56px 0; border-bottom: 1px solid var(--border); }
-.section-tag {
-    display: inline-block;
-    background: var(--green-soft);
-    color: var(--green);
-    font-weight: 700;
-    font-size: 12px;
-    padding: 4px 16px;
-    border-radius: 50px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border: 1px solid var(--green);
-    margin-bottom: 8px;
-}
-.section-title {
-    font-size: clamp(28px, 3.5vw, 40px);
-    font-weight: 900;
-    color: var(--primary);
-    margin-bottom: 8px;
-    letter-spacing: -0.02em;
-}
-.section-subtitle {
-    color: var(--text-muted);
-    font-size: 18px;
-    max-width: 620px;
-    margin-bottom: 32px;
-}
-.section-subtitle strong { color: var(--green); }
-.section-title.center, .section-subtitle.center { text-align: center; margin-left: auto; margin-right: auto; }
-
-/* =============================================================== */
-/* ===== STATUS BADGES – GLOBÁLNÍ (fungují na všech zařízeních) ===== */
-/* =============================================================== */
-.status-hotovo {
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #28a745;
-}
-.status-probiha {
-    background: #d1ecf1;
-    color: #0c5460;
-    border: 1px solid #17a2b8;
-}
-.status-chystame {
-    background: #fff3cd;
-    color: #856404;
-    border: 1px solid #ffc107;
-}
-
-/* Barvy pro "year" badge – také globálně */
-.timeline-item .content .year.hotovo {
-    color: #155724;
-    background: #d4edda;
-    border-color: #28a745;
-}
-.timeline-item .content .year.hotovo i { color: #28a745; }
-
-.timeline-item .content .year.probiha {
-    color: #0c5460;
-    background: #d1ecf1;
-    border-color: #17a2b8;
-}
-.timeline-item .content .year.probiha i { color: #17a2b8; }
-
-.timeline-item .content .year.chystame {
-    color: #856404;
-    background: #fff3cd;
-    border-color: #ffc107;
-}
-.timeline-item .content .year.chystame i { color: #ffc107; }
-
-/* =============================================================== */
-/* ===== TIMELINE – CYK-CAK NA PC S OBRÁZKY ===== */
-/* =============================================================== */
-
-/* ===== PC – OBRÁZKY VEDLE BUBLINEK ===== */
-@media (min-width: 769px) {
-    .timeline {
-        position: relative;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 30px 0;
-    }
-
-    .timeline::before {
-        content: '';
-        position: absolute;
-        left: 50%;
-        top: 10px;
-        bottom: 10px;
-        width: 3px;
-        background: linear-gradient(to bottom, var(--border) 0%, var(--primary) 50%, var(--border) 100%);
-        border-radius: 99px;
-        transform: translateX(-50%);
-        z-index: 0;
-        opacity: 0.5;
-    }
-
-    .timeline-item {
-        position: relative;
-        margin-bottom: 120px;
-        padding: 0;
-        display: flex;
-        align-items: stretch;
-        z-index: 1;
-    }
-
-    .timeline-item:last-child { margin-bottom: 0; }
-
-    /* ===== LEVÁ STRANA ===== */
-    .timeline-item.left {
-        flex-direction: row;
-        padding-right: calc(50% + 40px);
-        text-align: right;
-    }
-
-    .timeline-item.left .timeline-image {
-        position: absolute;
-        left: calc(50% + 52px);
-        top: 0;
-        bottom: 0;
-        width: 520px;
-        border-radius: 5%;
-        overflow: hidden;
-        border: 3px solid var(--border);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        background: var(--white);
-        transition: var(--transition);
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .timeline-item.left .timeline-image:hover {
-        transform: scale(1.04);
-        border-color: var(--primary);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-    }
-
-    .timeline-item.left .timeline-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
-
-    .timeline-item.left .timeline-image-text {
-        position: absolute;
-        left: calc(50% + 52px);
-        top: 0;
-        bottom: 0;
-        width: 520px;
-        z-index: 3;
-        text-align: center;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .timeline-item.left .timeline-image-text .program-label {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        font-size: 28px;
-        font-weight: 900;
-        color: var(--white);
-        background: linear-gradient(145deg, var(--primary), var(--primary-dark));
-        padding: 16px 20px;
-        border-radius: 5%;
-        border: 3px solid var(--secondary-light);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        line-height: 1.2;
-        letter-spacing: -0.02em;
-        transition: var(--transition);
-        text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        gap: 4px;
-    }
-
-    .timeline-item.left .timeline-image-text .program-label:hover {
-        transform: scale(1.03);
-        box-shadow: 0 8px 32px rgba(26,58,107,0.3);
-        border-color: var(--white);
-    }
-
-    .timeline-item.left .timeline-image-text .program-label small {
-        display: block;
-        font-size: 18px;
-        font-weight: 600;
-        color: rgba(255,255,255,0.85);
-        letter-spacing: 0;
-        margin-top: 4px;
-        background: rgba(255,255,255,0.1);
-        padding: 4px 16px;
-        border-radius: 50px;
-    }
-
-    /* ===== PRAVÁ STRANA ===== */
-    .timeline-item.right {
-        flex-direction: row-reverse;
-        padding-left: calc(50% + 40px);
-        text-align: left;
-    }
-
-    .timeline-item.right .timeline-image {
-        position: absolute;
-        right: calc(50% + 52px);
-        top: 0;
-        bottom: 0;
-        width: 520px;
-        border-radius: 5%;
-        overflow: hidden;
-        border: 3px solid var(--border);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        background: var(--white);
-        transition: var(--transition);
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .timeline-item.right .timeline-image:hover {
-        transform: scale(1.04);
-        border-color: var(--primary);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-    }
-
-    .timeline-item.right .timeline-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
-
-    .timeline-item.right .timeline-image-text {
-        position: absolute;
-        right: calc(50% + 52px);
-        top: 0;
-        bottom: 0;
-        width: 520px;
-        z-index: 3;
-        text-align: center;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .timeline-item.right .timeline-image-text .program-label {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        font-size: 28px;
-        font-weight: 900;
-        color: var(--white);
-        background: linear-gradient(145deg, var(--primary), var(--primary-dark));
-        padding: 16px 20px;
-        border-radius: 5%;
-        border: 3px solid var(--secondary-light);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        line-height: 1.2;
-        letter-spacing: -0.02em;
-        transition: var(--transition);
-        text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        gap: 4px;
-    }
-
-    .timeline-item.right .timeline-image-text .program-label:hover {
-        transform: scale(1.03);
-        box-shadow: 0 8px 32px rgba(26,58,107,0.3);
-        border-color: var(--white);
-    }
-
-    .timeline-item.right .timeline-image-text .program-label small {
-        display: block;
-        font-size: 18px;
-        font-weight: 600;
-        color: rgba(255,255,255,0.85);
-        letter-spacing: 0;
-        margin-top: 4px;
-        background: rgba(255,255,255,0.1);
-        padding: 4px 16px;
-        border-radius: 50px;
-    }
-
-    /* ===== TEČKA ===== */
-    .timeline-item .dot {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background: var(--border);
-        border: 4px solid var(--white);
-        box-shadow: 0 0 0 3px var(--border), 0 4px 20px rgba(0,0,0,0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 17px;
-        font-weight: 900;
-        color: var(--text-muted);
-        transition: var(--transition);
-        z-index: 2;
-    }
-
-    .timeline-item.active .dot {
-        background: var(--primary);
-        box-shadow: 0 0 0 3px var(--primary), 0 4px 24px rgba(26,58,107,0.3);
-        color: var(--white);
-        transform: translate(-50%, -50%) scale(1.15);
-    }
-
-    /* ===== BUBLINKY ===== */
-    .timeline-item .content {
-        background: var(--white);
-        border: 2px solid var(--border);
-        border-radius: var(--radius-lg);
-        padding: 32px 36px;
-        transition: var(--transition);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-        width: 100%;
-        position: relative;
-        z-index: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .timeline-item .content:hover {
-        border-color: var(--primary);
-        box-shadow: var(--shadow-hover);
-        transform: translateY(-2px);
-    }
-
-    .timeline-item.active .content {
-        border-color: var(--primary);
-        box-shadow: var(--shadow-hover);
-    }
-
-    .timeline-item .content .year {
-        display: inline-block;
-        font-size: 12px;
-        font-weight: 700;
-        padding: 2px 14px;
-        border-radius: 50px;
-        border: 1px solid;
-        margin-bottom: 6px;
-    }
-
-    .timeline-item .content .icon { font-size: 32px; display: block; margin-bottom: 6px; }
-    .timeline-item .content h3 { font-size: 19px; font-weight: 800; color: var(--primary); margin-bottom: 4px; line-height: 1.3; }
-    .timeline-item .content .desc { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-top: 2px; }
-
-    /* ===== CENOVKA A STATUS POD SEBOU ===== */
-    .timeline-item .content .price {
-        font-weight: 700;
-        font-size: 16px;
-        margin-top: 8px;
-        color: var(--green);
-        padding: 4px 14px;
-        background: var(--green-soft);
-        border-radius: 50px;
-        display: block;
-        border: 1px solid var(--green);
-        width: fit-content;
-    }
-
-    .timeline-item .content .status-badge {
-        display: block;
-        padding: 4px 18px;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 13px;
-        margin-top: 8px;
-        width: fit-content;
-    }
-    .timeline-item .content .status-badge i { margin-right: 6px; }
-
-    /* Zarovnání vlevo/vpravo podle strany */
-    .timeline-item.left .content {
-        align-items: flex-end;
-        text-align: right;
-    }
-    .timeline-item.left .content .price,
-    .timeline-item.left .content .status-badge {
-        align-self: flex-end;
-    }
-
-    .timeline-item.right .content {
-        align-items: flex-start;
-        text-align: left;
-    }
-    .timeline-item.right .content .price,
-    .timeline-item.right .content .status-badge {
-        align-self: flex-start;
-    }
-
-    /* Čára mezi body */
-    .timeline-item::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        top: calc(50% + 28px);
-        width: 2px;
-        height: calc(100% + 10px);
-        background: var(--border);
-        transform: translateX(-50%);
-        z-index: 0;
-        opacity: 0.3;
-    }
-    .timeline-item:last-child::after { display: none; }
-}
-
-/* ===== MOBIL – PŮVODNÍ VZHLED (BEZ OBRÁZKŮ) ===== */
-@media (max-width: 768px) {
-    .timeline {
-        position: relative;
-        max-width: 720px;
-        margin: 0 auto;
-        padding-left: 32px;
-    }
-    .timeline::before {
-        content: '';
-        position: absolute;
-        left: 10px;
-        top: 0;
-        bottom: 0;
-        width: 3px;
-        background: var(--border);
-        border-radius: 99px;
-    }
-    .timeline-item {
-        position: relative;
-        margin-bottom: 24px;
-        padding-left: 24px;
-    }
-    .timeline-item:last-child { margin-bottom: 0; }
-
-    /* Skrytí obrázků na mobilu */
-    .timeline-image,
-    .timeline-image-text {
-        display: none !important;
-    }
-
-    .timeline-item .dot {
-        position: absolute;
-        left: -22px;
-        top: 6px;
-        width: 28px;
-        height: 28px;
-        background: var(--border);
-        border-radius: 50%;
-        border: 3px solid var(--white);
-        box-shadow: 0 0 0 2px var(--border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        font-weight: 800;
-        color: var(--text-muted);
-        transition: var(--transition);
-    }
-    .timeline-item.active .dot {
-        background: var(--primary);
-        box-shadow: 0 0 0 2px var(--primary);
-        color: var(--white);
-        transform: scale(1.15);
-    }
-    .timeline-item .content {
-        background: var(--white);
-        border: 2px solid var(--border);
-        border-radius: var(--radius);
-        padding: 20px 24px;
-        transition: var(--transition);
-        box-shadow: var(--shadow);
-    }
-    .timeline-item.active .content {
-        border-color: var(--primary);
-        box-shadow: var(--shadow-hover);
-    }
-    .timeline-item .content .year {
-        display: inline-block;
-        font-size: 12px;
-        font-weight: 700;
-        padding: 2px 14px;
-        border-radius: 50px;
-        border: 1px solid;
-        margin-bottom: 6px;
-    }
-    .timeline-item .content .icon { font-size: 28px; display: block; margin-bottom: 4px; }
-    .timeline-item .content h3 { font-size: 18px; font-weight: 800; color: var(--primary); }
-    .timeline-item .content .desc { color: var(--text-muted); font-size: 15px; margin-top: 4px; }
-    .timeline-item .content .price {
-        font-weight: 700;
-        margin-top: 8px;
-        color: var(--green);
-        display: block;
-        width: fit-content;
-    }
-    .timeline-item .content .status-badge {
-        display: block;
-        padding: 4px 18px;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 13px;
-        margin-top: 8px;
-        width: fit-content;
-    }
-    .timeline-item .content .status-badge i { margin-right: 6px; }
-}
-
-/* ===== SLIBY – PŮVODNÍ STYLY (ZACHOVÁNY PRO KOMPATIBILITU) ===== */
-.sliby { max-width: 900px; margin: 40px auto 0; padding-top: 32px; border-top: 3px solid var(--primary); }
-.sliby h3 { text-align: center; font-size: 24px; font-weight: 800; color: var(--primary); }
-.sliby h3 i { color: var(--green); }
-.sliby .sub { text-align: center; color: var(--text-muted); margin-bottom: 20px; }
-.sliby-table { background: var(--white); border-radius: var(--radius); border: 2px solid var(--border); overflow: hidden; box-shadow: var(--shadow); }
-.sliby-header { display: grid; grid-template-columns: 1fr 1fr; padding: 14px 20px; background: var(--primary); color: var(--white); font-weight: 800; text-align: center; border-bottom: 2px solid var(--primary); }
-.sliby-row { display: grid; grid-template-columns: 1fr 1fr; padding: 14px 20px; border-bottom: 1px solid var(--border); align-items: center; }
-.sliby-row:last-child { border-bottom: none; }
-.sliby-row .text { font-weight: 600; color: var(--text-dark); }
-.sliby-row .text .detail { display: block; font-weight: 400; font-size: 13px; color: var(--text-muted); }
-.sliby-row .text .price { display: block; font-weight: 700; font-size: 14px; color: var(--green); }
-.sliby-row .status-wrap { text-align: right; }
-.status { display: inline-block; padding: 4px 18px; border-radius: 50px; font-weight: 700; font-size: 13px; }
-.status-hotovo { background: #d4edda; color: #155724; border: 1px solid #b8daff; }
-.status-probiha { background: #d1ecf1; color: #0c5460; border: 1px solid #17a2b8; }
-@media (max-width: 768px) {
-    .sliby-header { display: none; }
-    .sliby-row { grid-template-columns: 1fr; gap: 4px; text-align: left; padding: 12px 16px; }
-    .sliby-row .status-wrap { text-align: left; }
-}
-
-/* ===== PROGRAM TIMELINE ===== */
-.program-timeline { max-width: 960px; margin: 0 auto; position: relative; padding: 16px 0 24px; }
-.program-timeline::before { content: ''; position: absolute; left: 50%; top: 40px; bottom: 40px; width: 4px; background: var(--border); border-radius: 99px; transform: translateX(-50%); z-index: 0; }
-.program-timeline .line-fill { position: absolute; left: 50%; top: 40px; width: 4px; background: var(--primary); border-radius: 99px; transform: translateX(-50%); z-index: 1; height: 0%; transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 0 16px rgba(26,58,107,0.2); }
-.tl-step { display: flex; align-items: stretch; position: relative; z-index: 2; margin-bottom: 32px; cursor: pointer; transition: var(--transition); padding: 4px 0; }
-.tl-step:last-child { margin-bottom: 0; }
-.tl-step .tl-left { flex: 1; padding-right: 32px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; text-align: right; }
-.tl-step .tl-right { flex: 1; padding-left: 32px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
-.tl-dot {
-    flex-shrink: 0;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: var(--white);
-    border: 4px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    font-size: 18px;
-    color: var(--text-muted);
-    transition: var(--transition);
-    box-shadow: var(--shadow);
-    position: relative;
-    z-index: 2;
-    margin: 0 8px;
-}
-.tl-step.active .tl-dot { border-color: var(--primary); background: var(--primary); color: var(--white); transform: scale(1.1); box-shadow: 0 0 0 8px rgba(26,58,107,0.15); }
-.tl-step .tl-dot .inner-icon { display: none; font-size: 22px; }
-.tl-step.active .tl-dot .inner-icon { display: block; }
-.tl-step.active .tl-dot .step-num { display: none; }
-.year-tag { font-size: 16px; font-weight: 800; color: var(--green); }
-.tl-step .label { font-size: 20px; font-weight: 800; color: var(--primary); display: block; line-height: 1.2; }
-.tl-step .desc { font-size: 15px; color: var(--text-muted); display: block; }
-.badge-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-.badge-list span { font-size: 11px; font-weight: 700; background: var(--green-soft); padding: 2px 14px; border-radius: 50px; color: var(--green); border: 1px solid var(--green); }
-.detail-list { list-style: none; width: 100%; }
-.detail-list li { font-size: 15px; color: var(--text-muted); padding: 4px 0; display: flex; align-items: center; gap: 8px; }
-.detail-list li::before { content: "✓"; color: var(--green); font-weight: 900; font-size: 16px; flex-shrink: 0; }
-.tl-right .detail-list li { justify-content: flex-start; }
-.tl-left .detail-list li { justify-content: flex-end; }
-.tl-left .detail-list li::before { order: 1; }
-@media (max-width: 768px) {
-    .program-timeline::before { left: 20px; transform: none; }
-    .program-timeline .line-fill { left: 20px; transform: none; }
-    .tl-step { flex-direction: column !important; padding: 4px 0 4px 48px !important; margin-bottom: 24px; gap: 4px; position: relative; }
-    .tl-step .tl-left, .tl-step .tl-right { padding: 0 !important; text-align: left !important; align-items: flex-start !important; width: 100% !important; }
-    .tl-left .detail-list li, .tl-right .detail-list li { justify-content: flex-start !important; }
-    .tl-left .detail-list li::before, .tl-right .detail-list li::before { order: 0 !important; margin-right: 6px !important; }
-    .tl-left .badge-list, .tl-right .badge-list { justify-content: flex-start !important; }
-    .tl-dot { width: 40px; height: 40px; font-size: 14px; border-width: 3px; position: absolute; left: 0; top: 4px; margin: 0; }
-    .tl-step .tl-dot .inner-icon { font-size: 16px; }
-    .year-tag { font-size: 14px !important; }
-    .tl-step .label { font-size: 17px !important; }
-    .tl-step .desc { font-size: 14px !important; }
-    .detail-list li { font-size: 14px !important; }
-}
-
-/* ===== WHY GRID ===== */
-.why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
-.why-card:nth-child(1), .why-card:nth-child(4) { background: var(--primary); border: 2px solid var(--primary); color: var(--white); }
-.why-card:nth-child(1) .num, .why-card:nth-child(4) .num { color: rgba(255,255,255,0.15); }
-.why-card:nth-child(1) .icon, .why-card:nth-child(4) .icon { color: #7ab8ff; }
-.why-card:nth-child(1) h3, .why-card:nth-child(4) h3 { color: var(--white); }
-.why-card:nth-child(1) p, .why-card:nth-child(4) p { color: rgba(255,255,255,0.85); }
-.why-card:nth-child(1) .tag, .why-card:nth-child(4) .tag { background: rgba(255,255,255,0.15); color: var(--white); border-color: rgba(255,255,255,0.4); }
-.why-card:nth-child(1):hover, .why-card:nth-child(4):hover { background: var(--primary-dark); border-color: var(--primary-dark); }
-.why-card:nth-child(2), .why-card:nth-child(3) { background: var(--white); border: 2px solid var(--border); color: var(--text-dark); }
-.why-card:nth-child(2) .num, .why-card:nth-child(3) .num { color: #e8ecf0; }
-.why-card:nth-child(2) .icon, .why-card:nth-child(3) .icon { color: var(--secondary); }
-.why-card:nth-child(2) h3, .why-card:nth-child(3) h3 { color: var(--primary); }
-.why-card:nth-child(2) p, .why-card:nth-child(3) p { color: var(--text-muted); }
-.why-card:nth-child(2) .tag, .why-card:nth-child(3) .tag { background: rgba(42,122,216,0.08); color: var(--secondary); border-color: var(--secondary); }
-.why-card:nth-child(2):hover, .why-card:nth-child(3):hover { border-color: var(--primary); }
-.why-card { border-radius: var(--radius-lg); padding: 28px 24px; position: relative; transition: var(--transition); box-shadow: var(--shadow); }
-.why-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
-.why-card .num { position: absolute; top: 12px; right: 16px; font-size: 40px; font-weight: 900; line-height: 1; }
-.why-card .icon { font-size: 28px; margin-bottom: 8px; display: block; }
-.why-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-.why-card p { font-size: 15px; margin-bottom: 12px; }
-.why-card .tag { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 2px 14px; border-radius: 50px; border: 1px solid; }
-@media (max-width: 768px) {
-    .why-grid { grid-template-columns: 1fr; gap: 12px; }
-    .why-card:nth-child(1) { background: var(--white) !important; border: 2px solid var(--border) !important; color: var(--text-dark) !important; }
-    .why-card:nth-child(1) .num { color: #e8ecf0 !important; }
-    .why-card:nth-child(1) .icon { color: var(--secondary) !important; }
-    .why-card:nth-child(1) h3 { color: var(--primary) !important; }
-    .why-card:nth-child(1) p { color: var(--text-muted) !important; }
-    .why-card:nth-child(1) .tag { background: rgba(42,122,216,0.08) !important; color: var(--secondary) !important; border: 1px solid var(--secondary) !important; }
-    .why-card:nth-child(2) { background: var(--primary) !important; border: 2px solid var(--primary) !important; color: var(--white) !important; }
-    .why-card:nth-child(2) .num { color: rgba(255,255,255,0.15) !important; }
-    .why-card:nth-child(2) .icon { color: #7ab8ff !important; }
-    .why-card:nth-child(2) h3 { color: var(--white) !important; }
-    .why-card:nth-child(2) p { color: rgba(255,255,255,0.85) !important; }
-    .why-card:nth-child(2) .tag { background: rgba(255,255,255,0.15) !important; color: var(--white) !important; border: 1px solid rgba(255,255,255,0.4) !important; }
-    .why-card:nth-child(3) { background: var(--white) !important; border: 2px solid var(--border) !important; color: var(--text-dark) !important; }
-    .why-card:nth-child(3) .num { color: #e8ecf0 !important; }
-    .why-card:nth-child(3) .icon { color: var(--secondary) !important; }
-    .why-card:nth-child(3) h3 { color: var(--primary) !important; }
-    .why-card:nth-child(3) p { color: var(--text-muted) !important; }
-    .why-card:nth-child(3) .tag { background: rgba(42,122,216,0.08) !important; color: var(--secondary) !important; border: 1px solid var(--secondary) !important; }
-    .why-card:nth-child(4) { background: var(--primary) !important; border: 2px solid var(--primary) !important; color: var(--white) !important; }
-    .why-card:nth-child(4) .num { color: rgba(255,255,255,0.15) !important; }
-    .why-card:nth-child(4) .icon { color: #7ab8ff !important; }
-    .why-card:nth-child(4) h3 { color: var(--white) !important; }
-    .why-card:nth-child(4) p { color: rgba(255,255,255,0.85) !important; }
-    .why-card:nth-child(4) .tag { background: rgba(255,255,255,0.15) !important; color: var(--white) !important; border: 1px solid rgba(255,255,255,0.4) !important; }
-    .why-card { padding: 20px 16px; }
-    .why-card .num { font-size: 32px; }
-}
-
-/* ===== HIGHLIGHT BOX ===== */
-.highlight-box { max-width: 900px; margin: 24px auto 0; padding: 20px 28px; background: var(--primary); border-radius: var(--radius); text-align: center; border: 3px solid var(--primary); box-shadow: var(--shadow); transition: var(--transition); }
-.highlight-box:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
-.highlight-box p { font-size: 17px; font-weight: 600; color: var(--white); display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 0; }
-.highlight-box i { font-size: 28px; color: var(--secondary); flex-shrink: 0; }
-@media (max-width: 768px) {
-    .highlight-box { padding: 16px 16px; background: var(--white); border-color: var(--primary); }
-    .highlight-box p { font-size: 15px; gap: 8px; color: var(--primary); }
-    .highlight-box i { font-size: 22px; color: var(--primary); }
-}
-
-/* ===== PRIORITIES ===== */
-.priorities { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 900px; margin: 16px auto 0; }
-.priority-card { background: var(--white); border: 2px solid var(--border); border-radius: var(--radius); padding: 20px 18px; transition: var(--transition); box-shadow: var(--shadow); display: flex; flex-direction: column; }
-.priority-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: var(--shadow-hover); }
-.priority-card .icon { font-size: 28px; margin-bottom: 6px; }
-.priority-card h3 { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
-.priority-card ul { list-style: none; flex: 1; margin-bottom: 12px; }
-.priority-card li { font-size: 14px; color: var(--text-muted); padding: 2px 0 2px 16px; position: relative; }
-.priority-card li::before { content: "•"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
-.priority-card .tag { font-size: 10px; font-weight: 700; text-transform: uppercase; background: var(--green-soft); color: var(--green); padding: 2px 14px; border-radius: 50px; align-self: flex-start; border: 1px solid var(--green); }
-.priorities-scroll { display: none; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 8px 4px 16px 4px; scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--primary) var(--white); }
-.priorities-scroll::-webkit-scrollbar { height: 6px; }
-.priorities-scroll::-webkit-scrollbar-track { background: var(--white); border-radius: 99px; }
-.priorities-scroll::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 99px; }
-.priorities-scroll .priority-card { flex: 0 0 250px; scroll-snap-align: start; min-height: 180px; }
-@media (max-width: 768px) { .priorities { display: none; } .priorities-scroll { display: flex; } }
-
-/* ===== SCHOOL GRID - 2×2 LAYOUT ===== */
-.school-grid-desktop { 
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px; 
-    max-width: 1200px;
-    margin: 0 auto; 
-}
-
-.school-card { 
-    background: var(--white); 
-    border-radius: var(--radius); 
-    padding: 24px; 
-    border: 2px solid var(--border); 
-    transition: var(--transition); 
-    box-shadow: var(--shadow); 
-}
-
-.school-card:hover { 
-    border-color: var(--primary); 
-    box-shadow: var(--shadow-hover); 
-}
-
-.school-card .icon { 
-    font-size: 32px; 
-}
-
-.school-card h4 { 
-    font-weight: 700; 
-    font-size: 18px; 
-    color: var(--primary); 
-    margin: 8px 0 4px; 
-}
-
-.school-card ul { 
-    list-style: none; 
-}
-
-.school-card ul li { 
-    padding: 4px 0; 
-    font-size: 15px; 
-    color: var(--text-muted); 
-}
-
-.school-card ul li::before { 
-    content: "•"; 
-    color: var(--green); 
-    margin-right: 6px; 
-}
-
-/* Škola foto bublina */
-.school-photo-wrapper {
-    margin: 0;
-}
-
-.school-photo-bubble {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 21 / 9;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    border: 3px solid var(--border);
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.school-photo-bubble:hover {
-    border-color: var(--primary);
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-4px);
-}
-
-.school-photo-bubble img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition);
-}
-
-.school-photo-bubble:hover img {
-    transform: scale(1.05);
-}
-
-.school-photo-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(26, 58, 107, 0.9), transparent);
-    padding: 16px;
-    display: flex;
-    align-items: flex-end;
-}
-
-.school-photo-text {
-    color: var(--white);
-    font-size: 20px;
-    font-weight: 800;
-    line-height: 1.2;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-/* Mobil - accordion */
-.accordion { 
-    max-width: 900px; 
-    margin: 0 auto; 
-}
-
-.accordion-item { 
-    border: 2px solid var(--border); 
-    border-radius: var(--radius); 
-    margin-bottom: 10px; 
-    overflow: hidden; 
-    transition: var(--transition); 
-    background: var(--white); 
-}
-
-.accordion-item:hover { 
-    border-color: var(--primary); 
-}
-
-.accordion-header { 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    padding: 14px 20px; 
-    cursor: pointer; 
-    background: var(--white); 
-    transition: var(--transition); 
-    gap: 12px; 
-}
-
-.accordion-header:hover { 
-    background: var(--green-soft); 
-}
-
-.accordion-header .icon-left { 
-    font-size: 24px; 
-    flex-shrink: 0; 
-}
-
-.accordion-header .title-group h4 { 
-    font-size: 16px; 
-    font-weight: 700; 
-    color: var(--primary); 
-    margin: 0; 
-}
-
-.accordion-toggle { 
-    font-size: 16px; 
-    color: var(--green); 
-    transition: var(--transition); 
-    flex-shrink: 0; 
-}
-
-.accordion-item.open .accordion-toggle { 
-    transform: rotate(180deg); 
-}
-
-.accordion-body { 
-    max-height: 0; 
-    overflow: hidden; 
-    transition: max-height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), padding 0.3s ease; 
-    padding: 0 20px; 
-}
-
-.accordion-item.open .accordion-body { 
-    max-height: 300px; 
-    padding: 0 20px 16px 20px; 
-}
-
-.accordion-body ul { 
-    list-style: none; 
-    font-size: 15px; 
-    color: var(--text-muted); 
-}
-
-.accordion-body ul li { 
-    padding: 4px 0; 
-    display: flex; 
-    align-items: center; 
-    gap: 6px; 
-}
-
-.accordion-body ul li::before { 
-    content: "•"; 
-    color: var(--green); 
-    font-weight: 700; 
-}
-
-@media (min-width: 769px) { 
-    .accordion { display: none !important; } 
-}
-
-@media (max-width: 768px) { 
-    .school-grid-desktop { display: none !important; }
-    
-    /* Mobil - fotky mezi accordion items */
-    .school-photo-wrapper {
-        margin: 0 auto 16px;
-        padding: 0 16px;
-    }
-    
-    .school-photo-bubble {
-        aspect-ratio: 16 / 10;
-        border-radius: var(--radius);
-        border: 2px solid var(--border);
-    }
-    
-    .school-photo-text {
-        font-size: 18px;
-    }
-    
-    .school-photo-overlay {
-        padding: 12px;
-    }
-}
-
-/* ===== CANDIDATES ===== */
-.team-slogan {
-    text-align: center;
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--green);
-    letter-spacing: -0.02em;
-    margin: 0 auto 20px;
-    padding: 4px 0;
-    max-width: 800px;
-}
-.team-photo-section {
-    max-width: 960px;
-    margin: 0 auto 24px;
-}
-.team-photo-section .photo-placeholder {
-    width: 100%;
-    aspect-ratio: 2.2 / 1;
-    background: var(--white);
-    border: 2px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: var(--transition);
-}
-.team-photo-section .photo-placeholder:hover {
-    border-color: var(--primary);
-    box-shadow: var(--shadow-hover);
-}
-.team-photo-section .photo-placeholder img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition);
-}
-.team-photo-section .photo-placeholder:hover img {
-    transform: scale(1.02);
-}
-
-.candidates {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-.candidate {
-    background: var(--white);
-    border: 2px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 18px;
-    transition: var(--transition);
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-.candidate:hover {
-    border-color: var(--green);
-    box-shadow: 0 12px 30px rgba(46, 125, 50, 0.12);
-    transform: translateY(-3px);
-}
-.candidate-number {
-    flex-shrink: 0;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--green);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 800;
-    color: var(--white);
-    margin-bottom: 10px;
-}
-.candidate-info { flex: 1; }
-.candidate-info .role-tag {
-    font-size: 11px;
-    font-weight: 700;
-    background: var(--green-soft);
-    color: var(--green);
-    padding: 2px 14px;
-    border-radius: 50px;
-    display: inline-block;
-    border: 1px solid var(--green);
-}
-.candidate-info h3 {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--primary);
-    margin: 4px 0 2px;
-}
-.candidate-info .position {
-    font-weight: 600;
-    color: var(--green);
-    font-size: 13px;
-    margin-bottom: 4px;
-}
-.candidate-info .bio {
-    color: var(--text-muted);
-    font-size: 14px;
-    flex: 1;
-    margin-bottom: 8px;
-    line-height: 1.6;
-}
-.candidate-info .bio strong {
-    color: var(--text-dark);
-}
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 4px;
-}
-.tags span {
-    background: var(--green-soft);
-    font-size: 11px;
-    padding: 2px 12px;
-    border-radius: 50px;
-    font-weight: 700;
-    border: 1px solid var(--green);
-    color: var(--green);
-}
-
-@media (max-width: 992px) {
-    .candidates { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 768px) {
-    .candidates { grid-template-columns: 1fr; gap: 12px; }
-    .team-slogan { font-size: 22px; }
-    .candidate { padding: 16px; }
-    .team-photo-section .photo-placeholder { aspect-ratio: 2.2 / 1; border-radius: 1rem; }
-}
-@media (max-width: 480px) {
-    .team-photo-section .photo-placeholder { aspect-ratio: 2.2 / 1; border-radius: 0.8rem; }
-}
-
-/* ===== FOOTER ===== */
-footer { background: var(--primary); text-align: center; padding: 48px 24px; color: var(--white); border-top: 4px solid var(--primary-dark); }
-footer .footer-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--white); color: var(--primary); font-weight: 800; font-size: 15px; padding: 10px 28px; border-radius: 50px; margin-bottom: 20px; transition: var(--transition); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
-footer .footer-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.25); }
-footer p strong { font-weight: 900; }
-.footer-divider { width: 60px; height: 3px; background: rgba(255,255,255,0.2); margin: 16px auto; border-radius: 99px; }
-
-/* ===== LIGHTBOX ===== */
-#lightbox { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.88); backdrop-filter: blur(8px); z-index: 9999; justify-content: center; align-items: center; padding: 24px; cursor: pointer; }
-#lightboxClose { position: fixed; top: 20px; right: 20px; width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); background: rgba(0,0,0,0.5); color: white; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); z-index: 10000; }
-#lightboxClose:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
-#lightboxImage { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); cursor: default; }
-@media (max-width: 480px) { #lightboxClose { top: 12px; right: 12px; width: 40px; height: 40px; font-size: 18px; } #lightboxImage { max-width: 95vw; max-height: 80vh; } }
-
-        
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Volba pro zítřek – Čistá u Mladé Boleslavi</title>
+<meta name="description" content="Společně tvoříme budoucnost obce Čistá. 4 roky práce, stabilizovaný svah, nový rybníček a dokončená kanalizace." />
+<link rel="icon" href="logoa.png" type="image/png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+:root{--primary:#1a3a6b;--primary-dark:#0f2a4a;--secondary:#2a7ad8;--secondary-light:#5a9ee8;--green:#2e7d32;--green-light:#4caf4f;--green-soft:#e8f5e9;--bg-light:#f0f4fa;--white:#fff;--text-dark:#1a2a3a;--text-muted:#5a6a7e;--border:#dce4ec;--shadow:0 8px 30px rgba(0,0,0,.08);--shadow-hover:0 16px 48px rgba(26,58,107,.15);--radius:16px;--radius-lg:24px;--transition:.3s cubic-bezier(.34,1.56,.64,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--white);color:var(--text-dark);line-height:1.7;padding-top:72px;font-size:16px;-webkit-font-smoothing:antialiased}
+.container{max-width:1140px;margin:0 auto;padding:0 24px}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border-radius:50px;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:var(--transition);box-shadow:0 4px 16px rgba(26,58,107,.25)}
+.btn-primary{background:var(--primary);color:var(--white)}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 8px 32px rgba(26,58,107,.35);background:var(--primary-dark)}
+.btn-outline{background:transparent;color:var(--primary);border:2px solid var(--primary);box-shadow:none}
+.btn-outline:hover{background:rgba(26,58,107,.06);transform:translateY(-3px) scale(1.02)}
+.navbar{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,.98);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:1000;border-bottom:3px solid var(--primary);box-shadow:0 2px 12px rgba(26,58,107,.15)}
+.navbar .container{display:flex;justify-content:space-between;align-items:center;height:72px}
+.logo{font-size:1.25rem;font-weight:900;color:var(--primary);display:flex;align-items:center;gap:.5rem}
+.logo-icon{width:38px;height:38px;border-radius:12px;overflow:hidden;flex-shrink:0}
+.logo-icon img{width:100%;height:100%;object-fit:cover}
+.logo .logo-text-wrapper{display:flex;align-items:center;gap:.3rem;white-space:nowrap}
+.logo .logo-text{color:var(--primary)}
+.logo .logo-text-highlight{color:var(--secondary)}
+.nav-links{display:flex;gap:.5rem;list-style:none;align-items:center}
+.nav-links a{color:var(--text-muted);font-weight:600;font-size:.95rem;padding:.5rem 1.2rem;border-radius:999px;transition:.25s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:0;height:3px;background:var(--primary);border-radius:99px;transition:width .3s ease}
+.nav-links a:hover::after{width:60%}
+.nav-links a:hover{color:var(--primary);background:rgba(26,58,107,.08)}
+.nav-links a.active{color:var(--primary)!important;background:transparent!important}
+.nav-links a.active::after{width:60%!important}
+.nav-links a.banner-active::after{width:0!important}
+.nav-links a.banner-active{background:transparent!important;color:var(--text-muted)!important}
+.nav-links a.banner-active:hover{background:rgba(26,58,107,.08)!important;color:var(--primary)!important}
+.burger{display:none;flex-direction:column;gap:5px;background:rgba(26,58,107,.06);border:2px solid var(--primary);cursor:pointer;padding:10px 12px;border-radius:99px;transition:.25s}
+.burger:hover{background:var(--primary);transform:scale(1.02)}
+.burger:hover span{background:var(--white)}
+.burger span{display:block;width:24px;height:2.5px;background:var(--primary);border-radius:99px;transition:.3s cubic-bezier(.34,1.56,.64,1)}
+.burger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.burger.active span:nth-child(2){opacity:0;transform:scaleX(0)}
+.burger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.menu-header,.close-menu,.menu-title,.nav-overlay{display:none}
+.hero{text-align:left;padding:0;border-bottom:3px solid var(--primary);position:relative;overflow:hidden}
+.hero-top{background:linear-gradient(120deg,#e8f5e9 0%,#c8e6c9 100%);padding:60px 0 20px}
+.hero-bottom-section{background:linear-gradient(135deg,#dce8f5 0%,#b8d4e8 100%);padding:60px 0 40px}
+.hero .badge{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:var(--white);font-weight:700;font-size:13px;padding:6px 18px;border-radius:50px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px;box-shadow:0 2px 16px rgba(26,58,107,.2)}
+.hero h1{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:900;line-height:1.1;letter-spacing:-.02em;margin-bottom:8px;text-align:left}
+.hero h1 .line1{color:var(--primary)}
+.hero h1 .line2{background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subheadline{font-size:20px;font-weight:600;color:var(--text-dark);margin-bottom:24px;opacity:.8;text-align:left}
+.hero-row{display:flex;gap:40px;align-items:stretch;max-width:1100px;margin:0 auto 20px}
+.hero-row .col-photo{flex:1 1 48%;min-width:0}
+.hero-row .col-stats{flex:1 1 48%;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.hero-photo{width:100%;height:100%;min-height:220px;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);background:var(--white);cursor:pointer;transition:var(--transition);aspect-ratio:21/9}
+.hero-photo:hover{transform:scale(1.01);box-shadow:var(--shadow-hover)}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat-card{background:var(--white);border:2px solid var(--border);border-radius:var(--radius);padding:20px 16px;text-align:center;transition:var(--transition);box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:130px;color:var(--text-dark)}
+.stat-card:hover{transform:translateY(-4px);border-color:var(--primary);box-shadow:var(--shadow-hover)}
+.stat-card .emoji{font-size:32px;line-height:1.2;display:block;margin-bottom:4px}
+.stat-card .number{font-size:22px;font-weight:900;color:var(--primary);display:block;line-height:1.2}
+.stat-card .label{font-weight:700;font-size:15px;color:var(--text-dark);display:block;margin-top:2px}
+.stat-card .desc{font-size:12px;color:var(--text-muted);display:block;margin-top:4px}
+.hero-bottom-text{max-width:800px;margin:0;text-align:left}
+.hero-text{font-size:17px;color:var(--text-dark);margin-bottom:20px;line-height:1.8;text-align:left}
+.hero-text strong{color:var(--primary)}
+.btn-group{display:flex;gap:12px;justify-content:flex-start;flex-wrap:wrap}
+.intro-box{max-width:800px;margin:0 auto 32px;padding:32px 36px;background:var(--white);border-radius:var(--radius-lg);border:2px solid var(--border);box-shadow:var(--shadow);text-align:center;transition:var(--transition)}
+.intro-box:hover{border-color:var(--primary);box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+.intro-box p{font-size:18px;color:var(--text-dark);line-height:1.8;margin-bottom:12px}
+.intro-box p:last-child{margin-bottom:0}
+.intro-box p strong{color:var(--primary)}
+.intro-box .highlight{color:var(--green);font-weight:700}
+.intro-divider{width:60px;height:3px;background:var(--primary);margin:16px auto;border-radius:99px;opacity:.3}
+@media (max-width:992px){
+.hero-row{flex-direction:column;gap:24px}
+.hero-photo{min-height:160px;max-height:240px;aspect-ratio:21/9}
+.stats-grid{gap:8px}
+.stat-card{min-height:100px;padding:12px 8px;border-radius:12px}
+.stat-card .emoji{font-size:28px}
+.stat-card .number{font-size:18px}
+.stat-card .label{font-size:13px}
+.stat-card .desc{font-size:11px}
+.hero-top{padding:40px 0 30px}
+.hero-bottom-section{padding:20px 0 30px}
+}
+@media (max-width:768px){
+.hero-top{background:url('vesnice.jpg') no-repeat center center/cover!important;padding:40px 0 30px!important;position:relative;min-height:260px;display:flex;align-items:center;border-bottom:3px solid var(--primary)}
+.hero-top::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.55);z-index:1}
+.hero-top .container{position:relative;z-index:2;width:100%}
+.hero-top .badge{background:rgba(26,58,107,.85)!important;color:var(--white)!important;border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(4px)}
+.hero-top h1{color:#fff!important;text-shadow:0 2px 20px rgba(0,0,0,.5)}
+.hero-top h1 .line1{color:#fff!important}
+.hero-top h1 .line2{background:none!important;-webkit-text-fill-color:#fff!important;color:#fff!important}
+.hero-top .subheadline{color:rgba(255,255,255,.85)!important;text-shadow:0 2px 12px rgba(0,0,0,.4)}
+.hero-bottom-section{background:linear-gradient(135deg,#dce8f5 0%,#b8d4e8 100%)!important;padding:30px 0!important}
+.hero-row .col-photo{display:none!important}
+.hero-row .col-stats{flex:1 1 auto!important;width:100%!important}
+.stats-grid{gap:10px!important}
+.stat-card{background:var(--white)!important;border:2px solid var(--border)!important;border-radius:var(--radius)!important;padding:14px 10px!important;min-height:90px!important;box-shadow:var(--shadow)!important}
+.stat-card .emoji{font-size:30px!important;margin-bottom:2px!important}
+.stat-card .number{font-size:18px!important;color:var(--primary)!important}
+.stat-card .label{font-size:13px!important;font-weight:700!important;color:var(--text-dark)!important}
+.stat-card .desc{font-size:10px!important;color:var(--text-muted)!important}
+.btn-group{justify-content:center!important;gap:12px!important;margin-top:16px!important;margin-bottom:16px!important;flex-wrap:wrap!important}
+.btn{font-size:14px!important;padding:12px 24px!important;border-radius:50px!important;font-weight:700!important;box-shadow:0 4px 16px rgba(26,58,107,.25)!important;flex:0 1 auto!important;min-width:140px!important;justify-content:center!important}
+.btn-primary{background:var(--primary)!important;color:var(--white)!important;border:none!important}
+.btn-outline{background:transparent!important;color:var(--primary)!important;border:2px solid var(--primary)!important}
+.hero-bottom-text{max-width:100%!important;margin-top:0!important;text-align:center!important;display:flex!important;flex-direction:column!important}
+.hero-bottom-text .btn-group{order:0!important}
+.hero-bottom-text .hero-text{order:1!important;color:var(--text-dark)!important;font-size:15px!important;text-align:center!important}
+.hero-row{flex-direction:column!important;gap:16px!important;margin-bottom:0!important}
+.hero-row .col-stats{order:0!important}
+.hero-bottom-section .container{padding:0 16px!important}
+.burger{display:flex}
+.nav-links{display:flex;position:fixed;top:12px;left:12px;right:12px;width:auto;height:auto;max-height:80vh;background:rgba(255,255,255,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);flex-direction:column;justify-content:flex-start;align-items:stretch;padding:1.8rem 1.5rem 2rem;gap:.25rem;border-radius:var(--radius-lg);box-shadow:0 25px 60px rgba(0,0,0,.18);z-index:1001;border:2px solid var(--primary);transform:translateY(-20px) scale(.96);opacity:0;pointer-events:none;transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .35s ease;overflow-y:auto}
+.nav-links.open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto}
+.nav-links a::after{display:none!important}
+.nav-links a.active{background:rgba(26,58,107,.08);border-color:var(--primary)}
+.nav-overlay{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,.25);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:1000;opacity:0;transition:opacity .35s ease}
+.nav-overlay.active{display:block;opacity:1}
+.menu-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;padding-bottom:.8rem;border-bottom:2px solid var(--primary)}
+.menu-title{display:flex;align-items:center;gap:.5rem;font-weight:800;font-size:1rem;color:var(--primary)}
+.menu-title .menu-logo{width:32px;height:32px;border-radius:8px;overflow:hidden;flex-shrink:0}
+.menu-title .menu-logo img{width:100%;height:100%;object-fit:cover}
+.close-menu{display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:rgba(26,58,107,.08);border:2px solid var(--primary);border-radius:99px;color:var(--primary);font-size:1.4rem;cursor:pointer;transition:.25s;flex-shrink:0}
+.close-menu:hover{background:var(--primary);transform:rotate(90deg) scale(1.05);color:var(--white)}
+.nav-links a{color:var(--primary);font-weight:700;font-size:1.1rem;padding:.8rem 1.2rem;text-align:left;display:flex;align-items:center;gap:.7rem;border:1px solid transparent;background:transparent}
+.nav-links a:hover{background:rgba(26,58,107,.08);border-color:var(--primary);transform:translateX(4px)}
+}
+@media (max-width:480px){
+.hero-top{padding:30px 0 20px!important;min-height:220px}
+.hero-top h1{font-size:28px!important}
+.hero-top .badge{font-size:11px;padding:4px 14px}
+.hero-top .subheadline{font-size:16px!important}
+.stat-card{min-height:75px!important;padding:10px 6px!important;border-radius:12px!important}
+.stat-card .emoji{font-size:26px!important}
+.stat-card .number{font-size:16px!important}
+.stat-card .label{font-size:12px!important}
+.stat-card .desc{font-size:9px!important}
+.btn{font-size:13px!important;padding:10px 20px!important;min-width:120px!important}
+.hero-text{font-size:14px!important}
+.nav-links{padding:1.5rem 1.2rem 1.8rem;border-radius:20px;top:10px;left:10px;right:10px}
+.nav-links a{font-size:1rem;padding:.7rem 1rem}
+.close-menu{width:36px;height:36px;font-size:1.2rem}
+.menu-title{font-size:.9rem}
+.menu-title .menu-logo{width:28px;height:28px}
+}
+@media (min-width:769px){
+.hero-bottom-text{display:flex!important;flex-direction:column!important}
+.hero-bottom-text .hero-text{order:0!important;margin-bottom:16px!important}
+.hero-bottom-text .btn-group{order:1!important;justify-content:flex-start!important}
+}
+.banner-section{background:var(--primary);padding:48px 0;text-align:center;border-bottom:4px solid var(--secondary)}
+.banner-section h2{color:var(--white);font-size:clamp(32px,5vw,52px);font-weight:900;letter-spacing:-.02em}
+.banner-section h2 i{color:var(--secondary-light);margin-right:12px}
+@media (max-width:768px){.banner-section{padding:32px 0}}
+@media (max-width:480px){.banner-section{padding:24px 0}}
+section{scroll-margin-top:80px;padding:56px 0;border-bottom:1px solid var(--border)}
+.banner-section{scroll-margin-top:80px}
+#home{scroll-margin-top:0}
+.section-tag{display:inline-block;background:var(--green-soft);color:var(--green);font-weight:700;font-size:12px;padding:4px 16px;border-radius:50px;text-transform:uppercase;letter-spacing:.5px;border:1px solid var(--green);margin-bottom:8px}
+.section-title{font-size:clamp(28px,3.5vw,40px);font-weight:900;color:var(--primary);margin-bottom:8px;letter-spacing:-.02em}
+.section-subtitle{color:var(--text-muted);font-size:18px;max-width:620px;margin-bottom:32px}
+.section-subtitle strong{color:var(--green)}
+.section-title.center,.section-subtitle.center{text-align:center;margin-left:auto;margin-right:auto}
+.status-hotovo{background:#d4edda;color:#155724;border:1px solid #28a745}
+.status-probiha{background:#d1ecf1;color:#0c5460;border:1px solid #17a2b8}
+.status-chystame{background:#fff3cd;color:#856404;border:1px solid #ffc107}
+.timeline-item .content .year.hotovo{color:#155724;background:#d4edda;border-color:#28a745}
+.timeline-item .content .year.hotovo i{color:#28a745}
+.timeline-item .content .year.probiha{color:#0c5460;background:#d1ecf1;border-color:#17a2b8}
+.timeline-item .content .year.probiha i{color:#17a2b8}
+.timeline-item .content .year.chystame{color:#856404;background:#fff3cd;border-color:#ffc107}
+.timeline-item .content .year.chystame i{color:#ffc107}
+
+/* ===== PC TIMELINE ===== */
+@media (min-width:769px){
+.timeline{position:relative;max-width:1200px;margin:0 auto;padding:30px 0}
+.timeline::before{content:'';position:absolute;left:50%;top:10px;bottom:10px;width:3px;background:linear-gradient(to bottom,var(--border) 0%,var(--primary) 50%,var(--border) 100%);border-radius:99px;transform:translateX(-50%);z-index:0;opacity:.5}
+.timeline-item{position:relative;margin-bottom:120px;padding:0;display:flex;align-items:stretch;z-index:1}
+.timeline-item:last-child{margin-bottom:0}
+.timeline-item.left{flex-direction:row;padding-right:calc(50% + 40px);text-align:right}
+.timeline-item.left .timeline-image{position:absolute;left:calc(50% + 52px);top:0;bottom:0;width:520px;border-radius:5%;overflow:hidden;border:3px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,.1);background:var(--white);transition:var(--transition);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.timeline-item.left .timeline-image:hover{transform:scale(1.04);border-color:var(--primary);box-shadow:0 8px 32px rgba(0,0,0,.15)}
+.timeline-item.left .timeline-image img{width:100%;height:100%;object-fit:cover;display:block}
+.timeline-item.left .timeline-image-text{position:absolute;left:calc(50% + 52px);top:0;bottom:0;width:520px;z-index:3;text-align:center;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.timeline-item.left .timeline-image-text .program-label{display:flex;flex-direction:column;justify-content:center;align-items:center;width:100%;height:100%;font-size:28px;font-weight:900;color:var(--white);background:linear-gradient(145deg,var(--primary),var(--primary-dark));padding:16px 20px;border-radius:5%;border:3px solid var(--secondary-light);box-shadow:0 4px 20px rgba(0,0,0,.15);line-height:1.2;letter-spacing:-.02em;transition:var(--transition);text-shadow:0 2px 8px rgba(0,0,0,.2);gap:4px}
+.timeline-item.left .timeline-image-text .program-label:hover{transform:scale(1.03);box-shadow:0 8px 32px rgba(26,58,107,.3);border-color:var(--white)}
+.timeline-item.left .timeline-image-text .program-label small{display:block;font-size:18px;font-weight:600;color:rgba(255,255,255,.85);letter-spacing:0;margin-top:4px;background:rgba(255,255,255,.1);padding:4px 16px;border-radius:50px}
+.timeline-item.right{flex-direction:row-reverse;padding-left:calc(50% + 40px);text-align:left}
+.timeline-item.right .timeline-image{position:absolute;right:calc(50% + 52px);top:0;bottom:0;width:520px;border-radius:5%;overflow:hidden;border:3px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,.1);background:var(--white);transition:var(--transition);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.timeline-item.right .timeline-image:hover{transform:scale(1.04);border-color:var(--primary);box-shadow:0 8px 32px rgba(0,0,0,.15)}
+.timeline-item.right .timeline-image img{width:100%;height:100%;object-fit:cover;display:block}
+.timeline-item.right .timeline-image-text{position:absolute;right:calc(50% + 52px);top:0;bottom:0;width:520px;z-index:3;text-align:center;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.timeline-item.right .timeline-image-text .program-label{display:flex;flex-direction:column;justify-content:center;align-items:center;width:100%;height:100%;font-size:28px;font-weight:900;color:var(--white);background:linear-gradient(145deg,var(--primary),var(--primary-dark));padding:16px 20px;border-radius:5%;border:3px solid var(--secondary-light);box-shadow:0 4px 20px rgba(0,0,0,.15);line-height:1.2;letter-spacing:-.02em;transition:var(--transition);text-shadow:0 2px 8px rgba(0,0,0,.2);gap:4px}
+.timeline-item.right .timeline-image-text .program-label:hover{transform:scale(1.03);box-shadow:0 8px 32px rgba(26,58,107,.3);border-color:var(--white)}
+.timeline-item.right .timeline-image-text .program-label small{display:block;font-size:18px;font-weight:600;color:rgba(255,255,255,.85);letter-spacing:0;margin-top:4px;background:rgba(255,255,255,.1);padding:4px 16px;border-radius:50px}
+.timeline-item .dot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:var(--border);border:4px solid var(--white);box-shadow:0 0 0 3px var(--border),0 4px 20px rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;color:var(--text-muted);transition:var(--transition);z-index:2}
+.timeline-item.active .dot{background:var(--primary);box-shadow:0 0 0 3px var(--primary),0 4px 24px rgba(26,58,107,.3);color:var(--white);transform:translate(-50%,-50%) scale(1.15)}
+.timeline-item .content{background:var(--white);border:2px solid var(--border);border-radius:var(--radius-lg);padding:32px 36px;transition:var(--transition);box-shadow:0 4px 20px rgba(0,0,0,.06);width:100%;position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center}
+.timeline-item .content:hover{border-color:var(--primary);box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+.timeline-item.active .content{border-color:var(--primary);box-shadow:var(--shadow-hover)}
+.timeline-item .content .year{display:inline-block;font-size:12px;font-weight:700;padding:2px 14px;border-radius:50px;border:1px solid;margin-bottom:6px}
+.timeline-item .content .icon{font-size:32px;display:block;margin-bottom:6px}
+.timeline-item .content h3{font-size:19px;font-weight:800;color:var(--primary);margin-bottom:4px;line-height:1.3}
+.timeline-item .content .desc{color:var(--text-muted);font-size:15px;line-height:1.6;margin-top:2px}
+.timeline-item .content .price{font-weight:700;font-size:16px;margin-top:8px;color:var(--green);padding:4px 14px;background:var(--green-soft);border-radius:50px;display:block;border:1px solid var(--green);width:fit-content}
+.timeline-item .content .status-badge{display:block;padding:4px 18px;border-radius:50px;font-weight:700;font-size:13px;margin-top:8px;width:fit-content}
+.timeline-item .content .status-badge i{margin-right:6px}
+.timeline-item.left .content{align-items:flex-end;text-align:right}
+.timeline-item.left .content .price,.timeline-item.left .content .status-badge{align-self:flex-end}
+.timeline-item.right .content{align-items:flex-start;text-align:left}
+.timeline-item.right .content .price,.timeline-item.right .content .status-badge{align-self:flex-start}
+.timeline-item::after{content:'';position:absolute;left:50%;top:calc(50% + 28px);width:2px;height:calc(100% + 10px);background:var(--border);transform:translateX(-50%);z-index:0;opacity:.3}
+.timeline-item:last-child::after{display:none}
+.swipe-track{display:contents!important}
+.swipe-panel{display:contents!important}
+.swipe-panel.panel-image{display:none!important}
+.swipe-hint{display:none!important}
+.swipe-dots{display:none!important}
+.timeline-item .content{padding:32px 36px!important;overflow:visible!important}
+}
+
+/* ===== MOBIL TIMELINE + SWIPE ===== */
+@media (max-width:768px){
+.timeline{position:relative;max-width:720px;margin:0 auto;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:3px;background:var(--border);border-radius:99px}
+.timeline-item{position:relative;margin-bottom:24px;padding-left:24px}
+.timeline-item:last-child{margin-bottom:0}
+.timeline-image{display:none!important}
+.timeline-image-text{display:none!important}
+.timeline-item .dot{position:absolute;left:-22px;top:6px;width:28px;height:28px;background:var(--border);border-radius:50%;border:3px solid var(--white);box-shadow:0 0 0 2px var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--text-muted);transition:var(--transition);z-index:2}
+.timeline-item.active .dot{background:var(--primary);box-shadow:0 0 0 2px var(--primary);color:var(--white);transform:scale(1.15)}
+.timeline-item .content{background:var(--white);border:2px solid var(--border);border-radius:var(--radius);transition:var(--transition);box-shadow:var(--shadow);position:relative;overflow:hidden;padding:0!important}
+.timeline-item.active .content{border-color:var(--primary);box-shadow:var(--shadow-hover)}
+.mobile-toggle-btn{display:none!important}
+.swipe-track{display:flex;width:200%;min-height:340px;align-items:stretch;transition:transform .4s cubic-bezier(.34,1.2,.64,1);will-change:transform}
+.timeline-item.swiped .swipe-track{transform:translateX(-50%)}
+.swipe-panel{flex:0 0 50%;width:50%;padding:20px 24px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
+.swipe-panel.panel-text{padding-right:56px;padding-bottom:28px}
+.swipe-panel.panel-image{display:block;padding:0;background:var(--bg-light);overflow:hidden}
+.swipe-panel.panel-image img{width:100%;height:100%;min-height:340px;object-fit:cover;object-position:center;border-radius:0;border:none;box-shadow:none;display:block}
+.swipe-panel.panel-image .program-label-mobile{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;min-height:340px;font-size:26px;font-weight:900;color:var(--white);background:linear-gradient(145deg,var(--primary),var(--primary-dark));text-align:center;line-height:1.2;padding:20px;gap:6px}
+.swipe-panel.panel-image .program-label-mobile small{font-size:16px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.12);padding:4px 16px;border-radius:50px}
+.swipe-hint{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:var(--green-soft);border:1.5px solid var(--green);color:var(--green);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:6;transition:var(--transition);font-size:15px;animation:swipePulse 1.8s ease-in-out infinite}
+.swipe-hint:hover,.swipe-hint:active{background:var(--green);color:var(--white)}
+.timeline-item.swiped .swipe-hint{right:auto;left:12px;animation:none}
+.timeline-item.swiped .swipe-hint i{transform:rotate(180deg)}
+@keyframes swipePulse{0%,100%{transform:translateY(-50%) scale(1);box-shadow:0 0 0 0 rgba(46,125,50,.4)}50%{transform:translateY(-50%) scale(1.08);box-shadow:0 0 0 8px rgba(46,125,50,0)}}
+.swipe-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:6;pointer-events:none}
+.swipe-dots span{width:7px;height:7px;border-radius:50%;background:var(--border);transition:var(--transition);box-shadow:0 0 0 2px rgba(255,255,255,.5)}
+.swipe-dots span.active{background:var(--primary);width:20px;border-radius:99px}
+.timeline-item .content .year{display:inline-block;font-size:12px;font-weight:700;padding:2px 14px;border-radius:50px;border:1px solid;margin-bottom:6px}
+.timeline-item .content .icon{font-size:28px;display:block;margin-bottom:4px}
+.timeline-item .content h3{font-size:18px;font-weight:800;color:var(--primary)}
+.timeline-item .content .desc{color:var(--text-muted);font-size:15px;margin-top:4px}
+.timeline-item .content .price{font-weight:700;margin-top:8px;color:var(--green);display:block;width:fit-content}
+.timeline-item .content .status-badge{display:block;padding:4px 18px;border-radius:50px;font-weight:700;font-size:13px;margin-top:8px;width:fit-content}
+.timeline-item .content .status-badge i{margin-right:6px}
+}
+
+/* Dolní fotka obce – jen na mobilu */
+.obec-photo-section{display:none!important}
+@media (max-width:768px){.obec-photo-section{display:block!important}}
+
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.sliby{max-width:900px;margin:40px auto 0;padding-top:32px;border-top:3px solid var(--primary)}
+.sliby h3{text-align:center;font-size:24px;font-weight:800;color:var(--primary)}
+.sliby h3 i{color:var(--green)}
+.sliby .sub{text-align:center;color:var(--text-muted);margin-bottom:20px}
+.sliby-table{background:var(--white);border-radius:var(--radius);border:2px solid var(--border);overflow:hidden;box-shadow:var(--shadow)}
+.sliby-header{display:grid;grid-template-columns:1fr 1fr;padding:14px 20px;background:var(--primary);color:var(--white);font-weight:800;text-align:center;border-bottom:2px solid var(--primary)}
+.sliby-row{display:grid;grid-template-columns:1fr 1fr;padding:14px 20px;border-bottom:1px solid var(--border);align-items:center}
+.sliby-row:last-child{border-bottom:none}
+.sliby-row .text{font-weight:600;color:var(--text-dark)}
+.sliby-row .text .detail{display:block;font-weight:400;font-size:13px;color:var(--text-muted)}
+.sliby-row .text .price{display:block;font-weight:700;font-size:14px;color:var(--green)}
+.sliby-row .status-wrap{text-align:right}
+.status{display:inline-block;padding:4px 18px;border-radius:50px;font-weight:700;font-size:13px}
+@media (max-width:768px){.sliby-header{display:none}.sliby-row{grid-template-columns:1fr;gap:4px;text-align:left;padding:12px 16px}.sliby-row .status-wrap{text-align:left}}
+.program-timeline{max-width:960px;margin:0 auto;position:relative;padding:16px 0 24px}
+.program-timeline::before{content:'';position:absolute;left:50%;top:40px;bottom:40px;width:4px;background:var(--border);border-radius:99px;transform:translateX(-50%);z-index:0}
+.program-timeline .line-fill{position:absolute;left:50%;top:40px;width:4px;background:var(--primary);border-radius:99px;transform:translateX(-50%);z-index:1;height:0%;transition:height .6s cubic-bezier(.34,1.56,.64,1);box-shadow:0 0 16px rgba(26,58,107,.2)}
+.tl-step{display:flex;align-items:stretch;position:relative;z-index:2;margin-bottom:32px;cursor:pointer;transition:var(--transition);padding:4px 0}
+.tl-step:last-child{margin-bottom:0}
+.tl-step .tl-left{flex:1;padding-right:32px;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;text-align:right}
+.tl-step .tl-right{flex:1;padding-left:32px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.tl-dot{flex-shrink:0;width:56px;height:56px;border-radius:50%;background:var(--white);border:4px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:var(--text-muted);transition:var(--transition);box-shadow:var(--shadow);position:relative;z-index:2;margin:0 8px}
+.tl-step.active .tl-dot{border-color:var(--primary);background:var(--primary);color:var(--white);transform:scale(1.1);box-shadow:0 0 0 8px rgba(26,58,107,.15)}
+.tl-step .tl-dot .inner-icon{display:none;font-size:22px}
+.tl-step.active .tl-dot .inner-icon{display:block}
+.tl-step.active .tl-dot .step-num{display:none}
+.year-tag{font-size:16px;font-weight:800;color:var(--green)}
+.tl-step .label{font-size:20px;font-weight:800;color:var(--primary);display:block;line-height:1.2}
+.tl-step .desc{font-size:15px;color:var(--text-muted);display:block}
+.badge-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.badge-list span{font-size:11px;font-weight:700;background:var(--green-soft);padding:2px 14px;border-radius:50px;color:var(--green);border:1px solid var(--green)}
+.detail-list{list-style:none;width:100%}
+.detail-list li{font-size:15px;color:var(--text-muted);padding:4px 0;display:flex;align-items:center;gap:8px}
+.detail-list li::before{content:"✓";color:var(--green);font-weight:900;font-size:16px;flex-shrink:0}
+.tl-right .detail-list li{justify-content:flex-start}
+.tl-left .detail-list li{justify-content:flex-end}
+.tl-left .detail-list li::before{order:1}
+@media (max-width:768px){
+.program-timeline::before{left:20px;transform:none}
+.program-timeline .line-fill{left:20px;transform:none}
+.tl-step{flex-direction:column!important;padding:4px 0 4px 48px!important;margin-bottom:24px;gap:4px;position:relative}
+.tl-step .tl-left,.tl-step .tl-right{padding:0!important;text-align:left!important;align-items:flex-start!important;width:100%!important}
+.tl-left .detail-list li,.tl-right .detail-list li{justify-content:flex-start!important}
+.tl-left .detail-list li::before,.tl-right .detail-list li::before{order:0!important;margin-right:6px!important}
+.tl-left .badge-list,.tl-right .badge-list{justify-content:flex-start!important}
+.tl-dot{width:40px;height:40px;font-size:14px;border-width:3px;position:absolute;left:0;top:4px;margin:0}
+.tl-step .tl-dot .inner-icon{font-size:16px}
+.year-tag{font-size:14px!important}
+.tl-step .label{font-size:17px!important}
+.tl-step .desc{font-size:14px!important}
+.detail-list li{font-size:14px!important}
+}
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:0 auto}
+.why-card:nth-child(1),.why-card:nth-child(4){background:var(--primary);border:2px solid var(--primary);color:var(--white)}
+.why-card:nth-child(1) .num,.why-card:nth-child(4) .num{color:rgba(255,255,255,.15)}
+.why-card:nth-child(1) .icon,.why-card:nth-child(4) .icon{color:#7ab8ff}
+.why-card:nth-child(1) h3,.why-card:nth-child(4) h3{color:var(--white)}
+.why-card:nth-child(1) p,.why-card:nth-child(4) p{color:rgba(255,255,255,.85)}
+.why-card:nth-child(1) .tag,.why-card:nth-child(4) .tag{background:rgba(255,255,255,.15);color:var(--white);border-color:rgba(255,255,255,.4)}
+.why-card:nth-child(1):hover,.why-card:nth-child(4):hover{background:var(--primary-dark);border-color:var(--primary-dark)}
+.why-card:nth-child(2),.why-card:nth-child(3){background:var(--white);border:2px solid var(--border);color:var(--text-dark)}
+.why-card:nth-child(2) .num,.why-card:nth-child(3) .num{color:#e8ecf0}
+.why-card:nth-child(2) .icon,.why-card:nth-child(3) .icon{color:var(--secondary)}
+.why-card:nth-child(2) h3,.why-card:nth-child(3) h3{color:var(--primary)}
+.why-card:nth-child(2) p,.why-card:nth-child(3) p{color:var(--text-muted)}
+.why-card:nth-child(2) .tag,.why-card:nth-child(3) .tag{background:rgba(42,122,216,.08);color:var(--secondary);border-color:var(--secondary)}
+.why-card:nth-child(2):hover,.why-card:nth-child(3):hover{border-color:var(--primary)}
+.why-card{border-radius:var(--radius-lg);padding:28px 24px;position:relative;transition:var(--transition);box-shadow:var(--shadow)}
+.why-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
+.why-card .num{position:absolute;top:12px;right:16px;font-size:40px;font-weight:900;line-height:1}
+.why-card .icon{font-size:28px;margin-bottom:8px;display:block}
+.why-card h3{font-size:18px;font-weight:700;margin-bottom:6px}
+.why-card p{font-size:15px;margin-bottom:12px}
+.why-card .tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;padding:2px 14px;border-radius:50px;border:1px solid}
+@media (max-width:768px){
+.why-grid{grid-template-columns:1fr;gap:12px}
+.why-card:nth-child(1){background:var(--white)!important;border:2px solid var(--border)!important;color:var(--text-dark)!important}
+.why-card:nth-child(1) .num{color:#e8ecf0!important}
+.why-card:nth-child(1) .icon{color:var(--secondary)!important}
+.why-card:nth-child(1) h3{color:var(--primary)!important}
+.why-card:nth-child(1) p{color:var(--text-muted)!important}
+.why-card:nth-child(1) .tag{background:rgba(42,122,216,.08)!important;color:var(--secondary)!important;border:1px solid var(--secondary)!important}
+.why-card:nth-child(2){background:var(--primary)!important;border:2px solid var(--primary)!important;color:var(--white)!important}
+.why-card:nth-child(2) .num{color:rgba(255,255,255,.15)!important}
+.why-card:nth-child(2) .icon{color:#7ab8ff!important}
+.why-card:nth-child(2) h3{color:var(--white)!important}
+.why-card:nth-child(2) p{color:rgba(255,255,255,.85)!important}
+.why-card:nth-child(2) .tag{background:rgba(255,255,255,.15)!important;color:var(--white)!important;border:1px solid rgba(255,255,255,.4)!important}
+.why-card:nth-child(3){background:var(--white)!important;border:2px solid var(--border)!important;color:var(--text-dark)!important}
+.why-card:nth-child(3) .num{color:#e8ecf0!important}
+.why-card:nth-child(3) .icon{color:var(--secondary)!important}
+.why-card:nth-child(3) h3{color:var(--primary)!important}
+.why-card:nth-child(3) p{color:var(--text-muted)!important}
+.why-card:nth-child(3) .tag{background:rgba(42,122,216,.08)!important;color:var(--secondary)!important;border:1px solid var(--secondary)!important}
+.why-card:nth-child(4){background:var(--primary)!important;border:2px solid var(--primary)!important;color:var(--white)!important}
+.why-card:nth-child(4) .num{color:rgba(255,255,255,.15)!important}
+.why-card:nth-child(4) .icon{color:#7ab8ff!important}
+.why-card:nth-child(4) h3{color:var(--white)!important}
+.why-card:nth-child(4) p{color:rgba(255,255,255,.85)!important}
+.why-card:nth-child(4) .tag{background:rgba(255,255,255,.15)!important;color:var(--white)!important;border:1px solid rgba(255,255,255,.4)!important}
+.why-card{padding:20px 16px}
+.why-card .num{font-size:32px}
+}
+.highlight-box{max-width:900px;margin:24px auto 0;padding:20px 28px;background:var(--primary);border-radius:var(--radius);text-align:center;border:3px solid var(--primary);box-shadow:var(--shadow);transition:var(--transition)}
+.highlight-box:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+.highlight-box p{font-size:17px;font-weight:600;color:var(--white);display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:0}
+.highlight-box i{font-size:28px;color:var(--secondary);flex-shrink:0}
+@media (max-width:768px){
+.highlight-box{padding:16px;background:var(--white);border-color:var(--primary)}
+.highlight-box p{font-size:15px;gap:8px;color:var(--primary)}
+.highlight-box i{font-size:22px;color:var(--primary)}
+}
+.priorities{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:16px auto 0}
+.priority-card{background:var(--white);border:2px solid var(--border);border-radius:var(--radius);padding:20px 18px;transition:var(--transition);box-shadow:var(--shadow);display:flex;flex-direction:column}
+.priority-card:hover{transform:translateY(-4px);border-color:var(--primary);box-shadow:var(--shadow-hover)}
+.priority-card .icon{font-size:28px;margin-bottom:6px}
+.priority-card h3{font-size:16px;font-weight:700;color:var(--primary);margin-bottom:6px}
+.priority-card ul{list-style:none;flex:1;margin-bottom:12px}
+.priority-card li{font-size:14px;color:var(--text-muted);padding:2px 0 2px 16px;position:relative}
+.priority-card li::before{content:"•";position:absolute;left:0;color:var(--green);font-weight:700}
+.priority-card .tag{font-size:10px;font-weight:700;text-transform:uppercase;background:var(--green-soft);color:var(--green);padding:2px 14px;border-radius:50px;align-self:flex-start;border:1px solid var(--green)}
+.priorities-scroll{display:none;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:8px 4px 16px 4px;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--primary) var(--white)}
+.priorities-scroll::-webkit-scrollbar{height:6px}
+.priorities-scroll::-webkit-scrollbar-track{background:var(--white);border-radius:99px}
+.priorities-scroll::-webkit-scrollbar-thumb{background:var(--primary);border-radius:99px}
+.priorities-scroll .priority-card{flex:0 0 250px;scroll-snap-align:start;min-height:180px}
+@media (max-width:768px){.priorities{display:none}.priorities-scroll{display:flex}}
+.school-grid-desktop{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:1200px;margin:0 auto}
+.school-card{background:var(--white);border-radius:var(--radius);padding:24px;border:2px solid var(--border);transition:var(--transition);box-shadow:var(--shadow)}
+.school-card:hover{border-color:var(--primary);box-shadow:var(--shadow-hover)}
+.school-card .icon{font-size:32px}
+.school-card h4{font-weight:700;font-size:18px;color:var(--primary);margin:8px 0 4px}
+.school-card ul{list-style:none}
+.school-card ul li{padding:4px 0;font-size:15px;color:var(--text-muted)}
+.school-card ul li::before{content:"•";color:var(--green);margin-right:6px}
+.school-photo-wrapper{margin:0}
+.school-photo-bubble{position:relative;width:100%;aspect-ratio:21/9;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);border:3px solid var(--border);cursor:pointer;transition:var(--transition)}
+.school-photo-bubble:hover{border-color:var(--primary);box-shadow:var(--shadow-hover);transform:translateY(-4px)}
+.school-photo-bubble img{width:100%;height:100%;object-fit:cover;transition:var(--transition)}
+.school-photo-bubble:hover img{transform:scale(1.05)}
+.school-photo-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(26,58,107,.9),transparent);padding:16px;display:flex;align-items:flex-end}
+.school-photo-text{color:var(--white);font-size:20px;font-weight:800;line-height:1.2;text-shadow:0 2px 8px rgba(0,0,0,.3)}
+.accordion{max-width:900px;margin:0 auto}
+.accordion-item{border:2px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;transition:var(--transition);background:var(--white)}
+.accordion-item:hover{border-color:var(--primary)}
+.accordion-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;cursor:pointer;background:var(--white);transition:var(--transition);gap:12px}
+.accordion-header:hover{background:var(--green-soft)}
+.accordion-header .icon-left{font-size:24px;flex-shrink:0}
+.accordion-header .title-group h4{font-size:16px;font-weight:700;color:var(--primary);margin:0}
+.accordion-toggle{font-size:16px;color:var(--green);transition:var(--transition);flex-shrink:0}
+.accordion-item.open .accordion-toggle{transform:rotate(180deg)}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.34,1.56,.64,1),padding .3s ease;padding:0 20px}
+.accordion-item.open .accordion-body{max-height:300px;padding:0 20px 16px}
+.accordion-body ul{list-style:none;font-size:15px;color:var(--text-muted)}
+.accordion-body ul li{padding:4px 0;display:flex;align-items:center;gap:6px}
+.accordion-body ul li::before{content:"•";color:var(--green);font-weight:700}
+@media (min-width:769px){.accordion{display:none!important}}
+@media (max-width:768px){
+.school-grid-desktop{display:none!important}
+.school-photo-wrapper{margin:0 auto 16px;padding:0 16px}
+.school-photo-bubble{aspect-ratio:16/10;border-radius:var(--radius);border:2px solid var(--border)}
+.school-photo-text{font-size:18px}
+.school-photo-overlay{padding:12px}
+}
+.team-slogan{text-align:center;font-size:28px;font-weight:900;color:var(--green);letter-spacing:-.02em;margin:0 auto 20px;padding:4px 0;max-width:800px}
+.team-photo-section{max-width:960px;margin:0 auto 24px}
+.team-photo-section .photo-placeholder{width:100%;aspect-ratio:2.2/1;background:var(--white);border:2px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:var(--transition)}
+.team-photo-section .photo-placeholder:hover{border-color:var(--primary);box-shadow:var(--shadow-hover)}
+.team-photo-section .photo-placeholder img{width:100%;height:100%;object-fit:cover;transition:var(--transition)}
+.team-photo-section .photo-placeholder:hover img{transform:scale(1.02)}
+.candidates{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto}
+.candidate{background:var(--white);border:2px solid var(--border);border-radius:var(--radius);padding:20px 18px;transition:var(--transition);box-shadow:var(--shadow);display:flex;flex-direction:column;height:100%}
+.candidate:hover{border-color:var(--green);box-shadow:0 12px 30px rgba(46,125,50,.12);transform:translateY(-3px)}
+.candidate-number{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--white);margin-bottom:10px}
+.candidate-info{flex:1}
+.candidate-info .role-tag{font-size:11px;font-weight:700;background:var(--green-soft);color:var(--green);padding:2px 14px;border-radius:50px;display:inline-block;border:1px solid var(--green)}
+.candidate-info h3{font-size:18px;font-weight:800;color:var(--primary);margin:4px 0 2px}
+.candidate-info .position{font-weight:600;color:var(--green);font-size:13px;margin-bottom:4px}
+.candidate-info .bio{color:var(--text-muted);font-size:14px;flex:1;margin-bottom:8px;line-height:1.6}
+.candidate-info .bio strong{color:var(--text-dark)}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.tags span{background:var(--green-soft);font-size:11px;padding:2px 12px;border-radius:50px;font-weight:700;border:1px solid var(--green);color:var(--green)}
+@media (max-width:992px){.candidates{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:768px){
+.candidates{grid-template-columns:1fr;gap:12px}
+.team-slogan{font-size:22px}
+.candidate{padding:16px}
+.team-photo-section .photo-placeholder{aspect-ratio:2.2/1;border-radius:1rem}
+}
+@media (max-width:480px){.team-photo-section .photo-placeholder{aspect-ratio:2.2/1;border-radius:.8rem}}
+footer{background:var(--primary);text-align:center;padding:48px 24px;color:var(--white);border-top:4px solid var(--primary-dark)}
+footer .footer-btn{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--primary);font-weight:800;font-size:15px;padding:10px 28px;border-radius:50px;margin-bottom:20px;transition:var(--transition);box-shadow:0 4px 16px rgba(0,0,0,.15)}
+footer .footer-btn:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.25)}
+footer p strong{font-weight:900}
+.footer-divider{width:60px;height:3px;background:rgba(255,255,255,.2);margin:16px auto;border-radius:99px}
+#lightbox{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,.88);backdrop-filter:blur(8px);z-index:9999;justify-content:center;align-items:center;padding:24px;cursor:pointer}
+#lightboxClose{position:fixed;top:20px;right:20px;width:48px;height:48px;border-radius:50%;border:2px solid rgba(255,255,255,.3);background:rgba(0,0,0,.5);color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--transition);z-index:10000}
+#lightboxClose:hover{background:rgba(255,255,255,.2);transform:scale(1.1)}
+#lightboxImage{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6);cursor:default}
+@media (max-width:480px){#lightboxClose{top:12px;right:12px;width:40px;height:40px;font-size:18px}#lightboxImage{max-width:95vw;max-height:80vh}}
+</style>
 </head>
 <body>
 
-<!-- ===== NAVBAR ===== -->
 <nav class="navbar">
-    <div class="container">
-        <a href="#" class="logo" id="logoLink">
-            <span class="logo-icon"><img src="logoa.png" alt="Logo"></span>
-            <span class="logo-text-wrapper">
-                <span class="logo-text">Volba pro</span>
-                <span class="logo-text-highlight">zítřek</span>
-            </span>
-        </a>
-        <button class="burger" id="burger" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <ul class="nav-links" id="navLinks">
-            <div class="menu-header">
-                <div class="menu-title">
-                    <span class="menu-logo"><img src="logoa.png" alt="Logo"></span>
-                    Menu
-                </div>
-                <button class="close-menu" id="closeMenu" aria-label="Zavřít menu">
-                    <i class="fas fa-xmark"></i>
-                </button>
-            </div>
-            <li><a href="#home" data-section="home">Domů</a></li>
-            <li><a href="#vysledky" data-section="vysledky">Co jsme dokázali</a></li>
-            <li><a href="#program" data-section="program">Náš program</a></li>
-            <li><a href="#proc" data-section="proc">Proč pokračovat</a></li>
-            <li><a href="#tym" data-section="tym">Náš tým</a></li>
-        </ul>
-        <div class="nav-overlay" id="navOverlay"></div>
-    </div>
+<div class="container">
+<a href="#" class="logo" id="logoLink">
+<span class="logo-icon"><img src="logoa.png" alt="Logo"></span>
+<span class="logo-text-wrapper"><span class="logo-text">Volba pro</span><span class="logo-text-highlight">zítřek</span></span>
+</a>
+<button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+<ul class="nav-links" id="navLinks">
+<div class="menu-header">
+<div class="menu-title"><span class="menu-logo"><img src="logoa.png" alt="Logo"></span> Menu</div>
+<button class="close-menu" id="closeMenu" aria-label="Zavřít menu"><i class="fas fa-xmark"></i></button>
+</div>
+<li><a href="#home" data-section="home">Domů</a></li>
+<li><a href="#vysledky" data-section="vysledky">Co jsme dokázali</a></li>
+<li><a href="#program" data-section="program">Náš program</a></li>
+<li><a href="#proc" data-section="proc">Proč pokračovat</a></li>
+<li><a href="#tym" data-section="tym">Náš tým</a></li>
+</ul>
+<div class="nav-overlay" id="navOverlay"></div>
+</div>
 </nav>
 
-<!-- ===== HERO ===== -->
 <header class="hero" id="home">
-    <div class="hero-top">
-        <div class="container">
-            <div class="badge"><i class="fas fa-check-circle"></i> 4 roky práce pro Čistou</div>
-            <h1>
-                <span class="line1">Máme za sebou kus práce.</span>
-                <span class="line2">S vámi chceme pokračovat.</span>
-            </h1>
-            <p class="subheadline">Čistá u Mladé Boleslavi – náš domov.</p>
-        </div>
-    </div>
-    <div class="hero-bottom-section">
-        <div class="container">
-            <div class="hero-row">
-                <div class="col-photo">
-                    <div class="hero-photo clickable-image">
-                        <img src="vesnice.jpg" alt="Čistá u Mladé Boleslavi" loading="lazy">
-                    </div>
-                </div>
-                <div class="col-stats">
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <span class="emoji">🚧</span>
-                            <span class="number">dokončujeme</span>
-                            <span class="label">splaškovou kanalizaci</span>
-                            <span class="desc">za 188,58 mil. Kč s dotacemi</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="emoji">🚶</span>
-                            <span class="number">nový</span>
-                            <span class="label">chodník + osvětlení</span>
-                            <span class="desc">3. etapa za 10,68 mil. Kč</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="emoji">🏫</span>
-                            <span class="number">podpoříme</span>
-                            <span class="label">moderní školu</span>
-                            <span class="desc">aktivizační metody a individuální přístup</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="emoji">🌿</span>
-                            <span class="number">obnovíme</span>
-                            <span class="label">zeleň a veřejný prostor</span>
-                            <span class="desc">revitalizace návsi a výsadba stromů</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-bottom-text">
-                <div class="btn-group">
-                    <a href="#vysledky" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Co jsme dokázali</a>
-                    <a href="#tym" class="btn btn-outline"><i class="fas fa-users"></i> Kandidáti</a>
-                </div>
-                <p class="hero-text">
-                    Stabilizovali jsme skalní svah, vybudovali nový chodník s osvětlením a <strong>dokončujeme splaškovou kanalizaci.</strong>
-                    Čistá se mění k lepšímu. Pojďte s námi dotáhnout další projekty, které dávají smysl.
-                </p>
-            </div>
-        </div>
-    </div>
+<div class="hero-top">
+<div class="container">
+<div class="badge"><i class="fas fa-check-circle"></i> 4 roky práce pro Čistou</div>
+<h1><span class="line1">Máme za sebou kus práce.</span><span class="line2">S vámi chceme pokračovat.</span></h1>
+<p class="subheadline">Čistá u Mladé Boleslavi – náš domov.</p>
+</div>
+</div>
+<div class="hero-bottom-section">
+<div class="container">
+<div class="hero-row">
+<div class="col-photo">
+<div class="hero-photo clickable-image"><img src="vesnice.jpg" alt="Čistá u Mladé Boleslavi" loading="lazy"></div>
+</div>
+<div class="col-stats">
+<div class="stats-grid">
+<div class="stat-card"><span class="emoji">🚧</span><span class="number">dokončujeme</span><span class="label">splaškovou kanalizaci</span><span class="desc">za 188,58 mil. Kč s dotacemi</span></div>
+<div class="stat-card"><span class="emoji">🚶</span><span class="number">nový</span><span class="label">chodník + osvětlení</span><span class="desc">3. etapa za 10,68 mil. Kč</span></div>
+<div class="stat-card"><span class="emoji">🏫</span><span class="number">podpoříme</span><span class="label">moderní školu</span><span class="desc">aktivizační metody a individuální přístup</span></div>
+<div class="stat-card"><span class="emoji">🌿</span><span class="number">obnovíme</span><span class="label">zeleň a veřejný prostor</span><span class="desc">revitalizace návsi a výsadba stromů</span></div>
+</div>
+</div>
+</div>
+<div class="hero-bottom-text">
+<div class="btn-group">
+<a href="#vysledky" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Co jsme dokázali</a>
+<a href="#tym" class="btn btn-outline"><i class="fas fa-users"></i> Kandidáti</a>
+</div>
+<p class="hero-text">Stabilizovali jsme skalní svah, vybudovali nový chodník s osvětlením a <strong>dokončujeme splaškovou kanalizaci.</strong> Čistá se mění k lepšímu. Pojďte s námi dotáhnout další projekty, které dávají smysl.</p>
+</div>
+</div>
+</div>
 </header>
 
-<!-- ===== VÝSLEDKY ===== -->
 <section id="vysledky">
-    <div class="container">
-        <span class="section-tag">🌱 Co se v Čisté povedlo</span>
-        <h2 class="section-title">Čistá se mění k lepšímu</h2>
-        <p class="section-subtitle">Za poslední 4 roky jsme připravili a realizovali <strong>spoustu dobrých věcí</strong>. To&nbsp;je teprve začátek.</p>
+<div class="container">
+<span class="section-tag">🌱 Co se v Čisté povedlo</span>
+<h2 class="section-title">Čistá se mění k lepšímu</h2>
+<p class="section-subtitle">Za poslední 4 roky jsme připravili a realizovali <strong>spoustu dobrých věcí</strong>. To&nbsp;je teprve začátek.</p>
+<div class="timeline" id="timeline">
 
-        <div class="timeline" id="timeline">
-            <!-- BOD 1 – LEVÁ STRANA (HOTOVO) + OBRÁZEK VPRAVO -->
-            <div class="timeline-item left active">
-                <div class="dot">1</div>
-                <div class="timeline-image">
-                    <img src="svah.jpg" alt="Stabilizace skalního svahu" loading="lazy">
-                </div>
-                <div class="content">
-                    <span class="year hotovo"><i class="fas fa-check-circle"></i> Dokončeno 02/2025</span>
-                    <span class="icon">⛰️</span>
-                    <h3>Stabilizace skalního svahu</h3>
-                    <p class="desc">Zajistili jsme skalní stěnu nad domy čp. 91 a 92.</p>
-                    <p class="price">💰 4,59 mil. Kč s 80% dotací</p>
-                    <span class="status-badge status-hotovo"><i class="fas fa-check-circle"></i> Hotovo</span>
-                </div>
-            </div>
-
-            <!-- BOD 2 – PRAVÁ STRANA (HOTOVO) + OBRÁZEK VLEVO -->
-            <div class="timeline-item right">
-                <div class="dot">2</div>
-                <div class="timeline-image">
-                    <img src="chodnik.jpg" alt="Chodník, opěrné zdi a osvětlení" loading="lazy">
-                </div>
-                <div class="content">
-                    <span class="year hotovo"><i class="fas fa-check-circle"></i> Dokončeno 02/2026</span>
-                    <span class="icon">🚶</span>
-                    <h3>Chodník, opěrné zdi a osvětlení – 3. etapa</h3>
-                    <p class="desc">Vybudovali jsme nový chodník podél místní komunikace, opěrné zdi a osvětlení.</p>
-                    <p class="price">💰 10,68 mil. Kč</p>
-                    <span class="status-badge status-hotovo"><i class="fas fa-check-circle"></i> Hotovo</span>
-                </div>
-            </div>
-
-            <!-- BOD 3 – LEVÁ STRANA (PROBÍHÁ) + OBRÁZEK VPRAVO -->
-            <div class="timeline-item left">
-                <div class="dot">3</div>
-                <div class="timeline-image">
-                    <img src="kanalizace.jpg" alt="Splašková kanalizace" loading="lazy">
-                </div>
-                <div class="content">
-                    <span class="year probiha"><i class="fas fa-sync-alt fa-spin"></i> Dokončení 09/2026</span>
-                    <span class="icon">🚧</span>
-                    <h3>Splašková kanalizace – hlavní projekt</h3>
-                    <p class="desc">Stavba zahájena v 10/2024, k 25. 9. 2026 bude dílo dokončeno a předáno.</p>
-                    <p class="price">💰 188,58 mil. Kč</p>
-                    <span class="status-badge status-probiha"><i class="fas fa-sync-alt fa-spin"></i> Probíhá</span>
-                </div>
-            </div>
-
-            <!-- BOD 4 – PRAVÁ STRANA: CHYSTÁME VLEVO, PROGRAM VPRAVO -->
-            <div class="timeline-item right">
-                <div class="dot">4</div>
-                <div class="content">
-                    <span class="year chystame"><i class="fas fa-clock"></i> Chystáme</span>
-                    <span class="icon">💡</span>
-                    <h3>Další projekty pro rozvoj obce</h3>
-                    <p class="desc">Máme plány na další roky – od rozvoje kultury až po moderní služby. <strong>Chceme v tom pokračovat.</strong></p>
-                    <span class="status-badge status-chystame"><i class="fas fa-clock"></i> Chystáme</span>
-                </div>
-                <div class="timeline-image-text">
-                    <span class="program-label">Program<br><small>2026–2030</small></span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== BANNER: PROGRAM ===== -->
-<div class="banner-section" id="program-banner"><div class="container"><h2><i class="fas fa-clipboard-list"></i> Program</h2></div></div>
-
-<!-- ===== PROGRAM ===== -->
-<section id="program">
-    <div class="container">
-        <h2 class="section-title">Náš program pro Čistou 2026–2030</h2>
-        <p class="section-subtitle"><strong>Reálný plán</strong>, který stojí na zkušenosti a&nbsp;odpovědnosti. Nejdříve&nbsp;dokončíme kanalizaci a poté stabilizujeme finance.</p>
-        <div class="program-timeline" id="programTimeline">
-            <div class="line-fill" id="lineFill"></div>
-            <div class="tl-step active" data-step="0">
-                <div class="tl-left">
-                    <span class="year-tag">🌱 2026–2028</span>
-                    <span class="label">Dokončit & stabilizovat</span>
-                    <span class="desc">Dokončíme kanalizaci, zklidníme rozpočet</span>
-                    <div class="badge-list"><span>Kanalizace</span><span>Finance</span><span>Komunikace</span></div>
-                </div>
-                <div class="tl-dot"><span class="step-num">1</span><span class="inner-icon">🏗️</span></div>
-                <div class="tl-right">
-                    <ul class="detail-list">
-                        <li>Dokončit kanalizaci a připojit domácnosti</li>
-                        <li>Konsolidovat rozpočet a nastavit splátky úvěrů</li>
-                        <li>Nastavit desetiletý obecní provoz kanalizace</li>
-                        <li>Pomoci občanům s realizací domovních přípojek</li>
-                        <li>Vytvořit víceletý přehled investic</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="tl-step" data-step="1">
-                <div class="tl-left">
-                    <span class="year-tag">🌿 2028–2030</span>
-                    <span class="label">Rozvíjet & modernizovat</span>
-                    <span class="desc">Obecní dům, chodníky, úspory, zeleň</span>
-                    <div class="badge-list"><span>Infrastruktura</span><span>Životní prostředí</span><span>Modernizace</span></div>
-                </div>
-                <div class="tl-dot"><span class="step-num">2</span><span class="inner-icon">🚀</span></div>
-                <div class="tl-right">
-                    <ul class="detail-list">
-                        <li>Modernizace Domu služeb – prostory pro seniory</li>
-                        <li>4. etapa chodníků a cyklostezek na propojení centrální části obce a místní části Stránka</li>
-                        <li>Revitalizace návsi – dětské hřiště, zeleň</li>
-                        <li>Zateplení Kulturního domu a úspory energií</li>
-                        <li>Výsadba stromů a zadržování vody v krajině</li>
-                        <li>Bezpečné cesty pro děti a veřejné osvětlení</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div style="margin-top: 40px; padding-top: 32px; border-top: 3px solid var(--primary);">
-            <h3 class="section-title center" style="font-size: 28px;">🌱 Škola, rodiny a aktivní život</h3>
-            
-            <div class="school-grid-desktop">
-                <!-- Karta 1: Moderní vzdělávání -->
-                <div class="school-card">
-                    <span class="icon">📚</span>
-                    <h4>Moderní vzdělávání</h4>
-                    <ul>
-                        <li>Aktivizační metody výuky</li>
-                        <li>Projektová a badatelská výuka</li>
-                        <li>Individuální přístup k dětem</li>
-                    </ul>
-                </div>
-                
-                <!-- Karta 2: Fotka školy -->
-                <div class="school-photo-wrapper">
-                    <div class="school-photo-bubble clickable-image">
-                        <img src="skola.jpg" alt="Naše škola v Čisté" loading="lazy">
-                        <div class="school-photo-overlay">
-                            <span class="school-photo-text">📚<br>Naše<br>škola</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Karta 3: Sport a volný čas -->
-                <div class="school-card">
-                    <span class="icon">🏃</span>
-                    <h4>Sport a volný čas</h4>
-                    <ul>
-                        <li>Pumptrack pro děti a mládež</li>
-                        <li>Senior park – setkávání a pohyb</li>
-                        <li>Podpora spolků a kulturních akcí</li>
-                    </ul>
-                </div>
-                
-                <!-- Karta 4: Fotka hřiště -->
-                <div class="school-photo-wrapper">
-                    <div class="school-photo-bubble clickable-image">
-                        <img src="hriste.jpg" alt="Dětské hřiště" loading="lazy">
-                        <div class="school-photo-overlay">
-                            <span class="school-photo-text">🛝<br>Dětské<br>hřiště</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Mobil - accordion s fotkami -->
-            <div class="accordion">
-                <div class="accordion-item open">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="icon-left">📚</span>
-                        <div class="title-group"><h4>Moderní vzdělávání</h4></div>
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-body">
-                        <ul>
-                            <li>Aktivizační metody výuky</li>
-                            <li>Projektová a badatelská výuka</li>
-                            <li>Individuální přístup k dětem</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Fotka školy na mobilu -->
-                <div class="school-photo-wrapper">
-                    <div class="school-photo-bubble clickable-image">
-                        <img src="skola.jpg" alt="Naše škola v Čisté" loading="lazy">
-                        <div class="school-photo-overlay">
-                            <span class="school-photo-text">📚<br>Naše<br>škola</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="accordion-item">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="icon-left">🏃</span>
-                        <div class="title-group"><h4>Sport a volný čas</h4></div>
-                        <span class="accordion-toggle">▼</span>
-                    </div>
-                    <div class="accordion-body">
-                        <ul>
-                            <li>Pumptrack pro děti a mládež</li>
-                            <li>Senior park – setkávání a pohyb</li>
-                            <li>Podpora spolků a kulturních akcí</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Fotka hřiště na mobilu -->
-                <div class="school-photo-wrapper">
-                    <div class="school-photo-bubble clickable-image">
-                        <img src="hriste.jpg" alt="Dětské hřiště" loading="lazy">
-                        <div class="school-photo-overlay">
-                            <span class="school-photo-text">🛝<br>Dětské<br>hřiště</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div style="margin-top: 40px; padding-top: 32px; border-top: 3px solid var(--primary);">
-            <h3 class="section-title center" style="font-size: 28px;">🌿 Čistá, zelená a bezpečná obec</h3>
-            <div class="priorities">
-                <div class="priority-card">
-                    <span class="icon">♻️</span>
-                    <h3>Odpadové hospodářství</h3>
-                    <ul><li>Čipování nádob</li><li>Spravedlivější systém</li><li>Motivace k odpovědnosti</li></ul>
-                    <span class="tag">Klíčová oblast</span>
-                </div>
-                <div class="priority-card">
-                    <span class="icon">🌳</span>
-                    <h3>Zeleň a voda</h3>
-                    <ul><li>Výsadba stromů</li><li>Zadržování vody v krajině</li><li>Revitalizace zeleně</li></ul>
-                    <span class="tag">Důležité téma</span>
-                </div>
-                <div class="priority-card">
-                    <span class="icon">🛡️</span>
-                    <h3>Bezpečnost</h3>
-                    <ul><li>Spolupráce s Policií ČR</li><li>Bezpečné cesty pro děti</li><li>Veřejné osvětlení</li></ul>
-                    <span class="tag">Zásadní úkol</span>
-                </div>
-            </div>
-            <div class="priorities-scroll">
-                <div class="priority-card">
-                    <span class="icon">♻️</span>
-                    <h3>Odpadové hospodářství</h3>
-                    <ul><li>Čipování nádob</li><li>Spravedlivější systém</li><li>Motivace k odpovědnosti</li></ul>
-                    <span class="tag">Klíčová oblast</span>
-                </div>
-                <div class="priority-card">
-                    <span class="icon">🌳</span>
-                    <h3>Zeleň a voda</h3>
-                    <ul><li>Výsadba stromů</li><li>Zadržování vody v krajině</li><li>Revitalizace zeleně</li></ul>
-                    <span class="tag">Důležité téma</span>
-                </div>
-                <div class="priority-card">
-                    <span class="icon">🛡️</span>
-                    <h3>Bezpečnost</h3>
-                    <ul><li>Spolupráce s Policií ČR</li><li>Bezpečné cesty pro děti</li><li>Veřejné osvětlení</li></ul>
-                    <span class="tag">Zásadní úkol</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== BANNER: PROČ ===== -->
-<div class="banner-section" id="proc-banner"><div class="container"><h2><i class="fas fa-heart"></i> Proč kandidujeme</h2></div></div>
-
-<!-- ===== PROČ ===== -->
-<section id="proc">
-    <div class="container">
-        <div class="intro-box">
-            <p><strong>Čistá je náš domov.</strong> Chceme, aby se tu dobře žilo všem.</p>
-            <p>Neslibujeme nemožné. <span class="highlight">Chceme pokračovat v&nbsp;projektech, které dávají smysl.</span></p>
-            <div class="intro-divider"></div>
-            <p><strong>Společně tvoříme budoucnost. Ta začíná tady, v&nbsp;Čisté.</strong></p>
-        </div>
-
-        <div class="why-grid">
-            <div class="why-card">
-                <span class="num">01</span>
-                <span class="icon"><i class="fas fa-check-double"></i></span>
-                <h3>Dotahujeme věci do konce</h3>
-                <p>Neslibujeme, co nezvládneme. Nové chodníky, kanalizace – to jsou projekty, které jsme dotáhli od prvního návrhu až do konce.</p>
-                <span class="tag">Spolehlivost</span>
-            </div>
-            <div class="why-card">
-                <span class="num">02</span>
-                <span class="icon"><i class="fas fa-euro-sign"></i></span>
-                <h3>Umíme čerpat dotace</h3>
-                <p>Díky evropským penězům jsme ušetřili obecní rozpočet na další potřeby. Projekty realizujeme s výraznými úsporami.</p>
-                <span class="tag">Dotace</span>
-            </div>
-            <div class="why-card">
-                <span class="num">03</span>
-                <span class="icon"><i class="fas fa-users"></i></span>
-                <h3>Žijeme tu s vámi</h3>
-                <p>Chodíme po stejných ulicích, naše děti chodí do stejné školy a školky. Nejsme cizí lidé, jsme vaši sousedé. <strong>Děláme to pro svůj domov.</strong></p>
-                <span class="tag">Sousedé</span>
-            </div>
-            <div class="why-card">
-                <span class="num">04</span>
-                <span class="icon"><i class="fas fa-lightbulb"></i></span>
-                <h3>Myslíme na další generace</h3>
-                <p>Nebojíme se nových nápadů a moderních řešení. Chceme, aby naše vesnice držela krok s dobou a byla připravená na budoucnost.</p>
-                <span class="tag">Moderní přístup</span>
-            </div>
-        </div>
-
-        <div class="highlight-box">
-            <p><i class="fas fa-handshake"></i> <span>Umíme jednat s developery a získat ze spolupráce významné plnění pro obec.</span></p>
-        </div>
-    </div>
-</section>
-
-<!-- ===== BANNER: KANDIDÁTI ===== -->
-<div class="banner-section" id="tym-banner"><div class="container"><h2><i class="fas fa-users"></i> Kandidáti</h2></div></div>
-
-    <!-- ===== TÝM ===== -->
-    <section id="tym">
-        <div class="container">
-            <h2 class="section-title center">Lidé, kteří to tu znají</h2>
-            <div class="team-slogan">Jsme tým, ne soubor jednotlivců</div>
-
-            <div class="team-photo-section">
-                <div class="photo-placeholder clickable-image">
-                    <img src="ffoo.jpg" alt="Společná fotka týmu Volba pro zítřek">
-                </div>
-            </div>
-
-            <div class="candidates">
-                <!-- 1. Zdeněk Tyšer -->
-                <div class="candidate">
-                    <div class="candidate-number">1</div>
-                    <div class="candidate-info">
-                        <span class="role-tag">starosta obce</span>
-                        <h3>Zdeněk Tyšer</h3>
-                        <div class="position">64 let, Nová Čistá • bez politické příslušnosti</div>
-                        <p class="bio">V současné době dokončuje již třetí volební období ve funkci starosty obce. Pod jeho vedením se podařilo konsolidovat obecní rozpočet, dokončit řadu investičních akcí, jež zlepšily jak vizuální, tak bezpečnostní stránku obce a zejména dokončit významný a pro obec velice potřebný projekt „Čistá – Výstavba splaškové kanalizace". Rád by ve své funkci pokračoval i v dalším volebním období, a i nadále pomáhal všem občanům naší obce při napojování domácností na dokončenou veřejnou část splaškové kanalizace.</p>
-                        <div class="tags"><span>Veřejná správa</span><span>Rozvoj obce</span><span>Kanalizace</span><span>Dotace</span></div>
-                    </div>
-                </div>
-
-                <!-- 2. Leoš Miler -->
-                <div class="candidate">
-                    <div class="candidate-number">2</div>
-                    <div class="candidate-info">
-                        <span class="role-tag">místostarosta</span>
-                        <h3>Leoš Miler</h3>
-                        <div class="position">58 let, Velká Strana • bez politické příslušnosti</div>
-                        <p class="bio">OSVČ – soukromý zemědělec. Dlouholetý zastupitel. V zastupitelstvu obce působil nepřetržitě od voleb v roce 1994 až do konce volebního období 2010-2014. Od roku 2018 opět působí v zastupitelstvu obce ve funkci místostarosty. Nyní je znovu ochoten pomoci svými letitými zkušenostmi v zastupitelstvu obce Čistá.</p>
-                        <div class="tags"><span>Zemědělství</span><span>Infrastruktura</span><span>Zkušenosti</span></div>
-                    </div>
-                </div>
-
-                <!-- 3. Libor Bárta -->
-                <div class="candidate">
-                    <div class="candidate-number">3</div>
-                    <div class="candidate-info">
-                        <span class="role-tag">OSVČ – elektromontážní práce</span>
-                        <h3>Libor Bárta</h3>
-                        <div class="position">48 let, Velká Strana • bez politické příslušnosti</div>
-                        <p class="bio">V zastupitelstvu obce dokončuje první volební období, kde byl předsedou Finančního výboru obce. Avšak již několik let zajišťuje pro obec kompletní údržbu veřejného osvětlení a ostatní elektromontážní práce na všech obecních budovách. Pro naši obec je i nadále ochoten pomoci v zastupitelstvu obce Čistá.</p>
-                        <div class="tags"><span>Elektrikář</span><span>Finanční výbor</span><span>Veřejné osvětlení</span></div>
-                    </div>
-                </div>
-
-                <!-- 4. Pavel Šlégr -->
-                <div class="candidate">
-                    <div class="candidate-number">4</div>
-                    <div class="candidate-info">
-                        <span class="role-tag">OSVČ – zemědělec a včelař</span>
-                        <h3>Pavel Šlégr</h3>
-                        <div class="position">28 let, Velká Strana • bez politické příslušnosti</div>
-                        <p class="bio">V zastupitelstvu obce prozatím nepůsobil, avšak již několik let zajišťuje pro obec veškeré technické práce. Je ochoten pomoci svými zkušenostmi, a to v oblasti životního prostředí, veřejné zeleně a rozvoje obce.</p>
-                        <div class="tags"><span>Mladá generace</span><span>Zemědělství</span><span>Včelařství</span><span>Životní prostředí</span></div>
-                    </div>
-                </div>
-
-                <!-- 5. Klára Zahrádková -->
-                <div class="candidate">
-                    <div class="candidate-number">5</div>
-                    <div class="candidate-info">
-                        <span class="role-tag">obchodní zástupce</span>
-                        <h3>Klára Zahrádková</h3>
-                        <div class="position">32 let, Nová Čistá • bez politické příslušnosti</div>
-                        <p class="bio">V zastupitelstvu obce prozatím nepůsobila. Je ochotna pomoci svými několikaletými zkušenostmi v oblasti odpadového hospodářství a veřejné zeleně.</p>
-                        <div class="tags"><span>Odpadové hospodářství</span><span>Veřejná zeleň</span><span>Modernizace</span></div>
-                    </div>
-                </div>
-
-                <!-- 6. Danuše Horáčková -->
-                <div class="candidate">
-                    <div class="candidate-number">6</div>
-                    <div class="candidate-info">
-                        <span class="role-tag">VaK Mladá Boleslav – logistik</span>
-                        <h3>Danuše Horáčková</h3>
-                        <div class="position">63 let, Velká Strana • bez politické příslušnosti</div>
-                        <p class="bio">V zastupitelstvu obce působila nepřetržitě ve volebních obdobích 1998-2010 a dále od období 2014 až doposud. V tomto volebním období je předsedkyní Kulturního výboru obce a pracuje pro Sbor pro občanské záležitosti. Nyní je opět připravena pomoci svými zkušenostmi, a to zejména v oblasti společenského a kulturního dění.</p>
-                        <div class="tags"><span>Logistika</span><span>Kultura</span><span>Komunita</span></div>
-                    </div>
-                </div>
-
-                <!-- 7. Ing. Zdeňka Doušová -->
-                <div class="candidate">
-                    <div class="candidate-number">7</div>
-                    <div class="candidate-info">
-                        <span class="role-tag">OSVČ – projektantka</span>
-                        <h3>Ing. Zdeňka Doušová</h3>
-                        <div class="position">54 let, Stránka • bez politické příslušnosti</div>
-                        <p class="bio">V zastupitelstvu obce již působila ve volebním období 2018-2022, avšak již od roku 2015 zajišťuje pro obec vyřizování různých stavebních povolení a souhlasných stanovisek. Nyní je ochotna pomoci svými odbornými zkušenostmi v zastupitelstvu obce, a to zejména v oblasti projektů a výstavby.</p>
-                        <div class="tags"><span>Projektování</span><span>Stavebnictví</span><span>Rozvoj</span></div>
-                    </div>
-                </div>
-
-                <!-- 8. Martina Kolářová -->
-                <div class="candidate">
-                    <div class="candidate-number">8</div>
-                    <div class="candidate-info">
-                        <span class="role-tag">učitelka</span>
-                        <h3>Martina Kolářová</h3>
-                        <div class="position">53 let, Týnec • bez politické příslušnosti</div>
-                        <p class="bio">V zastupitelstvu obce prozatím nepůsobila. Naší obci je ochotna pomoci v oblasti školství a společenského a kulturního dění.</p>
-                        <div class="tags"><span>Učitelka</span><span>Vzdělávání</span><span>Kultura</span></div>
-                    </div>
-                </div>
-
-                <!-- 9. Jaroslav Martinec -->
-                <div class="candidate">
-                    <div class="candidate-number">9</div>
-                    <div class="candidate-info">
-                        <span class="role-tag">důchodce</span>
-                        <h3>Jaroslav Martinec</h3>
-                        <div class="position">67 let, Velká Strana • bez politické příslušnosti</div>
-                        <p class="bio">V zastupitelstvu obce působil ve volebním období 2002–2006 a dále od volebního období 2014 až doposud. V tomto volebním období byl předsedou Sportovního výboru. Je ochoten i nadále pomoci v oblasti sportu a odpadového hospodářství.</p>
-                        <div class="tags"><span>Zkušenosti</span><span>Sport</span><span>Odpadové hospodářství</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<!-- ===== FOTKA ČISTÉ – NA ROZKLIKNUTÍ ===== -->
-<section style="padding: 40px 0; background: var(--bg-light); border-bottom: 1px solid var(--border);">
-    <div class="container">
-        <h2 class="section-title center" style="font-size: 28px; text-align: center;">🌿 Čistá – naše obec</h2>
-        <div style="max-width: 900px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; transition: var(--transition);" class="clickable-image">
-            <img 
-                src="vesnice.jpg" 
-                alt="Čistá u Mladé Boleslavi – pohled na obec" 
-                style="width: 100%; height: auto; display: block; transition: var(--transition);"
-                loading="lazy"
-            >
-        </div>
-    </div>
-</section>
-
-<!-- ===== FOOTER ===== -->
-<footer>
-    <div class="container">
-        <a href="#home" class="footer-btn"><i class="fas fa-arrow-up"></i> Nahoru</a>
-        <p><strong>Volba pro zítřek</strong> – společně tvoříme budoucnost Čisté</p>
-        <div class="footer-divider"></div>
-        <p>Komunální volby 9.–10. října 2026</p>
-        <p style="margin-top:8px; opacity:0.5; font-size:13px;">© 2026</p>
-    </div>
-</footer>
-
-<!-- ===== LIGHTBOX ===== -->
-<div id="lightbox">
-    <button id="lightboxClose" aria-label="Zavřít">✕</button>
-    <img id="lightboxImage" src="" alt="">
+<div class="timeline-item left active">
+<div class="dot">1</div>
+<div class="timeline-image"><img src="svah.jpg" alt="Stabilizace skalního svahu" loading="lazy"></div>
+<div class="content">
+<div class="swipe-track">
+<div class="swipe-panel panel-text">
+<span class="year hotovo"><i class="fas fa-check-circle"></i> Dokončeno 02/2025</span>
+<span class="icon">⛰️</span>
+<h3>Stabilizace skalního svahu</h3>
+<p class="desc">Zajistili jsme skalní stěnu nad domy čp. 91 a 92.</p>
+<p class="price">💰 4,59 mil. Kč s 80% dotací</p>
+<span class="status-badge status-hotovo"><i class="fas fa-check-circle"></i> Hotovo</span>
+</div>
+<div class="swipe-panel panel-image"><img src="svah.jpg" alt="Stabilizace skalního svahu" loading="lazy"></div>
+</div>
+<button class="swipe-hint" onclick="swipeCard(this)" aria-label="Přepnout na obrázek"><i class="fas fa-chevron-right"></i></button>
+<div class="swipe-dots"><span class="active"></span><span></span></div>
+</div>
 </div>
 
-<!-- ===== SCRIPTS ===== -->
+<div class="timeline-item right">
+<div class="dot">2</div>
+<div class="timeline-image"><img src="chodnik.jpg" alt="Chodník, opěrné zdi a osvětlení" loading="lazy"></div>
+<div class="content">
+<div class="swipe-track">
+<div class="swipe-panel panel-text">
+<span class="year hotovo"><i class="fas fa-check-circle"></i> Dokončeno 02/2026</span>
+<span class="icon">🚶</span>
+<h3>Chodník, opěrné zdi a osvětlení – 3. etapa</h3>
+<p class="desc">Vybudovali jsme nový chodník podél místní komunikace, opěrné zdi a osvětlení.</p>
+<p class="price">💰 10,68 mil. Kč</p>
+<span class="status-badge status-hotovo"><i class="fas fa-check-circle"></i> Hotovo</span>
+</div>
+<div class="swipe-panel panel-image"><img src="chodnik.jpg" alt="Chodník, opěrné zdi a osvětlení" loading="lazy"></div>
+</div>
+<button class="swipe-hint" onclick="swipeCard(this)" aria-label="Přepnout na obrázek"><i class="fas fa-chevron-right"></i></button>
+<div class="swipe-dots"><span class="active"></span><span></span></div>
+</div>
+</div>
+
+<div class="timeline-item left">
+<div class="dot">3</div>
+<div class="timeline-image"><img src="kanalizace.jpg" alt="Splašková kanalizace" loading="lazy"></div>
+<div class="content">
+<div class="swipe-track">
+<div class="swipe-panel panel-text">
+<span class="year probiha"><i class="fas fa-sync-alt fa-spin"></i> Dokončení 09/2026</span>
+<span class="icon"></span>
+<h3>Splašková kanalizace – hlavní projekt</h3>
+<p class="desc">Stavba zahájena v 10/2024, k 25. 9. 2026 bude dílo dokončeno a předáno.</p>
+<p class="price">💰 188,58 mil. Kč</p>
+<span class="status-badge status-probiha"><i class="fas fa-sync-alt fa-spin"></i> Probíhá</span>
+</div>
+<div class="swipe-panel panel-image"><img src="kanalizace.jpg" alt="Splašková kanalizace" loading="lazy"></div>
+</div>
+<button class="swipe-hint" onclick="swipeCard(this)" aria-label="Přepnout na obrázek"><i class="fas fa-chevron-right"></i></button>
+<div class="swipe-dots"><span class="active"></span><span></span></div>
+</div>
+</div>
+
+<div class="timeline-item right">
+<div class="dot">4</div>
+<div class="timeline-image-text"><span class="program-label">Program<br><small>2026–2030</small></span></div>
+<div class="content">
+<div class="swipe-track">
+<div class="swipe-panel panel-text">
+<span class="year chystame"><i class="fas fa-clock"></i> Chystáme</span>
+<span class="icon">💡</span>
+<h3>Další projekty pro rozvoj obce</h3>
+<p class="desc">Máme plány na další roky – od rozvoje kultury až po moderní služby. <strong>Chceme v tom pokračovat.</strong></p>
+<span class="status-badge status-chystame"><i class="fas fa-clock"></i> Chystáme</span>
+</div>
+<div class="swipe-panel panel-image">
+<div class="program-label-mobile">Program<br><small>2026–2030</small></div>
+</div>
+</div>
+<button class="swipe-hint" onclick="swipeCard(this)" aria-label="Přepnout na grafiku"><i class="fas fa-chevron-right"></i></button>
+<div class="swipe-dots"><span class="active"></span><span></span></div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<div class="banner-section" id="program-banner"><div class="container"><h2><i class="fas fa-clipboard-list"></i> Program</h2></div></div>
+
+<section id="program">
+<div class="container">
+<h2 class="section-title">Náš program pro Čistou 2026–2030</h2>
+<p class="section-subtitle"><strong>Reálný plán</strong>, který stojí na zkušenosti a&nbsp;odpovědnosti. Nejdříve&nbsp;dokončíme kanalizaci a poté stabilizujeme finance.</p>
+<div class="program-timeline" id="programTimeline">
+<div class="line-fill" id="lineFill"></div>
+<div class="tl-step active" data-step="0">
+<div class="tl-left">
+<span class="year-tag">🌱 2026–2028</span>
+<span class="label">Dokončit & stabilizovat</span>
+<span class="desc">Dokončíme kanalizaci, zklidníme rozpočet</span>
+<div class="badge-list"><span>Kanalizace</span><span>Finance</span><span>Komunikace</span></div>
+</div>
+<div class="tl-dot"><span class="step-num">1</span><span class="inner-icon">🏗️</span></div>
+<div class="tl-right">
+<ul class="detail-list">
+<li>Dokončit kanalizaci a připojit domácnosti</li>
+<li>Konsolidovat rozpočet a nastavit splátky úvěrů</li>
+<li>Nastavit desetiletý obecní provoz kanalizace</li>
+<li>Pomoci občanům s realizací domovních přípojek</li>
+<li>Vytvořit víceletý přehled investic</li>
+</ul>
+</div>
+</div>
+<div class="tl-step" data-step="1">
+<div class="tl-left">
+<span class="year-tag">🌿 2028–2030</span>
+<span class="label">Rozvíjet & modernizovat</span>
+<span class="desc">Obecní dům, chodníky, úspory, zeleň</span>
+<div class="badge-list"><span>Infrastruktura</span><span>Životní prostředí</span><span>Modernizace</span></div>
+</div>
+<div class="tl-dot"><span class="step-num">2</span><span class="inner-icon">🚀</span></div>
+<div class="tl-right">
+<ul class="detail-list">
+<li>Modernizace Domu služeb – prostory pro seniory</li>
+<li>4. etapa chodníků a cyklostezek na propojení centrální části obce a místní části Stránka</li>
+<li>Revitalizace návsi – dětské hřiště, zeleň</li>
+<li>Zateplení Kulturního domu a úspory energií</li>
+<li>Výsadba stromů a zadržování vody v krajině</li>
+<li>Bezpečné cesty pro děti a veřejné osvětlení</li>
+</ul>
+</div>
+</div>
+</div>
+<div style="margin-top:40px;padding-top:32px;border-top:3px solid var(--primary)">
+<h3 class="section-title center" style="font-size:28px">🌱 Škola, rodiny a aktivní život</h3>
+<div class="school-grid-desktop">
+<div class="school-card">
+<span class="icon">📚</span>
+<h4>Moderní vzdělávání</h4>
+<ul><li>Aktivizační metody výuky</li><li>Projektová a badatelská výuka</li><li>Individuální přístup k dětem</li></ul>
+</div>
+<div class="school-photo-wrapper">
+<div class="school-photo-bubble clickable-image">
+<img src="skola.jpg" alt="Naše škola v Čisté" loading="lazy">
+<div class="school-photo-overlay"><span class="school-photo-text">📚<br>Naše<br>škola</span></div>
+</div>
+</div>
+<div class="school-card">
+<span class="icon">🏃</span>
+<h4>Sport a volný čas</h4>
+<ul><li>Pumptrack pro děti a mládež</li><li>Senior park – setkávání a pohyb</li><li>Podpora spolků a kulturních akcí</li></ul>
+</div>
+<div class="school-photo-wrapper">
+<div class="school-photo-bubble clickable-image">
+<img src="hriste.jpg" alt="Dětské hřiště" loading="lazy">
+<div class="school-photo-overlay"><span class="school-photo-text">🛝<br>Dětské<br>hřiště</span></div>
+</div>
+</div>
+</div>
+<div class="accordion">
+<div class="accordion-item open">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span class="icon-left">📚</span>
+<div class="title-group"><h4>Moderní vzdělávání</h4></div>
+<span class="accordion-toggle">▼</span>
+</div>
+<div class="accordion-body">
+<ul><li>Aktivizační metody výuky</li><li>Projektová a badatelská výuka</li><li>Individuální přístup k dětem</li></ul>
+</div>
+</div>
+<div class="school-photo-wrapper">
+<div class="school-photo-bubble clickable-image">
+<img src="skola.jpg" alt="Naše škola v Čisté" loading="lazy">
+<div class="school-photo-overlay"><span class="school-photo-text">📚<br>Naše<br>škola</span></div>
+</div>
+</div>
+<div class="accordion-item">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span class="icon-left">🏃</span>
+<div class="title-group"><h4>Sport a volný čas</h4></div>
+<span class="accordion-toggle">▼</span>
+</div>
+<div class="accordion-body">
+<ul><li>Pumptrack pro děti a mládež</li><li>Senior park – setkávání a pohyb</li><li>Podpora spolků a kulturních akcí</li></ul>
+</div>
+</div>
+<div class="school-photo-wrapper">
+<div class="school-photo-bubble clickable-image">
+<img src="hriste.jpg" alt="Dětské hřiště" loading="lazy">
+<div class="school-photo-overlay"><span class="school-photo-text">🛝<br>Dětské<br>hřiště</span></div>
+</div>
+</div>
+</div>
+</div>
+<div style="margin-top:40px;padding-top:32px;border-top:3px solid var(--primary)">
+<h3 class="section-title center" style="font-size:28px">🌿 Čistá, zelená a bezpečná obec</h3>
+<div class="priorities">
+<div class="priority-card"><span class="icon">♻️</span><h3>Odpadové hospodářství</h3><ul><li>Čipování nádob</li><li>Spravedlivější systém</li><li>Motivace k odpovědnosti</li></ul><span class="tag">Klíčová oblast</span></div>
+<div class="priority-card"><span class="icon">🌳</span><h3>Zeleň a voda</h3><ul><li>Výsadba stromů</li><li>Zadržování vody v krajině</li><li>Revitalizace zeleně</li></ul><span class="tag">Důležité téma</span></div>
+<div class="priority-card"><span class="icon">🛡️</span><h3>Bezpečnost</h3><ul><li>Spolupráce s Policií ČR</li><li>Bezpečné cesty pro děti</li><li>Veřejné osvětlení</li></ul><span class="tag">Zásadní úkol</span></div>
+</div>
+<div class="priorities-scroll">
+<div class="priority-card"><span class="icon">♻️</span><h3>Odpadové hospodářství</h3><ul><li>Čipování nádob</li><li>Spravedlivější systém</li><li>Motivace k odpovědnosti</li></ul><span class="tag">Klíčová oblast</span></div>
+<div class="priority-card"><span class="icon">🌳</span><h3>Zeleň a voda</h3><ul><li>Výsadba stromů</li><li>Zadržování vody v krajině</li><li>Revitalizace zeleně</li></ul><span class="tag">Důležité téma</span></div>
+<div class="priority-card"><span class="icon">🛡️</span><h3>Bezpečnost</h3><ul><li>Spolupráce s Policií ČR</li><li>Bezpečné cesty pro děti</li><li>Veřejné osvětlení</li></ul><span class="tag">Zásadní úkol</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="banner-section" id="proc-banner"><div class="container"><h2><i class="fas fa-heart"></i> Proč kandidujeme</h2></div></div>
+
+<section id="proc">
+<div class="container">
+<div class="intro-box">
+<p><strong>Čistá je náš domov.</strong> Chceme, aby se tu dobře žilo všem.</p>
+<p>Neslibujeme nemožné. <span class="highlight">Chceme pokračovat v&nbsp;projektech, které dávají smysl.</span></p>
+<div class="intro-divider"></div>
+<p><strong>Společně tvoříme budoucnost. Ta začíná tady, v&nbsp;Čisté.</strong></p>
+</div>
+<div class="why-grid">
+<div class="why-card"><span class="num">01</span><span class="icon"><i class="fas fa-check-double"></i></span><h3>Dotahujeme věci do konce</h3><p>Neslibujeme, co nezvládneme. Nové chodníky, kanalizace – to jsou projekty, které jsme dotáhli od prvního návrhu až do konce.</p><span class="tag">Spolehlivost</span></div>
+<div class="why-card"><span class="num">02</span><span class="icon"><i class="fas fa-euro-sign"></i></span><h3>Umíme čerpat dotace</h3><p>Díky evropským penězům jsme ušetřili obecní rozpočet na další potřeby. Projekty realizujeme s výraznými úsporami.</p><span class="tag">Dotace</span></div>
+<div class="why-card"><span class="num">03</span><span class="icon"><i class="fas fa-users"></i></span><h3>Žijeme tu s vámi</h3><p>Chodíme po stejných ulicích, naše děti chodí do stejné školy a školky. Nejsme cizí lidé, jsme vaši sousedé. <strong>Děláme to pro svůj domov.</strong></p><span class="tag">Sousedé</span></div>
+<div class="why-card"><span class="num">04</span><span class="icon"><i class="fas fa-lightbulb"></i></span><h3>Myslíme na další generace</h3><p>Nebojíme se nových nápadů a moderních řešení. Chceme, aby naše vesnice držela krok s dobou a byla připravená na budoucnost.</p><span class="tag">Moderní přístup</span></div>
+</div>
+<div class="highlight-box"><p><i class="fas fa-handshake"></i> <span>Umíme jednat s developery a získat ze spolupráce významné plnění pro obec.</span></p></div>
+</div>
+</section>
+
+<div class="banner-section" id="tym-banner"><div class="container"><h2><i class="fas fa-users"></i> Kandidáti</h2></div></div>
+
+<section id="tym">
+<div class="container">
+<h2 class="section-title center">Lidé, kteří to tu znají</h2>
+<div class="team-slogan">Jsme tým, ne soubor jednotlivců</div>
+<div class="team-photo-section">
+<div class="photo-placeholder clickable-image"><img src="ffoo.jpg" alt="Společná fotka týmu Volba pro zítřek"></div>
+</div>
+<div class="candidates">
+<div class="candidate">
+<div class="candidate-number">1</div>
+<div class="candidate-info">
+<span class="role-tag">starosta obce</span>
+<h3>Zdeněk Tyšer</h3>
+<div class="position">64 let, Nová Čistá • bez politické příslušnosti</div>
+<p class="bio">V současné době dokončuje již třetí volební období ve funkci starosty obce. Pod jeho vedením se podařilo konsolidovat obecní rozpočet, dokončit řadu investičních akcí, jež zlepšily jak vizuální, tak bezpečnostní stránku obce a zejména dokončit významný a pro obec velice potřebný projekt „Čistá – Výstavba splaškové kanalizace". Rád by ve své funkci pokračoval i v dalším volebním období, a i nadále pomáhal všem občanům naší obce při napojování domácností na dokončenou veřejnou část splaškové kanalizace.</p>
+<div class="tags"><span>Veřejná správa</span><span>Rozvoj obce</span><span>Kanalizace</span><span>Dotace</span></div>
+</div>
+</div>
+<div class="candidate">
+<div class="candidate-number">2</div>
+<div class="candidate-info">
+<span class="role-tag">místostarosta</span>
+<h3>Leoš Miler</h3>
+<div class="position">58 let, Velká Strana • bez politické příslušnosti</div>
+<p class="bio">OSVČ – soukromý zemědělec. Dlouholetý zastupitel. V zastupitelstvu obce působil nepřetržitě od voleb v roce 1994 až do konce volebního období 2010-2014. Od roku 2018 opět působí v zastupitelstvu obce ve funkci místostarosty. Nyní je znovu ochoten pomoci svými letitými zkušenostmi v zastupitelstvu obce Čistá.</p>
+<div class="tags"><span>Zemědělství</span><span>Infrastruktura</span><span>Zkušenosti</span></div>
+</div>
+</div>
+<div class="candidate">
+<div class="candidate-number">3</div>
+<div class="candidate-info">
+<span class="role-tag">OSVČ – elektromontážní práce</span>
+<h3>Libor Bárta</h3>
+<div class="position">48 let, Velká Strana • bez politické příslušnosti</div>
+<p class="bio">V zastupitelstvu obce dokončuje první volební období, kde byl předsedou Finančního výboru obce. Avšak již několik let zajišťuje pro obec kompletní údržbu veřejného osvětlení a ostatní elektromontážní práce na všech obecních budovách. Pro naši obec je i nadále ochoten pomoci v zastupitelstvu obce Čistá.</p>
+<div class="tags"><span>Elektrikář</span><span>Finanční výbor</span><span>Veřejné osvětlení</span></div>
+</div>
+</div>
+<div class="candidate">
+<div class="candidate-number">4</div>
+<div class="candidate-info">
+<span class="role-tag">OSVČ – zemědělec a včelař</span>
+<h3>Pavel Šlégr</h3>
+<div class="position">28 let, Velká Strana • bez politické příslušnosti</div>
+<p class="bio">V zastupitelstvu obce prozatím nepůsobil, avšak již několik let zajišťuje pro obec veškeré technické práce. Je ochoten pomoci svými zkušenostmi, a to v oblasti životního prostředí, veřejné zeleně a rozvoje obce.</p>
+<div class="tags"><span>Mladá generace</span><span>Zemědělství</span><span>Včelařství</span><span>Životní prostředí</span></div>
+</div>
+</div>
+<div class="candidate">
+<div class="candidate-number">5</div>
+<div class="candidate-info">
+<span class="role-tag">obchodní zástupce</span>
+<h3>Klára Zahrádková</h3>
+<div class="position">32 let, Nová Čistá • bez politické příslušnosti</div>
+<p class="bio">V zastupitelstvu obce prozatím nepůsobila. Je ochotna pomoci svými několikaletými zkušenostmi v oblasti odpadového hospodářství a veřejné zeleně.</p>
+<div class="tags"><span>Odpadové hospodářství</span><span>Veřejná zeleň</span><span>Modernizace</span></div>
+</div>
+</div>
+<div class="candidate">
+<div class="candidate-number">6</div>
+<div class="candidate-info">
+<span class="role-tag">VaK Mladá Boleslav – logistik</span>
+<h3>Danuše Horáčková</h3>
+<div class="position">63 let, Velká Strana • bez politické příslušnosti</div>
+<p class="bio">V zastupitelstvu obce působila nepřetržitě ve volebních obdobích 1998-2010 a dále od období 2014 až doposud. V tomto volebním období je předsedkyní Kulturního výboru obce a pracuje pro Sbor pro občanské záležitosti. Nyní je opět připravena pomoci svými zkušenostmi, a to zejména v oblasti společenského a kulturního dění.</p>
+<div class="tags"><span>Logistika</span><span>Kultura</span><span>Komunita</span></div>
+</div>
+</div>
+<div class="candidate">
+<div class="candidate-number">7</div>
+<div class="candidate-info">
+<span class="role-tag">OSVČ – projektantka</span>
+<h3>Ing. Zdeňka Doušová</h3>
+<div class="position">54 let, Stránka • bez politické příslušnosti</div>
+<p class="bio">V zastupitelstvu obce již působila ve volebním období 2018-2022, avšak již od roku 2015 zajišťuje pro obec vyřizování různých stavebních povolení a souhlasných stanovisek. Nyní je ochotna pomoci svými odbornými zkušenostmi v zastupitelstvu obce, a to zejména v oblasti projektů a výstavby.</p>
+<div class="tags"><span>Projektování</span><span>Stavebnictví</span><span>Rozvoj</span></div>
+</div>
+</div>
+<div class="candidate">
+<div class="candidate-number">8</div>
+<div class="candidate-info">
+<span class="role-tag">učitelka</span>
+<h3>Martina Kolářová</h3>
+<div class="position">53 let, Týnec • bez politické příslušnosti</div>
+<p class="bio">V zastupitelstvu obce prozatím nepůsobila. Naší obci je ochotna pomoci v oblasti školství a společenského a kulturního dění.</p>
+<div class="tags"><span>Učitelka</span><span>Vzdělávání</span><span>Kultura</span></div>
+</div>
+</div>
+<div class="candidate">
+<div class="candidate-number">9</div>
+<div class="candidate-info">
+<span class="role-tag">důchodce</span>
+<h3>Jaroslav Martinec</h3>
+<div class="position">67 let, Velká Strana • bez politické příslušnosti</div>
+<p class="bio">V zastupitelstvu obce působil ve volebním období 2002–2006 a dále od volebního období 2014 až doposud. V tomto volebním období byl předsedou Sportovního výboru. Je ochoten i nadále pomoci v oblasti sportu a odpadového hospodářství.</p>
+<div class="tags"><span>Zkušenosti</span><span>Sport</span><span>Odpadové hospodářství</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="obec-photo-section" style="padding:40px 0;background:var(--bg-light);border-bottom:1px solid var(--border)">
+<div class="container">
+<h2 class="section-title center" style="font-size:28px;text-align:center">Čistá – naše obec</h2>
+<div style="max-width:900px;margin:0 auto;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:var(--transition)" class="clickable-image">
+<img src="vesnice.jpg" alt="Čistá u Mladé Boleslavi – pohled na obec" style="width:100%;height:auto;display:block;transition:var(--transition)" loading="lazy">
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<a href="#home" class="footer-btn"><i class="fas fa-arrow-up"></i> Nahoru</a>
+<p><strong>Volba pro zítřek</strong> – společně tvoříme budoucnost Čisté</p>
+<div class="footer-divider"></div>
+<p>Komunální volby 9.–10. října 2026</p>
+<p style="margin-top:8px;opacity:.5;font-size:13px">© 2026</p>
+</div>
+</footer>
+
+<div id="lightbox">
+<button id="lightboxClose" aria-label="Zavřít">✕</button>
+<img id="lightboxImage" src="" alt="">
+</div>
+
 <script>
-    // ===== BURGER MENU =====
-    const burger = document.getElementById('burger');
-    const navLinks = document.getElementById('navLinks');
-    const closeMenu = document.getElementById('closeMenu');
-    const navOverlay = document.getElementById('navOverlay');
+const burger=document.getElementById('burger'),navLinks=document.getElementById('navLinks'),closeMenu=document.getElementById('closeMenu'),navOverlay=document.getElementById('navOverlay');
+function openMenu(){burger.classList.add('active');navLinks.classList.add('open');navOverlay.classList.add('active');document.body.style.overflow='hidden'}
+function closeMenuFn(){burger.classList.remove('active');navLinks.classList.remove('open');navOverlay.classList.remove('active');document.body.style.overflow=''}
+burger.addEventListener('click',openMenu);
+closeMenu.addEventListener('click',closeMenuFn);
+navOverlay.addEventListener('click',closeMenuFn);
+document.querySelectorAll('.nav-links a').forEach(l=>l.addEventListener('click',closeMenuFn));
+document.getElementById('logoLink').addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})});
 
-    function openMenu() {
-        burger.classList.add('active');
-        navLinks.classList.add('open');
-        navOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
+const navItems=document.querySelectorAll('.nav-links a[data-section]'),sections={};
+navItems.forEach(link=>{const id=link.getAttribute('data-section');let el=document.getElementById(id)||document.getElementById(id+'-banner');if(el)sections[id]=el});
+function updateActiveNav(){
+const pos=window.scrollY+150;let active=null,isBanner=false;
+for(const[id,el]of Object.entries(sections)){const t=el.offsetTop,h=el.offsetHeight;if(pos>=t&&pos<t+h){active=id;if(el.id&&el.id.includes('banner'))isBanner=true;break}}
+if(!active){let lastId=null,lastBottom=0;for(const[id,el]of Object.entries(sections)){const b=el.offsetTop+el.offsetHeight;if(b>lastBottom){lastBottom=b;lastId=id}}active=(lastId&&pos>=lastBottom)?lastId:'home'}
+navItems.forEach(link=>{const id=link.getAttribute('data-section');const isActive=id===active;link.classList.toggle('active',isActive);link.classList.toggle('banner-active',isActive&&isBanner)})}
+window.addEventListener('scroll',updateActiveNav);
+setTimeout(updateActiveNav,50);
 
-    function closeMenuFn() {
-        burger.classList.remove('active');
-        navLinks.classList.remove('open');
-        navOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-    }
+const items=document.querySelectorAll('.timeline-item');
+function updateTimeline(){const c=window.scrollY+window.innerHeight/2;let a=0;items.forEach((it,i)=>{const r=it.getBoundingClientRect();const ic=r.top+window.scrollY+r.height/2;if(ic<c)a=i});items.forEach(it=>it.classList.remove('active'));if(items[a])items[a].classList.add('active')}
+window.addEventListener('scroll',updateTimeline,{passive:true});
+updateTimeline();
 
-    burger.addEventListener('click', openMenu);
-    closeMenu.addEventListener('click', closeMenuFn);
-    navOverlay.addEventListener('click', closeMenuFn);
+const tlSteps=document.querySelectorAll('.tl-step'),lineFill=document.getElementById('lineFill');
+function updateProgramStep(i){tlSteps.forEach((s,x)=>s.classList.toggle('active',x===i));const t=tlSteps.length-1;lineFill.style.height=(t>0?(i/t)*100:0)+'%'}
+tlSteps.forEach((s,i)=>s.addEventListener('click',()=>updateProgramStep(i)));
+const programSection=document.querySelector('#programTimeline');
+function updateProgramOnScroll(){const c=window.scrollY+window.innerHeight/2;let ci=0,cd=Infinity;tlSteps.forEach((s,i)=>{const r=s.getBoundingClientRect();const sc=r.top+window.scrollY+r.height/2;const d=Math.abs(sc-c);if(d<cd){cd=d;ci=i}});const pr=programSection.getBoundingClientRect();if(pr.top<window.innerHeight&&pr.bottom>0){const ca=document.querySelector('.tl-step.active');const ai=ca?parseInt(ca.dataset.step):-1;if(ai!==ci)updateProgramStep(ci)}}
+window.addEventListener('scroll',updateProgramOnScroll,{passive:true});
+updateProgramStep(0);
+setTimeout(updateProgramOnScroll,100);
 
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', closeMenuFn);
-    });
+function toggleAccordion(h){const item=h.parentElement;const wasOpen=item.classList.contains('open');document.querySelectorAll('.accordion-item').forEach(el=>el.classList.remove('open'));if(!wasOpen)item.classList.add('open')}
+if(window.innerWidth<=768){const f=document.querySelector('.accordion-item');if(f)f.classList.add('open')}
 
-    document.getElementById('logoLink').addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+function swipeCard(btn){
+const item=btn.closest('.timeline-item');if(!item)return;
+item.classList.toggle('swiped');
+const d=item.querySelectorAll('.swipe-dots span');
+if(d.length===2){const s=item.classList.contains('swiped');d[0].classList.toggle('active',!s);d[1].classList.toggle('active',s)}}
+(function(){
+const cards=document.querySelectorAll('.timeline-item .content');
+cards.forEach(card=>{
+let sx=0,sy=0,moved=false;
+card.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;moved=false},{passive:true});
+card.addEventListener('touchmove',e=>{const dx=e.touches[0].clientX-sx,dy=e.touches[0].clientY-sy;if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>30)moved=true},{passive:true});
+card.addEventListener('touchend',e=>{
+if(!moved)return;
+const dx=e.changedTouches[0].clientX-sx,item=card.closest('.timeline-item');if(!item)return;
+if(dx<-40)item.classList.add('swiped');else if(dx>40)item.classList.remove('swiped');
+const d=item.querySelectorAll('.swipe-dots span');if(d.length===2){const s=item.classList.contains('swiped');d[0].classList.toggle('active',!s);d[1].classList.toggle('active',s)}});
+let mouseDown=false,msx=0;
+card.addEventListener('mousedown',e=>{if(window.innerWidth>768)return;mouseDown=true;msx=e.clientX});
+card.addEventListener('mouseup',e=>{
+if(!mouseDown)return;mouseDown=false;
+const dx=e.clientX-msx,item=card.closest('.timeline-item');if(!item)return;
+if(dx<-40)item.classList.add('swiped');else if(dx>40)item.classList.remove('swiped');
+const d=item.querySelectorAll('.swipe-dots span');if(d.length===2){const s=item.classList.contains('swiped');d[0].classList.toggle('active',!s);d[1].classList.toggle('active',s)}});
+card.addEventListener('mouseleave',()=>{mouseDown=false});
+})})();
 
-    // ===== AKTIVNÍ POLOŽKA MENU =====
-    const navItems = document.querySelectorAll('.nav-links a[data-section]');
-    const sections = {};
+const lightbox=document.getElementById('lightbox'),lightboxImage=document.getElementById('lightboxImage'),lightboxClose=document.getElementById('lightboxClose');
+function openLightbox(src){lightboxImage.src=src;lightbox.style.display='flex';document.body.style.overflow='hidden'}
+function closeLightbox(){lightbox.style.display='none';document.body.style.overflow=''}
+document.querySelectorAll('.clickable-image').forEach(el=>el.addEventListener('click',function(e){e.stopPropagation();const img=this.querySelector('img');if(img)openLightbox(img.src)}));
+lightbox.addEventListener('click',function(e){if(e.target===this)closeLightbox()});
+lightboxClose.addEventListener('click',function(e){e.stopPropagation();closeLightbox()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lightbox.style.display==='flex')closeLightbox()});
 
-    navItems.forEach(link => {
-        const sectionId = link.getAttribute('data-section');
-        let element = document.getElementById(sectionId);
-        if (!element) {
-            element = document.getElementById(sectionId + '-banner');
-        }
-        if (element) {
-            sections[sectionId] = element;
-        }
-    });
-
-    function updateActiveNav() {
-        const scrollPos = window.scrollY + 150;
-        let activeSection = null;
-        let isBanner = false;
-
-        for (const [id, element] of Object.entries(sections)) {
-            const top = element.offsetTop;
-            const height = element.offsetHeight;
-            if (scrollPos >= top && scrollPos < top + height) {
-                activeSection = id;
-                if (element.id && element.id.includes('banner')) {
-                    isBanner = true;
-                }
-                break;
-            }
-        }
-
-        if (!activeSection) {
-            let lastId = null;
-            let lastBottom = 0;
-            for (const [id, element] of Object.entries(sections)) {
-                const bottom = element.offsetTop + element.offsetHeight;
-                if (bottom > lastBottom) {
-                    lastBottom = bottom;
-                    lastId = id;
-                }
-            }
-            if (lastId && scrollPos >= lastBottom) {
-                activeSection = lastId;
-            } else {
-                activeSection = 'home';
-            }
-        }
-
-        navItems.forEach(link => {
-            const sectionId = link.getAttribute('data-section');
-            const isActive = sectionId === activeSection;
-            link.classList.toggle('active', isActive);
-            
-            if (isActive && isBanner) {
-                link.classList.add('banner-active');
-            } else {
-                link.classList.remove('banner-active');
-            }
-        });
-    }
-
-    window.addEventListener('scroll', updateActiveNav);
-    setTimeout(updateActiveNav, 50);
-
-    // ===== TIMELINE =====
-    const items = document.querySelectorAll('.timeline-item');
-
-    function updateTimeline() {
-        const center = window.scrollY + window.innerHeight / 2;
-        let active = 0;
-
-        items.forEach((item, i) => {
-            const rect = item.getBoundingClientRect();
-            const itemCenter = rect.top + window.scrollY + rect.height / 2;
-            if (itemCenter < center) active = i;
-        });
-
-        items.forEach(item => item.classList.remove('active'));
-        if (items[active]) items[active].classList.add('active');
-    }
-
-    window.addEventListener('scroll', updateTimeline, { passive: true });
-    updateTimeline();
-
-    // ===== PROGRAM TIMELINE =====
-    const tlSteps = document.querySelectorAll('.tl-step');
-    const lineFill = document.getElementById('lineFill');
-
-    function updateProgramStep(index) {
-        tlSteps.forEach((s, i) => {
-            s.classList.toggle('active', i === index);
-        });
-
-        const total = tlSteps.length - 1;
-        const progress = total > 0 ? (index / total) * 100 : 0;
-        lineFill.style.height = progress + '%';
-    }
-
-    tlSteps.forEach((step, index) => {
-        step.addEventListener('click', () => {
-            updateProgramStep(index);
-        });
-    });
-
-    const programSection = document.querySelector('#programTimeline');
-
-    function updateProgramOnScroll() {
-        const center = window.scrollY + window.innerHeight / 2;
-
-        let closestIndex = 0;
-        let closestDist = Infinity;
-
-        tlSteps.forEach((step, i) => {
-            const r = step.getBoundingClientRect();
-            const stepCenter = r.top + window.scrollY + r.height / 2;
-            const dist = Math.abs(stepCenter - center);
-            if (dist < closestDist) {
-                closestDist = dist;
-                closestIndex = i;
-            }
-        });
-
-        const progRect = programSection.getBoundingClientRect();
-        if (progRect.top < window.innerHeight && progRect.bottom > 0) {
-            const currentActive = document.querySelector('.tl-step.active');
-            const activeIndex = currentActive ? parseInt(currentActive.dataset.step) : -1;
-            if (activeIndex !== closestIndex) {
-                updateProgramStep(closestIndex);
-            }
-        }
-    }
-
-    window.addEventListener('scroll', updateProgramOnScroll, { passive: true });
-    updateProgramStep(0);
-    setTimeout(updateProgramOnScroll, 100);
-
-    // ===== ACCORDION =====
-    function toggleAccordion(header) {
-        const item = header.parentElement;
-        const isOpen = item.classList.contains('open');
-
-        document.querySelectorAll('.accordion-item').forEach(el => {
-            el.classList.remove('open');
-        });
-
-        if (!isOpen) {
-            item.classList.add('open');
-        }
-    }
-
-    if (window.innerWidth <= 768) {
-        const firstItem = document.querySelector('.accordion-item');
-        if (firstItem) {
-            firstItem.classList.add('open');
-        }
-    }
-
-    // ===== LIGHTBOX =====
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const lightboxClose = document.getElementById('lightboxClose');
-
-    function openLightbox(src) {
-        lightboxImage.src = src;
-        lightboxImage.alt = '';
-        lightbox.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-        lightbox.style.display = 'none';
-        document.body.style.overflow = '';
-    }
-
-    document.querySelectorAll('.clickable-image').forEach(element => {
-        element.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const img = this.querySelector('img');
-            if (img) {
-                openLightbox(img.src);
-            }
-        });
-    });
-
-    lightbox.addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeLightbox();
-        }
-    });
-
-    lightboxClose.addEventListener('click', function(e) {
-        e.stopPropagation();
-        closeLightbox();
-    });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && lightbox.style.display === 'flex') {
-            closeLightbox();
-        }
-    });
-
-    // ===== OPRAVA SCROLLU – POSUN O VÝŠKU MENU =====
-    document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === '#') return;
-        
-        link.addEventListener('click', function(e) {
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                const menuHeight = 72;
-                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - menuHeight - 10;
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
+document.querySelectorAll('.nav-links a[href^="#"]').forEach(link=>{
+const href=link.getAttribute('href');if(href==='#')return;
+link.addEventListener('click',function(e){const t=document.querySelector(href);if(t){e.preventDefault();const pos=t.getBoundingClientRect().top+window.pageYOffset-82;window.scrollTo({top:pos,behavior:'smooth'})}})});
 </script>
-
 </body>
 </html>
